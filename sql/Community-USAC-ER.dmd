@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Community-USAC-ER" id="D045F465-91C4-88E9-7553-BDF0DB7E4DED" version="3.5">
+<createdBy>marco</createdBy>
+<createdTime>2019-06-26 05:11:12 UTC</createdTime>
+<ownerDesignName>Community-USAC-ER</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>D045F465-91C4-88E9-7553-BDF0DB7E4DED</designId>
+</OSDM_Design>
