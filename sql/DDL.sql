@@ -1,17 +1,22 @@
 CREATE TABLE Cargo (
-    cod_cargo   NUMBER NOT NULL,
+    cod_cargo   NUMBER,
     cargo       VARCHAR2(50) NOT NULL,
     CONSTRAINT PK_Cargo PRIMARY KEY (cod_cargo)
 );
 
-CREATE SEQUENCE Seq_cargo
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_CARGO;
+
+CREATE TRIGGER TRG_CARGO
+    BEFORE INSERT ON Cargo
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_CARGO.NEXTVAL
+    INTO :new.cod_cargo
+    FROM dual;
+END;
 
 CREATE TABLE Usuario (
-    cod_usuario   NUMBER NOT NULL,
+    cod_usuario   NUMBER,
     carnet        NUMBER,
     no_registro   NUMBER,
     nombre        VARCHAR2(50) NOT NULL,
@@ -22,27 +27,37 @@ CREATE TABLE Usuario (
     CONSTRAINT PK_Usuario PRIMARY KEY (cod_usuario)
 );
 
-CREATE SEQUENCE Seq_usuario 
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_USUARIO;
+
+CREATE TRIGGER TRG_USUARIO
+    BEFORE INSERT ON Usuario
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_USUARIO.NEXTVAL
+    INTO :new.cod_usuario
+    FROM dual;
+END;
 
 CREATE TABLE Facultad (
-    cod_facultad   NUMBER NOT NULL,
+    cod_facultad   NUMBER,
     nombre         VARCHAR2(50) NOT NULL,
     descripcion    VARCHAR2(200),
     CONSTRAINT PK_facultad PRIMARY KEY (cod_facultad)
 );
 
-CREATE SEQUENCE Seq_facultad 
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_FACULTAD;
+
+CREATE TRIGGER TRG_FACULTAD
+    BEFORE INSERT ON Facultad
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_FACULTAD.NEXTVAL
+    INTO :new.cod_facultad
+    FROM dual;
+END;
 
 CREATE TABLE Carrera (
-    cod_carrera    NUMBER NOT NULL,
+    cod_carrera    NUMBER,
     cod_facultad   NUMBER NOT NULL,
     nombre         VARCHAR2(50) NOT NULL,
     descripcion    VARCHAR2(200),
@@ -50,27 +65,37 @@ CREATE TABLE Carrera (
     CONSTRAINT FK_FacultadCarrera FOREIGN KEY (cod_facultad) REFERENCES Facultad(cod_facultad)
 );
 
-CREATE SEQUENCE Seq_carrera
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_CARRERA;
+
+CREATE TRIGGER TRG_CARRERA
+    BEFORE INSERT ON Carrera
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_CARRERA.NEXTVAL
+    INTO :new.cod_carrera
+    FROM dual;
+END;
 
 CREATE TABLE Ciencia (
-    cod_ciencia           NUMBER NOT NULL,
+    cod_ciencia           NUMBER,
     nombre                VARCHAR2(50) NOT NULL,
     descripcion           VARCHAR2(200),
     cod_carrera           NUMBER NOT NULL,
     cod_facultad          NUMBER NOT NULL,
-    CONSTRAINT PK_Ciencia PRIMARY KEY cod_ciencia,
+    CONSTRAINT PK_Ciencia PRIMARY KEY (cod_ciencia),
     CONSTRAINT FK_CarreraCiencia FOREIGN KEY (cod_carrera, cod_facultad) REFERENCES Carrera(cod_carrera, cod_facultad)
 );
 
-CREATE SEQUENCE Seq_ciencia
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_CIENCIA;
+
+CREATE TRIGGER TRG_CIENCIA
+    BEFORE INSERT ON Ciencia
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_CIENCIA.NEXTVAL
+    INTO :new.cod_ciencia
+    FROM dual;
+END;
 
 CREATE TABLE Chat (
     cod_emisor                 NUMBER NOT NULL,
@@ -102,7 +127,7 @@ CREATE TABLE Asignacion (
 );
 
 CREATE TABLE Tema (
-    cod_tema              NUMBER NOT NULL,
+    cod_tema              NUMBER,
     cod_usuario           NUMBER NOT NULL,
     titulo                VARCHAR2(50) NOT NULL,
     descripcion           VARCHAR2(200) NOT NULL,
@@ -112,20 +137,36 @@ CREATE TABLE Tema (
     CONSTRAINT FK_UsuarioTema FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario)
 );
 
-CREATE SEQUENCE Seq_tema
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_TEMA;
+
+CREATE TRIGGER TRG_TEMA
+    BEFORE INSERT ON Tema
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_TEMA.NEXTVAL
+    INTO :new.cod_tema
+    FROM dual;
+END;
 
 CREATE TABLE Src_tema (
-    cod_srs_tema               NUMBER NOT NULL,
+    cod_srs_tema               NUMBER,
     url_imagen                 VARCHAR2(100) NOT NULL,
     tag                        VARCHAR2(50),
     cod_tema                   NUMBER NOT NULL,
     CONSTRAINT PK_SrcTema PRIMARY KEY (cod_srs_tema),
     CONSTRAINT FK_TemaSrc FOREIGN KEY (cod_tema) REFERENCES Tema(cod_tema)
 );
+
+CREATE SEQUENCE SEQ_SRC_TEMA;
+
+CREATE TRIGGER TRG_SRC_TEMA
+    BEFORE INSERT ON Src_tema
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_SRC_TEMA.NEXTVAL
+    INTO :new.cod_srs_tema
+    FROM dual;
+END;
 
 CREATE TABLE Etiqueta (
     cod_tema                   NUMBER NOT NULL,
@@ -136,25 +177,30 @@ CREATE TABLE Etiqueta (
 );
 
 CREATE TABLE Comentario (
-    cod_comentario             NUMBER NOT NULL,
+    cod_comentario             NUMBER,
     contenido                  VARCHAR2(200),
     url_imagen                 VARCHAR2(100),
     tag                        VARCHAR2(50),
     cod_tema                   NUMBER NOT NULL,
-    cod_usuario                NUMBER NOT NULL
+    cod_usuario                NUMBER NOT NULL,
     CONSTRAINT PK_Comentario PRIMARY KEY (cod_comentario),
     CONSTRAINT FK_TemaComentario FOREIGN KEY (cod_tema) REFERENCES Tema(cod_tema),
     CONSTRAINT FK_UsuarioComentario FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario)
 );
 
-CREATE SEQUENCE Seq_comentario
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_COMENTARIO;
+
+CREATE TRIGGER TRG_COMENTARIO
+    BEFORE INSERT ON Comentario
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_COMENTARIO.NEXTVAL
+    INTO :new.cod_comentario
+    FROM dual;
+END;
 
 CREATE TABLE Examen (
-    cod_examen            NUMBER NOT NULL,
+    cod_examen            NUMBER,
     cod_usuario           NUMBER NOT NULL,
     titulo                CLOB NOT NULL,
     tema                  CLOB NOT NULL,
@@ -162,50 +208,54 @@ CREATE TABLE Examen (
     fecha_modificacion    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tiempo                NUMBER NOT NULL,
     duracion              NUMBER NOT NULL,
-    activo                CHAR(1) NOT NULL DEFAULT '1',
+    activo                CHAR(1) DEFAULT '1',
     CONSTRAINT PK_Examen PRIMARY KEY (cod_examen, cod_usuario),
     CONSTRAINT FK_UsuarioExamen FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario)
 );
 
+CREATE SEQUENCE SEQ_EXAMEN;
+
+CREATE TRIGGER TRG_EXAMEN
+    BEFORE INSERT ON Examen
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_EXAMEN.NEXTVAL
+    INTO :new.cod_examen
+    FROM dual;
+END;
+
 -- ALTER TABLE Examen MODIFY activo CHAR(1) DEFAULT '1';
 -- ALTER TABLE Examen ADD field NUMBER;
 
-CREATE SEQUENCE Seq_Examen 
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
-
 CREATE TABLE Tipo_pregunta (
-    cod_tipo_pregunta   NUMBER NOT NULL,
+    cod_tipo_pregunta   NUMBER,
     nombre              VARCHAR2(50) NOT NULL,
     CONSTRAINT PK_TipoP PRIMARY KEY (cod_tipo_pregunta)
 );
 
-CREATE SEQUENCE Seq_tipop
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_TIPO_PREG;
+
+CREATE TRIGGER TRG_TIPO_PREG
+    BEFORE INSERT ON Tipo_pregunta
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_TIPO_PREG.NEXTVAL
+    INTO :new.cod_tipo_pregunta
+    FROM dual;
+END;
 
 CREATE TABLE Pregunta (
-    cod_pregunta                      NUMBER NOT NULL,
+    cod_pregunta                      NUMBER,
     descripcion                       VARCHAR2(200), 
     cod_tipo_pregunta                 NUMBER NOT NULL,
     CONSTRAINT PK_Pregunta PRIMARY KEY (cod_pregunta),
     CONSTRAINT FK_TipopPregunta FOREIGN KEY (cod_tipo_pregunta) REFERENCES Tipo_pregunta(cod_tipo_pregunta)
 );
 
-CREATE SEQUENCE Seq_pregunta
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
-
 CREATE TABLE Detalle_pregunta (
     cod_pregunta          NUMBER NOT NULL,
     cod_examen            NUMBER NOT NULL,
-    cod_usuario           NUMBER NOT NULL
+    cod_usuario           NUMBER NOT NULL,
     fecha_creacion        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PK_DetalleP PRIMARY KEY (cod_pregunta, cod_examen, cod_usuario),
     CONSTRAINT FK_PreguntaDetalle FOREIGN KEY (cod_pregunta) REFERENCES Pregunta(cod_pregunta),
@@ -213,18 +263,23 @@ CREATE TABLE Detalle_pregunta (
 );
 
 CREATE TABLE Respuesta (
-    cod_respuesta   NUMBER NOT NULL
+    cod_respuesta   NUMBER,
     respuesta       VARCHAR2(100) NOT NULL,
     CONSTRAINT PK_Respuesta PRIMARY KEY (cod_respuesta)
 );
 
-CREATE SEQUENCE Seq_Respuesta
-    MINVALUE 1
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10;
+CREATE SEQUENCE SEQ_RESPUESTA;
 
-CREATE TABLE DetalleRespuesta (
+CREATE OR REPLACE TRIGGER TRG_RESPUESTA
+    BEFORE INSERT ON Respuesta
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_RESPUESTA.NEXTVAL
+    INTO :new.cod_respuesta
+    FROM dual;
+END;
+
+CREATE TABLE Detalle_respuesta (
     cod_pregunta              NUMBER NOT NULL,
     cod_respuesta             NUMBER NOT NULL,
     correcta                  CHAR(1) NOT NULL ,
