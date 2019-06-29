@@ -1,0 +1,19 @@
+{
+  "name": "api-communityusac",
+  "version": "1.0.0",
+  "description": "API Community USAC",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Marco Chavez",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "oracledb": "^3.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
