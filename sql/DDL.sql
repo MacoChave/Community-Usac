@@ -15,6 +15,12 @@ BEGIN
     FROM dual;
 END;
 
+CREATE TABLE Rol (
+    cod_rol         NUMBER,
+    rol             VARCHAR2(50),
+    CONSTRAINT PK_Rol PRIMARY KEY (cod_rol)
+);
+
 CREATE TABLE Usuario (
     cod_usuario   NUMBER,
     carnet        NUMBER,
@@ -24,8 +30,20 @@ CREATE TABLE Usuario (
     correo        VARCHAR2(50) NOT NULL,
     telefono      NUMBER,
     clave         VARCHAR2(10) NOT NULL,
-    CONSTRAINT PK_Usuario PRIMARY KEY (cod_usuario)
+    cod_rol       NUMBER,
+    CONSTRAINT PK_Usuario PRIMARY KEY (cod_usuario),
+    CONSTRAINT FK_RolUsuario FOREIGN KEY (cod_rol) REFERENCES Rol(cod_rol)
 );
+
+CREATE VIEW V_USUARIO {
+    SELECT u.carnet, u.no_registro, u.nombre, u.url_foto, u.correo, u.telefono, u.clave, r.rol
+    FROM Usuario U, Rol R 
+    WHERE 
+        u.cod_rol = r.cod_rol
+};
+
+ALTER TABLE Usuario ADD cod_rol NUMBER;
+ALTER TABLE Usuario ADD CONSTRAINT FK_RolUsuario FOREIGN KEY (cod_rol) REFERENCES Rol(cod_rol);
 
 CREATE SEQUENCE SEQ_USUARIO;
 

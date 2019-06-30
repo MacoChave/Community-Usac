@@ -4,15 +4,22 @@ const ejecutor = require('../db/ejecutor');
 const router = new Router();
 
 router.get('/', (req, res) => {
-    ejecutor.select('SELECT * FROM Facultad', []).then((res) => {
-        console.log(res.rows);
-    });
-    return res.send('Lista de facultades');
+    ejecutor.select('SELECT * FROM Facultad', [])
+        .then((result) => {
+            return res.send(result.rows);
+        }
+    );
+    return res.send('Agrega una facultad');
 });
 
 router.get('/:id', (req, res) => {
     const {id} = req.params; //OBTENER ID
-    return res.send('Lista todas facultad por id');
+    ejecutor.select('SELECT * FROM Facultad WHERE cod_facultad = :id', [id])
+        .then(result => {
+            return res.send(result.rows);
+        }
+    );
+    return res.send('Agrega una facultad');
 });
 
 router.post('/', (req, res) => {
