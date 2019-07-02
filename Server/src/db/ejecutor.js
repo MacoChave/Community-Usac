@@ -2,7 +2,7 @@ const oracledb = require('oracledb');
 const dbConfig = require('./dbconfig');
 
 module.exports = {
-    select: async (query, params) => {
+    query: async (query, bindParam) => {
         let connection;
         let result;
     
@@ -17,39 +17,11 @@ module.exports = {
     
             result = await connection.execute(
                 query,
-                params
+                bindParam
             );
         } catch (err) {
             console.error(err);
             result = {error: err}
-        } finally {
-            if (connection) {
-                try {
-                    await connection.close();
-                    return result;
-                } catch (err) {
-                    console.error(err);
-                }
-            }
-        }
-    },
-    insert: async (query, params) => {
-        let connection;
-        let result;
-
-        try {
-            connection = await oracledb.getConnection(
-                {
-                    user: dbConfig.user,
-                    password: dbConfig.password,
-                    connectString: dbConfig.connectString
-                }
-            );
-
-            result = connection.execute(query, params)
-        } catch (err) {
-            console.error(err);
-            result = {error: err};
         } finally {
             if (connection) {
                 try {

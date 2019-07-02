@@ -21,6 +21,17 @@ CREATE TABLE Rol (
     CONSTRAINT PK_Rol PRIMARY KEY (cod_rol)
 );
 
+CREATE SEQUENCE SEQ_ROL;
+
+CREATE TRIGGER TRG_ROL
+    BEFORE INSERT ON Rol
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_ROL.NEXTVAL
+    INTO :new.cod_rol
+    FROM dual;
+END;
+
 CREATE TABLE Usuario (
     cod_usuario   NUMBER,
     carnet        NUMBER,
@@ -103,6 +114,34 @@ CREATE TABLE Ciencia (
     CONSTRAINT PK_Ciencia PRIMARY KEY (cod_ciencia),
     CONSTRAINT FK_CarreraCiencia FOREIGN KEY (cod_carrera, cod_facultad) REFERENCES Carrera(cod_carrera, cod_facultad)
 );
+
+CREATE OR REPLACE PROCEDURE c_ciencia (
+    i_nombre IN VARCHAR2, 
+    i_descripcion IN VARCHAR2, 
+    i_facultad IN VARCHAR2, 
+    i_carrera IN VARCHAR2)
+IS 
+    s_carrera NUMBER;
+    s_facultad NUMBER;
+BEGIN
+    s_carrera := 0;
+    s_facultad := 0;
+
+    SELECT c.cod_carrera INTO s_carrera
+    FROM Carrera C
+    WHERE c.nombre LIKE i_carrera;
+
+    SELECT f.cod_facultad INTO s_facultad
+    FROM Facultad F
+    WHERE f.nombre LIKE i_facultad;
+    
+    IF s_carrera > 0 AND s_facultad > 0 THEN
+        INSERT INTO Ciencia 
+            (nombre, descripcion, cod_carrera, cod_facultad)
+        VALUES 
+            (i_nombre, i_descripcion, s_carrera, s_facultad);
+    END IF;
+END;
 
 CREATE SEQUENCE SEQ_CIENCIA;
 

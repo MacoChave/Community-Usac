@@ -83,4 +83,17 @@ FROM Facultad F, Carrera C
 WHERE
     f.cod_facultad = c.cod_facultad;
 
-/* FILL CIENCIAS */
+/* FILL ROL */
+INSERT INTO Rol (rol)
+VALUES ('admin');
+INSERT INTO Rol (rol)
+VALUES ('user');
+/* FILL USUARIO */
+INSERT INTO Usuario (nombre, correo, clave, cod_rol)
+VALUES ('admin', 'admin@community.usac.edu.gt', 'admin', 1);
+
+/* FILL CIENCIA */
+BEGIN
+    c_ciencia('MIA', 'Manejo e Implementación de Archivos', 'Ingeniería', 'Ingeniería en Ciencias y Sistemas');
+    COMMIT;
+END;

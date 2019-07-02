@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
         "name": "API Community USAC",
         "autor": "201020831"
     };
-    res.send(data);
+    res.json(data);
 });
 
 module.exports = router;
