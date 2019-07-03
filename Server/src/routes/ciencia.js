@@ -5,8 +5,19 @@ const router = new Router();
 
 router.get('/', (req, res) => {
     ejecutor.query(
-        `SELECT * 
-        FROM Ciencia`, 
+        `SELECT 
+            m.cod_ciencia,
+            m.nombre,
+            m.descripcion,
+            c.nombre AS carrera,
+            f.nombre AS facultad
+        FROM 
+            Ciencia M, 
+            Carrera C, 
+            Facultad F
+        WHERE
+            m.cod_carrera = c.cod_carrera AND 
+            m.cod_facultad = f.cod_facultad`, 
         []
     )
     .then((result) => {
@@ -17,11 +28,20 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const {id} = req.params; //OBTENER ID
     ejecutor.query(
-        `SELECT * 
+        `SELECT 
+            m.cod_ciencia,
+            m.nombre,
+            m.descripcion,
+            c.nombre AS carrera,
+            f.nombre AS facultad
         FROM 
-            Ciencia 
-        WHERE 
-            cod_ciencia = :id`, 
+            Ciencia M, 
+            Carrera C, 
+            Facultad F
+        WHERE
+            m.cod_carrera = c.cod_carrera AND 
+            m.cod_facultad = f.cod_facultad AND 
+            m.cod_ciencia = :id`, 
         [id]
     )
     .then(result => {
@@ -30,13 +50,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {nombre, descripcion, cod_carrera, cod_facultad} = req.body; //OBTENER JSON
+    const {nombre, descripcion, carrera, facultad} = req.body; //OBTENER JSON
     ejecutor.query(
-        `INSERT INTO Ciencia 
-            (nombre, descripcion, cod_carrera, cod_facultad)
-        VALUES 
-            (:nombre, :descripcion, :cod_carrera, :cod_facultad)`,
-        [nombre, descripcion, cod_carrera, cod_facultad]
+        `BEGIN
+            c_ciencia(:nombre, :descripcion, :carrera, :facultad);
+            COMMIT;
+        END;`,
+        [nombre, descripcion, carrera, facultad]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -44,16 +64,13 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    const {nombre, descripcion, cod_carrera, cod_facultad} = req.body;
+    const {nombre, descripcion, carrera, facultad} = req.body; //OBTENER JSON
     ejecutor.query(
-        `UPDATE Ciencia SET 
-            nombre = :nombre, 
-            descripcion = :descripcion, 
-            cod_carrera = :cod_carrera, 
-            cod_facultad = :cod_facultad 
-        WHERE
-            cod_ciencia = :id`,
-        [nombre, descripcion, cod_carrera, cod_facultad, req.params.id]
+        `BEGIN
+            u_ciencia(:id, :nombre, :descripcion, :carrera, :facultad);
+            COMMIT;
+        END;`,
+        [req.params.id, nombre, descripcion, carrera, facultad]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -63,7 +80,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     ejecutor.query(
         `DELETE FROM Ciencia 
-        WHERE cod_ciencia = _id`,
+        WHERE cod_ciencia = :id`,
         [req.params.id]
     )
     .then(result => {

@@ -32,6 +32,39 @@ module.exports = {
                 }
             }
         }
+    },
+    execute: (query, bindParam) => {
+        return new Promise(
+            async (res, rej) => {
+                let conn;
+
+                try {
+                    conn = await oracledb.getConnection(
+                        {
+                            user: dbConfig.user,
+                            password: dbConfig.password,
+                            connectString: dbConfig.connectString
+                        }
+                    );
+                    const result = await conn.executeMany(
+                        query,
+                        bindParam
+                    );
+                    conn.commit();
+                    res(result);
+                } catch (err) {
+                    rej(err.message);
+                } finally {
+                    if (conn) {
+                        try {
+                            await conn.close();
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
+                }
+            }
+        )
     }
 }
 
