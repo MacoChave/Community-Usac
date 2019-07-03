@@ -16,11 +16,25 @@ app.use(express.urlencoded({extended: false}));
 
 // ROUTES
 app.use(require('./routes/index'));
+app.use('/api/cargo', require('./routes/cargo'));
+app.use('/api/rol', require('./routes/rol'));
+app.use('/api/usuario', require('./routes/usuario'));
 app.use('/api/facultad', require('./routes/facultad'));
 app.use('/api/carrera', require('./routes/carrera'));
-app.use('/api/usuario', require('./routes/usuario'));
 app.use('/api/ciencia', require('./routes/ciencia'));
-app.use('/api/cargo', require('./routes/cargo'));
+app.use('/api/chat', require('./routes/chat'));
+app.use('/api/cargo/detalle', require('./routes/detalle_cargo'));
+app.use('/api/usuario/asignacion', require('./routes/asignacion'));
+app.use('/app/tema', require('./routes/tema'));
+app.use('/api/tema/source', require('./routes/src_tema'));
+app.use('/api/tema/etiqueta', require('./routes/etiqueta'));
+app.use('/api/tema/comentario', require('./routes/comentario'));
+app.use('/api/examen', require('./routes/examen'));
+app.use('/api/examen/pregunta', require('./routes/pregunta'));
+app.use('/api/examen/pregunta/tipo', require('./routes/tipo_pregunta'));
+app.use('/api/examen/pregunta/detalle', require('./routes/detalle_pregunta'));
+app.use('/api/examen/pregunta/respuesta', require('./routes/respuesta'));
+app.use('/api/examen/pregunta/respuesta/detalle', require('./routes/detalle_respuesta'));
 
 // STARTING THE SERVER
 app.listen(app.get('port'), () => {
