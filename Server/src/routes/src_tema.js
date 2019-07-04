@@ -4,26 +4,66 @@ const ejecutor = require('../db/ejecutor');
 const router = new Router();
 
 router.get('/', (req, res) => {
-    return res.json({message: 'Get source tema'});
+    ejecutor.query(
+        `SELECT * FROM VIEW_SRC_TEMA`,
+        []
+    )
+    .then(result => {
+        return res.json(result.rows);
+    })
 })
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
-    return res.json({message: 'Get source tema ' + id});
+    ejecutor.query(
+        `SELECT * FROM VIEW_SRC_TEMA 
+        WHERE cod_srs_tema = :id`,
+        [id]
+    )
+    .then(result => {
+        return res.json(result.rows);
+    })
 })
 
 router.post('/', (req, res) => {
-    return res.json({message: 'Create source tema'});
+    const { imagen, tag, tema } = req.body;
+    ejecutor.query(
+        `BEGIN 
+            PROC_C_SRCTEMA(:imagen, :tag, :tema);
+            COMMIT;
+        END`,
+        [imagen, tag, tema]
+    )
+    .then(result => {
+        return res.json(result.rowsAffected);
+    })
 })
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    return res.json({message: 'Update source tema ' + id});
+    const { imagen, tag, tema } = req.body;
+    ejecutor.query(
+        `BEGIN 
+            PROC_C_SRCTEMA(:id, :imagen, :tag, :tema);
+            COMMIT;
+        END`,
+        [id, imagen, tag, tema]
+    )
+    .then(result => {
+        return res.json(result.rowsAffected);
+    })
 })
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    return res.json({message: 'Delete source tema ' + id});
+    ejecutor.query(
+        `DELETE FROM Src_tema
+        WHERE cod_srs_tema = :id`,
+        [id]
+    )
+    .then(result => {
+        return res.json(result.rowsAffected);
+    })
 })
 
 module.exports = router;

@@ -6,7 +6,7 @@ const router = new Router();
 router.get('/', (req, res) => {
     ejecutor.query(
         `SELECT * 
-        FROM Usuario`, 
+        FROM VIEW_USUARIO`, 
         []
     )
     .then((result) => {
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     const {id} = req.params; //OBTENER ID
     ejecutor.query(
         `SELECT * 
-        FROM Usuario 
+        FROM VIEW_USUARIO 
         WHERE cod_usuario = :id`, 
         [id]
     )
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    const {carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol} = req.body;
+    const {carnet, no_registro, nombre, url_foto, correo, telefono, clave} = req.body;
     ejecutor.query(
         `UPDATE Usuario SET 
             carnet = :carnet,
@@ -68,11 +68,10 @@ router.put('/:id', (req, res) => {
             url_foto = :url_foto, 
             correo = :correo, 
             telefono = :telefono, 
-            clave = :clave, 
-            cod_rol = :cod_rol
+            clave = :clave
         WHERE 
             cod_usuario = :id`,
-        [carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol, req.params.id]
+        [carnet, no_registro, nombre, url_foto, correo, telefono, clave, req.params.id]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});

@@ -43,7 +43,7 @@ WHERE
 
 CREATE VIEW VIEW_TEMA AS 
 SELECT 
-    u.nombre AS usuario, t.titulo, t.descripcion, t.fecha_creacion, t.fecha_cierre 
+    t.cod_tema, u.nombre AS usuario, t.titulo, t.descripcion, t.fecha_creacion, t.fecha_cierre 
 FROM 
     Tema T, Usuario U
 WHERE 
@@ -68,7 +68,7 @@ WHERE
 
 CREATE VIEW VIEW_COMENTARIO AS 
 SELECT 
-    c.contenido, c.url_imagen, c.tag, c.fecha_creacion, 
+    c.cod_comentario, c.contenido, c.url_imagen, c.tag, c.fecha_creacion, 
     t.titulo, u.nombre, u.url_foto
 FROM 
     Comentario C, Tema T, Usuario U 

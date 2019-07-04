@@ -5,19 +5,7 @@ const router = new Router();
 
 router.get('/', (req, res) => {
     ejecutor.query(
-        `SELECT 
-            m.cod_ciencia,
-            m.nombre,
-            m.descripcion,
-            c.nombre AS carrera,
-            f.nombre AS facultad
-        FROM 
-            Ciencia M, 
-            Carrera C, 
-            Facultad F
-        WHERE
-            m.cod_carrera = c.cod_carrera AND 
-            m.cod_facultad = f.cod_facultad`, 
+        `SELECT * FROM VIEW_CIENCIA`, 
         []
     )
     .then((result) => {
@@ -28,19 +16,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const {id} = req.params; //OBTENER ID
     ejecutor.query(
-        `SELECT 
-            m.cod_ciencia,
-            m.nombre,
-            m.descripcion,
-            c.nombre AS carrera,
-            f.nombre AS facultad
-        FROM 
-            Ciencia M, 
-            Carrera C, 
-            Facultad F
+        `SELECT * FROM VIEW_CIENCIA
         WHERE
-            m.cod_carrera = c.cod_carrera AND 
-            m.cod_facultad = f.cod_facultad AND 
             m.cod_ciencia = :id`, 
         [id]
     )
@@ -53,10 +30,12 @@ router.post('/', (req, res) => {
     const {nombre, descripcion, carrera, facultad} = req.body; //OBTENER JSON
     ejecutor.query(
         `BEGIN
-            c_ciencia(:nombre, :descripcion, :carrera, :facultad);
+            PROC_C_CIENCIA(
+                :nombre, :descripcion, :facultad, :carrera
+            );
             COMMIT;
-        END;`,
-        [nombre, descripcion, carrera, facultad]
+        END`,
+        [nombre, descripcion, facultad, carrera]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -64,13 +43,16 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    const {nombre, descripcion, carrera, facultad} = req.body; //OBTENER JSON
+    const id = req.params.id;
+    const {nombre, descripcion} = req.body;
     ejecutor.query(
         `BEGIN
-            u_ciencia(:id, :nombre, :descripcion, :carrera, :facultad);
+            PROC_U_CIENCIA(
+                :id, :nombre, :descripcion
+            );
             COMMIT;
         END;`,
-        [req.params.id, nombre, descripcion, carrera, facultad]
+        [id, nombre, descripcion]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
