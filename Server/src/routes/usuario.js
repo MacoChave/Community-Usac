@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         []
     )
     .then((result) => {
-        return res.json(result.rows);
+        res.json(result.rows);
     });
 });
 
@@ -23,24 +23,22 @@ router.get('/:id', (req, res) => {
         [id]
     )
     .then(result => {
-        return res.json(result.rows);
+        res.json(result.rows);
     });
 });
 
 router.post('/login', (req, res) => {
     const {nombre, clave, rol} = req.body;
     ejecutor.query(
-        `SELECT * 
-        FROM Usuario U, Rol R
-        WHERE
-            r.cod_rol = u.cod_rol AND 
-            u.nombre LIKE :nombre AND 
-            u.clave LIKE :clave AND 
-            r.rol LIKE :rol`,
+        `SELECT * FROM VIEW_USUARIO 
+        WHERE 
+            nombre LIKE :nombre AND 
+            clave LIKE :clave AND 
+            rol LIKE :rol`,
         [nombre, clave, rol]
     )
     .then(result => {
-        return res.json(result.rows);
+        res.json(result.rows);
     });
 });
 
@@ -54,7 +52,7 @@ router.post('/', (req, res) => {
         [carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol]
     )
     then(result => {
-        return res.json({message: result.rowsAffected});
+        res.json({message: result.rowsAffected});
     });
 });
 
@@ -74,7 +72,7 @@ router.put('/:id', (req, res) => {
         [carnet, no_registro, nombre, url_foto, correo, telefono, clave, req.params.id]
     )
     .then(result => {
-        return res.json({message: result.rowsAffected});
+        res.json({message: result.rowsAffected});
     });
 });
 
@@ -85,7 +83,7 @@ router.delete('/:id', (req, res) => {
         [req.params.id]
     )
     .then(result => {
-        return res.json({message: result.rowsAffected});
+        res.json({message: result.rowsAffected});
     });
 });
 

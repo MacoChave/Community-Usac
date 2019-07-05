@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'Sign in';
-  name: string;
-  pass: string;
+  @HostBinding('class') clases = 'main';
 
-  login() {
-    this.name = '';
-    this.pass = '';
-  }
+  title = 'Community USAC';
+
 }

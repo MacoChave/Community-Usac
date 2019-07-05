@@ -17,7 +17,11 @@ module.exports = {
     
             result = await connection.execute(
                 query,
-                bindParam
+                bindParam,
+                {
+                    outFormat: oracledb.OBJECT,
+                    autoCommit: true
+                }
             );
         } catch (err) {
             console.error(err);

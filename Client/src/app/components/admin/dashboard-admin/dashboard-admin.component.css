@@ -1,0 +1,56 @@
+.toggle_menu {
+    width: 32pt;
+    height: 32pt;
+    border-radius: 50%;
+    background: #1e1e1e;
+    color: #ffffff;
+    position: fixed;
+    top: 48pt;
+    right: 1rem;
+    z-index: 10;
+}
+
+.main_menu_button {
+    cursor: pointer;
+    margin: 0.5rem;
+}
+
+.menu_container {
+    position: fixed;
+    top: 80pt;
+    right: 1rem;
+    width: 80pt;
+    z-index: 5;
+}
+
+.menu {
+    width: 100%;
+    height: 180pt;
+    border-radius: 1.5rem;
+    background: #1e1e1e;
+    transition: 1s height ease-in-out;
+    padding-left: .3rem;
+    padding-top: 1.5rem;
+    overflow: hidden;
+}
+
+.menu_item {
+    list-style: none;
+    margin: .5rem;
+}
+
+.menu_link {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding-bottom: .5rem;
+}
+
+.active {
+    border-bottom: 2px solid #ffffff;
+}
+
+.hide_menu {
+    height: 0;
+    padding-top: 0;
+}

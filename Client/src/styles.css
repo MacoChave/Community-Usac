@@ -5,8 +5,32 @@
     margin: 0;
     padding: 0;
     box-sizing: content-box;
+    font-family: 'Raleway', sans-serif;
 }
 
-body {
-    background-color: steelblue;
+h1 h2 h3 h4 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+    line-height: 2;
+    background: steelblue;
+}
+
+.main {
+    height: 100%;
+}
+
+.footer {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+.grid_container {
+    display: grid;
+    margin: 0 30pt;
+}
+
+.flex_container {
+    display: flex;
 }

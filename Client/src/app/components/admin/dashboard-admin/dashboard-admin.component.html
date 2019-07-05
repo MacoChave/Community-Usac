@@ -1,0 +1,57 @@
+<div class="toggle_menu" (click)='toggle()'>
+    <i class="material-icons main_menu_button">menu</i>
+</div>
+<div class="menu_container">
+    <ul [class]=classMenu>
+        <li class="menu_item">
+            <a
+                class="menu_link"  
+                [routerLink]="[{outlets: {admin: ['user']}}]" routerLinkActive='active'>
+                Usuario
+            </a>
+        </li>
+        <li class="menu_item">
+            <a
+                class="menu_link"  
+                [routerLink]="[{outlets: {admin: ['facultad']}}]" routerLinkActive='active'>
+                Facultad
+            </a>
+        </li>
+        <li class="menu_item">
+            <a
+                class="menu_link"  
+                [routerLink]="[{outlets: {admin: ['carrera']}}]" routerLinkActive='active'>
+                Carrera
+            </a>
+        </li>
+        <li class="menu_item">
+            <a
+                class="menu_link"  
+                [routerLink]="[{outlets: {admin: ['cargo']}}]" routerLinkActive='active'>
+                Cargo
+            </a>
+        </li>
+        <li class="menu_item">
+            <a
+                class="menu_link"> 
+                Reportes
+            </a>
+        </li>
+        <li class="menu_item">
+            <a
+                class="menu_link"
+                (click)='signOut()'> 
+                Sign out
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- <script>
+    let btn_toggle_menu = document.querySelectorAll('.toggle_menu')[0];
+
+    btn_toggle_menu.addEventListener('click', () => {
+        let menu = document.querySelectorAll('.menu')[0];
+        menu.classList.toggle('hide_menu');
+    });
+</script> -->
+<router-outlet name='admin'></router-outlet>

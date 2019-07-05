@@ -1,0 +1,12 @@
+.flex_container {
+    flex-direction: column;
+    margin: 20vh auto;
+    max-width: 300px;
+    max-height: 300px;
+    padding: 1.5em;
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+}
