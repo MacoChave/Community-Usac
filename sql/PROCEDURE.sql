@@ -396,7 +396,7 @@ IS
 BEGIN 
     UPDATE Examen 
     SET
-        activo = '0'
+        activo = 0
     WHERE 
         cod_examen = i_cod_examen;
 END PROC_D_EXAMEN;
@@ -481,7 +481,7 @@ END PROC_C_DETALLEPREG;
 CREATE OR REPLACE PROCEDURE PROC_C_DETALLERES(
     i_pregunta IN VARCHAR2,
     i_respuesta IN VARCHAR2,
-    correcta IN CHAR
+    correcta IN NUMBER
 )
 IS 
     s_pregunta := 0;

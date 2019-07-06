@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { UserServiceService } from 'src/app/services/user-service.service';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material';
 import { UserAddComponent } from '../user-add/user-add.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
   result: any = [];
   
   constructor(
-    private userService: UserServiceService,
+    private userService: UserService,
     private dialog: MatDialog
   ) { }
 

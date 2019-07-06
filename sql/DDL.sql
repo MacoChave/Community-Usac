@@ -233,7 +233,7 @@ CREATE TABLE Examen (
     fecha_modificacion    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tiempo                NUMBER NOT NULL,
     duracion              NUMBER NOT NULL,
-    activo                CHAR(1) DEFAULT '1',
+    activo                NUMBER DEFAULT 1,
     log                   VARCHAR(200), 
     CONSTRAINT PK_Examen PRIMARY KEY (cod_examen, cod_usuario),
     CONSTRAINT FK_UsuarioExamen FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario)
@@ -305,7 +305,7 @@ END;
 CREATE TABLE Detalle_respuesta (
     cod_pregunta              NUMBER NOT NULL,
     cod_respuesta             NUMBER NOT NULL,
-    correcta                  CHAR(1) NOT NULL ,
+    correcta                  NUMBER NOT NULL ,
     CONSTRAINT PK_DetalleRespuesta PRIMARY KEY (cod_pregunta, cod_respuesta),
     CONSTRAINT FK_PreguntaRespuesta FOREIGN KEY (cod_pregunta) REFERENCES Pregunta(cod_pregunta),
     CONSTRAINT FK_RespuestaDetalle FOREIGN KEY (cod_respuesta) REFERENCES Respuesta(cod_respuesta)

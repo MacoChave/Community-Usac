@@ -5,9 +5,9 @@ import { Position } from '../models/Position';
 @Injectable({
   providedIn: 'root'
 })
-export class PositionServiceService {
+export class PositionService {
 
-  API_URI = 'http://localhost:3000/api/rol';
+  API_URI = 'http://localhost:3000/api/cargo';
 
   constructor(private http: HttpClient) { }
 

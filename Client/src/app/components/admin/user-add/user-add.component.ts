@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Position } from 'src/app/models/Position';
-import { PositionServiceService } from 'src/app/services/cargo-service.service';
+import { PositionService } from 'src/app/services/cargo.service';
 
 @Component({
   selector: 'user/add',
@@ -30,7 +30,7 @@ export class UserAddComponent implements OnInit {
   }
 
   constructor(
-    private positionService: PositionServiceService, 
+    private positionService: PositionService, 
     private dialogRef: MatDialogRef<UserAddComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }

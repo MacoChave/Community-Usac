@@ -19,11 +19,18 @@ import { CarreraAddComponent } from './components/admin/carrera-add/carrera-add.
 import { CargoComponent } from './components/admin/cargo/cargo.component';
 import { CargoAddComponent } from './components/admin/cargo-add/cargo-add.component';
 
-import { UserServiceService } from './services/user-service.service';
-
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
-import { PositionServiceService } from './services/cargo-service.service';
+
+import { UserService } from './services/user.service';
+import { PositionService } from './services/cargo.service';
+import { RolService } from './services/rol.service';
+import { FacultadService } from './services/facultad.service';
+import { CarreraService } from './services/carrera.service';
+import { CienciaService } from './services/ciencia.service';
+import { AsignacionService } from './services/asignacion.service';
+import { ChatService } from './services/chat.service';
+import { DetalleCargoService } from './services/detalle-cargo.service';
 
 @NgModule({
   declarations: [
@@ -51,8 +58,15 @@ import { PositionServiceService } from './services/cargo-service.service';
     MaterialModule
   ],
   providers: [
-    UserServiceService,
-    PositionServiceService
+    UserService,
+    PositionService,
+    RolService,
+    FacultadService,
+    CarreraService,
+    CienciaService,
+    DetalleCargoService,
+    AsignacionService,
+    ChatService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

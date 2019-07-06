@@ -13,9 +13,9 @@ FROM Carrera C, Facultad F
 WHERE 
     c.cod_facultad = f.cod_facultad;
     
-CREATE VIEW VIEW_CIENCIA AS 
+CREATE OR REPLACE VIEW VIEW_CIENCIA AS 
 SELECT 
-    m.nombre, m.descripcion, c.nombre AS carrera, f.nombre AS facultad
+    m.cod_ciencia, m.nombre, m.descripcion, c.nombre AS carrera, f.nombre AS facultad
 FROM 
     Ciencia M, Carrera C, Facultad F
 WHERE 
@@ -57,9 +57,9 @@ FROM
 WHERE 
     st.cod_tema = t.cod_tema;
 
-CREATE VIEW VIEW_ETIQUETA AS 
+CREATE OR REPLACE VIEW VIEW_ETIQUETA AS 
 SELECT 
-    t.titulo AS Tema, c.nombre AS ciencia 
+    t.titulo AS tema, c.nombre AS ciencia 
 FROM 
     Etiqueta E, Tema T, Ciencia C 
 WHERE 
@@ -76,30 +76,30 @@ WHERE
     c.cod_tema = t.cod_tema AND 
     c.cod_usuario = u.cod_usuario;
 
-CREATE VIEW VIEW_EXAMEN AS 
+CREATE OR REPLACE VIEW VIEW_EXAMEN AS 
 SELECT 
-    e.titulo, e.tema, e.fecha_creacion, e.fecha_modificacion, 
+    e.cod_examen, e.titulo, e.tema, e.fecha_creacion, e.fecha_modificacion, 
     e.tiempo, e.duracion, e.activo, e.log, u.nombre, u.url_foto
 FROM
     Examen E, Usuario U 
 WHERE 
     e.cod_usuario = u.cod_usuario;
 
-CREATE VIEW VIEW_PREGUNTA AS 
-SELECT p.descripcion, tp.nombre AS tipo 
+CREATE OR REPLACE VIEW VIEW_PREGUNTA AS 
+SELECT p.cod_pregunta, p.descripcion, tp.nombre AS tipo 
 FROM 
     Pregunta P, Tipo_pregunta TP 
 WHERE 
     p.cod_tipo_pregunta = tp.cod_tipo_pregunta;
 
-CREATE VIEW VIEW_DETALLEPREG AS 
+CREATE OR REPLACE VIEW VIEW_DETALLEPREG AS 
 SELECT 
-    e.titulo AS examen, p.descripcion AS pregunta, 
+    dt.cod_pregunta, e.titulo AS examen, p.descripcion AS pregunta, 
     tp.nombre AS tipo, u.nombre AS creador, u.url_foto, 
-    dp.fecha_creacion
+    dt.fecha_creacion
 FROM 
     Detalle_pregunta DT, Pregunta P, Examen E, Usuario U, 
-    TP Tipo_pregunta
+    Tipo_pregunta TP
 WHERE 
     dt.cod_pregunta = p.cod_pregunta AND 
     dt.cod_examen = e.cod_examen AND 

@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 
 import { User } from '../../models/User';
-import { UserServiceService } from '../../services/user-service.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit {
   items: string[] = ['admin', 'user'];
 
   constructor(
-    private userService: UserServiceService,
+    private userService: UserService,
     private router: Router
   ) {}
 
