@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {nombre, descripcion, carrera, facultad} = req.body; //OBTENER JSON
+    const {NOMBRE, DESCRIPCION, CARRERA, FACULTAD} = req.body; //OBTENER JSON
     ejecutor.query(
         `BEGIN
             PROC_C_CIENCIA(
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
             );
             COMMIT;
         END`,
-        [nombre, descripcion, facultad, carrera]
+        [NOMBRE, DESCRIPCION, FACULTAD, CARRERA]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const {nombre, descripcion} = req.body;
+    const {NOMBRE, DESCRIPCION} = req.body;
     ejecutor.query(
         `BEGIN
             PROC_U_CIENCIA(
@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
             );
             COMMIT;
         END;`,
-        [id, nombre, descripcion]
+        [id, NOMBRE, DESCRIPCION]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});

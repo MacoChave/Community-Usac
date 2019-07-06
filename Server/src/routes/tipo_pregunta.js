@@ -26,12 +26,12 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { nombre } = req.body;
+    const { NOMBRE } = req.body;
     ejecutor.query(
         `INSERT INTO Tipo_pregunta 
             (nombre) 
         VALLUES (:nombre)`,
-        [nombre]
+        [NOMBRE]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -40,12 +40,12 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { nombre } = req.body;
+    const { NOMBRE } = req.body;
     ejecutor.query(
         `UPDATE FROM Tipo_pregunta 
         SET nombre = :nombre 
         WHERE cod_tipo_pregunta = :id`,
-        [nombre, id]
+        [NOMBRE, id]
     )
     .then(result => {
         return res.json(result.rowsAffected);

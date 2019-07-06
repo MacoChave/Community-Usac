@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 // })
 
 router.post('/', (req, res) => {
-    const { usuario, ciencia } = req.body;
+    const { USUARIO, CIENCIA } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_ASIGNACION(
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
             );
             COMMIT;
         END`,
-        [usuario, ciencia]
+        [USUARIO, CIENCIA]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -55,13 +55,13 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    const { usuario, ciencia } = req.body;
+    const { USUARIO, CIENCIA } = req.body;
     ejecutor.query(
         `DELETE FROM Asignacion
         WHERE 
             cod_usuario = :usuario AND 
             cod_ciencia = :ciencia`,
-        [usuario, ciencia]
+        [USUARIO, CIENCIA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

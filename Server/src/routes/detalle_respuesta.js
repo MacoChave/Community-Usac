@@ -25,13 +25,13 @@ router.get('/', (req, res) => {
 // })
 
 router.post('/', (req, res) => {
-    const { pregunta, respuesta } = req.body;
+    const { PREGUNTA, RESPUESTA } = req.body;
     ejecutor.query(
         `BEGIN 
             PROC_C_DETALLERES(:pregunta, :respuesta)
             COMMIT;
         END`,
-        [pregunta, respuesta]
+        [PREGUNTA, RESPUESTA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

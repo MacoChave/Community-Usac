@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 // })
 
 router.post('/', (req, res) => {
-    const {  } = req.body;
+    const { PREGUNTA, EXAMEN, USUARIO } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_DETALLEPREG(
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
             );
             COMMINT;
         END`,
-        []
+        [PREGUNTA, EXAMEN, USUARIO]
     )
     .then(result => {
         return res.json(result.rowsAffected);

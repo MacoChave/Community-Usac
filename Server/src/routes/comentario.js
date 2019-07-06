@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { contenido, imagen, tag, tema, usuario } = req.body;
+    const { CONTENIDO, IMAGEN, TAG, TEMA, USUARIO } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_COMENTARIO(
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
             );
             COMMIT;
         END`,
-        [contenido, imagen, tag, tema, usuario]
+        [CONTENIDO, IMAGEN, TAG, TEMA, USUARIO]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { contenido, imagen, tag } = req.body;
+    const { CONTENIDO, IMAGEN, TAG } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_U_COMENTARIO(
@@ -57,7 +57,7 @@ router.put('/:id', (req, res) => {
             );
             COMMIT;
         END`,
-        [id, contenido, imagen, tag]
+        [id, CONTENIDO, IMAGEN, TAG]
     )
     .then(result => {
         return res.json(result.rowsAffected);

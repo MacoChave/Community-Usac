@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {facultad, nombre, descripcion} = req.body;
+    const {FACULTAD, NOMBRE, DESCRIPCION} = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_CARRERA(
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
             );
             COMMIT;
         END`,
-        [facultad, nombre, descripcion]
+        [FACULTAD, NOMBRE, DESCRIPCION]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const {facultad, nombre, descripcion} = req.body;
+    const {FACULTAD, NOMBRE, DESCRIPCION} = req.body;
     ejecutor.query(
         `BEGIN
             PROC_U_CARRERA(
@@ -51,7 +51,7 @@ router.put('/:id', (req, res) => {
             );
             COMMIT;
         END`,
-        [id, facultad, nombre, descripcion]
+        [id, FACULTAD, NOMBRE, DESCRIPCION]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});

@@ -26,12 +26,12 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { respuesta } = req.body;
+    const { RESPUESTA } = req.body;
     ejecutor.query(
         `INSERT INTO Respuesta 
             (respuesta) 
         VALUES (:respuesta)`,
-        [respuesta]
+        [RESPUESTA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

@@ -28,14 +28,15 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    const {nombre, clave, rol} = req.body;
+    const {NOMBRE, CLAVE, ROL} = req.body;
+    console.log(`${NOMBRE}, ${CLAVE}, ${ROL}`);
     ejecutor.query(
         `SELECT * FROM VIEW_USUARIO 
         WHERE 
             nombre LIKE :nombre AND 
             clave LIKE :clave AND 
             rol LIKE :rol`,
-        [nombre, clave, rol]
+        [NOMBRE, CLAVE, ROL]
     )
     .then(result => {
         res.json(result.rows);
@@ -43,13 +44,13 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol} = req.body;
+    const {CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, COD_ROL} = req.body;
     ejecutor.query(
         `INSERT INTO Usuario 
             (carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol) 
         VALUES 
             (:carnet, :no_registro, :nombre, :url_foto, :correo, :telefono, :clave, :cod_rol)`,
-        [carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol]
+        [CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, COD_ROL]
     )
     then(result => {
         res.json({message: result.rowsAffected});
@@ -57,7 +58,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    const {carnet, no_registro, nombre, url_foto, correo, telefono, clave} = req.body;
+    const {CARNET, NOREGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE} = req.body;
     ejecutor.query(
         `UPDATE Usuario SET 
             carnet = :carnet,
@@ -69,7 +70,7 @@ router.put('/:id', (req, res) => {
             clave = :clave
         WHERE 
             cod_usuario = :id`,
-        [carnet, no_registro, nombre, url_foto, correo, telefono, clave, req.params.id]
+        [CARNET, NOREGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, req.params.id]
     )
     .then(result => {
         res.json({message: result.rowsAffected});

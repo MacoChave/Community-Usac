@@ -26,11 +26,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { rol } = req.body;
+    const { ROL } = req.body;
     ejecutor.query(
         `INSERT INTO Rol (rol)
         VALUES (:rol)`,
-        [rol]
+        [ROL]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -39,12 +39,12 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { rol } = req.body;
+    const { ROL } = req.body;
     ejecutor.query(
         `UPDATE Rol SET
         rol = :rol
         WHERE cod_rol = :id`,
-        [rol, id]
+        [ROL, id]
     )
     .then(result => {
         return res.json(result.rowsAffected);

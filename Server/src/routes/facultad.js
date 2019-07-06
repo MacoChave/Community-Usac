@@ -26,13 +26,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {nombre, descripcion} = req.body; //OBTENER JSON
+    const {NOMBRE, DESCRIPCION} = req.body; //OBTENER JSON
     ejecutor.query(
         `INSERT INTO Facultad 
             (nombre, descripcion) 
         VALUES 
             (:nombre, :descripcion)`,
-        [nombre, descripcion]
+        [NOMBRE, DESCRIPCION]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -40,14 +40,14 @@ router.post('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-    const {nombre, descripcion} = req.body;
+    const {NOMBRE, DESCRIPCION} = req.body;
     ejecutor.query(
         `UPDATE Facultad SET 
             nombre = :nombre, 
             descripcion = :descripcion
         WHERE 
             cod_facultad = :id`,
-        [nombre, descripcion, req.params.id]
+        [NOMBRE, DESCRIPCION, req.params.id]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});

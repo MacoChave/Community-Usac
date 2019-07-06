@@ -26,13 +26,13 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { descripcion, tipo } = req.body;
+    const { DESCRIPCION, TIPO } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_PREGUNTA(:descripcion, :tipo);
             COMMIT;
         END`,
-        [descripcion, tipo]
+        [DESCRIPCION, TIPO]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -41,13 +41,13 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { descripcion, tipo } = req.body;
+    const { DESCRIPCION, TIPO } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_U_PREGUNTA(:id, :descripcion, :tipo);
             COMMIT;
         END`,
-        [id, descripcion, tipo]
+        [id, DESCRIPCION, TIPO]
     )
     .then(result => {
         return res.json(result.rowsAffected);

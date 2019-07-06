@@ -26,13 +26,13 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { imagen, tag, tema } = req.body;
+    const { IMAGEN, TAG, TEMA } = req.body;
     ejecutor.query(
         `BEGIN 
             PROC_C_SRCTEMA(:imagen, :tag, :tema);
             COMMIT;
         END`,
-        [imagen, tag, tema]
+        [IMAGEN, TAG, TEMA]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -41,13 +41,13 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { imagen, tag, tema } = req.body;
+    const { IMAGEN, TAG, TEMA } = req.body;
     ejecutor.query(
         `BEGIN 
             PROC_C_SRCTEMA(:id, :imagen, :tag, :tema);
             COMMIT;
         END`,
-        [id, imagen, tag, tema]
+        [id, IMAGEN, TAG, TEMA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

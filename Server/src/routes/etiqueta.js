@@ -26,13 +26,13 @@ router.get('/', (req, res) => {
 // })
 
 router.post('/', (req, res) => {
-    const { tema, ciencia } = req.body;
+    const { TEMA, CIENCIA } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_ETIQUETA(:tema, :ciencia);
             COMMIT;
         END`,
-        [tema, ciencia]
+        [TEMA, CIENCIA]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -52,13 +52,13 @@ router.post('/', (req, res) => {
 // })
 
 router.delete('/', (req, res) => {
-    const { cod_tema, cod_ciencia } = req.body;
+    const { COD_TEMA, COD_CIENCIA } = req.body;
     ejecutor.query(
         `DELETE FROM Etiqueta 
         WHERE 
             cod_tema = :tema, 
             cod_ciencia = :ciencia`,
-        [cod_tema, cod_ciencia]
+        [COD_TEMA, COD_CIENCIA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

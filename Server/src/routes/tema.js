@@ -26,13 +26,13 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { usuario, titulo, descripcion } = req.body;
+    const { USUARIO, TITULO, DESCRIPCION } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_TEMA(:usuario, :titulo, :descripcion);
             COMMIT;
         END`,
-        [usuario, titulo, descripcion]
+        [USUARIO, TITULO, DESCRIPCION]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -41,13 +41,13 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { usuario, titulo, descripcion } = req.body;
+    const { USUARIO, TITULO, DESCRIPCION } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_U_TEMA(:id :titulo, :descripcion);
             COMMIT;
         END`,
-        [id, titulo, descripcion]
+        [id, TITULO, DESCRIPCION]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -56,13 +56,13 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    const { motivo } = req.body;
+    const { MOTIVO } = req.body;
     ejecutor.query(
         `BEGIN 
             PROC_D_TEMA(:id, :motivo);
             COMMIT;
         END`,
-        [id, motivo]
+        [id, MOTIVO]
     )
     .then(result => {
         return res.json(result.rowsAffected);

@@ -26,7 +26,7 @@ router.get('/:nombre', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { usuario, cargo, facultad, carrera } = req.body;
+    const { USUARIO, CARGO, FACULTAD, CARRERA } = req.body;
     ejecutor.query(
         `BEGIN
             PROC_C_DETALLE_CARGO(
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
             );
             COMMIT;
         END`,
-        [usuario, cargo, facultad, carrera]
+        [USUARIO, CARGO, FACULTAD, CARRERA]
     )
     .then(result => {
         return res.json(result.rowsAffected);
