@@ -23,6 +23,7 @@ import { UserServiceService } from './services/user-service.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
+import { PositionServiceService } from './services/cargo-service.service';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,12 @@ import { MaterialModule } from './material.module';
     MaterialModule
   ],
   providers: [
-    UserServiceService
+    UserServiceService,
+    PositionServiceService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    UserAddComponent
+  ]
 })
 export class AppModule { }

@@ -1,0 +1,37 @@
+.flex_container {
+    flex-direction: column;
+    padding: 10pt;
+}
+
+.user_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid_container {
+    grid-template-areas: "rol id"
+                         "username password"
+                         "mail phone"
+                         "url url"
+                         "button button";
+    margin: 0;
+}
+
+.rol {grid-area: rol}
+.id {grid-area: id}
+.username {grid-area: username}
+.password {grid-area: password}
+.mail {grid-area: mail}
+.phone {grid-area: phone}
+.image {
+    grid-area: url;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.image .profile_image {
+    width: 120pt;
+    height: 120pt;
+    margin: 15pt;
+}
+.button {grid-area: button}

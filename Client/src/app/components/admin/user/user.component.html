@@ -1,19 +1,31 @@
-<div class="item">
-    <div class="header">
-        <img class="profile_image" src="../../../../assets/profile_image.jpg" alt="profile_image">
-        <h3>Name: user name</h3>
-        <p>Rol: user rol</p>
+<div class="grid_container" *ngIf='result != null && result.length > 0; else emptyContainer'>
+    <div class="item" *ngFor='let res of result'>
+        <div class="header">
+            <!-- res.URL_FOTO == null ? '../../../../assets/profile_image.jpg' : 'res.URL_FOTO' -->
+            <img class="profile_image" [src]="res.URL_FOTO == null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_image">
+            <h3>Name: {{res.NOMBRE}} </h3>
+            <p>Rol: {{res.ROL}} </p>
+        </div>
+        <div class="container">
+            <p>Carnet: {{res.CARNET}} </p>
+            <p>No registro: {{NO_REGISTRO}} </p>
+            <p>Correo: {{CORREO}} </p>
+            <p>Telefono: {{TELEFONO}} </p>
+        </div>
+        <div class="footer">
+            <button mat-button color="accent" (click)='editUser(res.COD_USUARIO)'>Edit</button>
+            <button mat-button color="warn" (click)='deleteUser(res.COD_USUARIO)'>Delete</button>
+        </div>
     </div>
-    <div class="container">
-        <p>Carnet: no carnet</p>
-        <p>No registro: no register</p>
-        <p>Facultad: facultad</p>
-        <p>Carrera: carrera</p>
-        <p>Correo: user mail</p>
-        <p>Telefono: phone number</p>
-    </div>
-    <div class="footer">
-        <button mat-button color="accent">Edit</button>
-        <button mat-button color="warn">Delete</button>
+    <div class="item">
+        <div class="header">
+            <h3>Add new user</h3>
+        </div>
+        <div class="footer">
+            <button mat-button color="accent" (click)='addUser()'>Add</button>
+        </div>
     </div>
 </div>
+<ng-template #emptyContainer>
+
+</ng-template>

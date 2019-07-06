@@ -4,12 +4,12 @@
 }
 
 .grid_container {
-    grid-auto-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 16pt;
 }
 
 .item {
-    width: 200pt;
+    max-width: 200pt;
 }
 
 .item .header {
@@ -28,4 +28,22 @@
 .item .footer {
     display: flex;
     justify-content: flex-end;
+}
+
+.fab_button {
+    position: fixed;
+    bottom: 32pt;
+    right: 32pt;
+}
+
+@media screen and (min-width: 426px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

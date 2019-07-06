@@ -16,26 +16,26 @@ export class SigninComponent implements OnInit {
   title: 'Sign in';
 
   user: User = {
-    cod_usuario: 0,
-    carnet: 0,
-    no_registro: 0,
-    nombre: '',
-    url_foto: '',
-    correo: '',
-    telefono: 0,
-    clave: '',
-    rol: '',
+    COD_USUARIO: 0,
+    CARNET: 0,
+    NO_REGISTRO: 0,
+    NOMBRE: '',
+    URL_FOTO: '',
+    CORREO: '',
+    TELEFONO: 0,
+    CLAVE: '',
+    ROL: '',
   }
   currentUser: User = {
-    cod_usuario: 0,
-    carnet: 0,
-    no_registro: 0,
-    nombre: '',
-    url_foto: '',
-    correo: '',
-    telefono: 0,
-    clave: '',
-    rol: '',
+    COD_USUARIO: 0,
+    CARNET: 0,
+    NO_REGISTRO: 0,
+    NOMBRE: '',
+    URL_FOTO: '',
+    CORREO: '',
+    TELEFONO: 0,
+    CLAVE: '',
+    ROL: '',
   }
   result: any = [];
   items: string[] = ['admin', 'user'];
@@ -49,12 +49,12 @@ export class SigninComponent implements OnInit {
   }
 
   login() {
-    delete this.user.cod_usuario;
-    delete this.user.carnet;
-    delete this.user.no_registro;
-    delete this.user.url_foto;
-    delete this.user.correo;
-    delete this.user.telefono;
+    delete this.user.COD_USUARIO;
+    delete this.user.CARNET;
+    delete this.user.NO_REGISTRO;
+    delete this.user.URL_FOTO;
+    delete this.user.CORREO;
+    delete this.user.TELEFONO;
 
     console.log(this.user);
 
@@ -63,9 +63,9 @@ export class SigninComponent implements OnInit {
       err => console.error(err)
     );
 
-    this.user.nombre =  '';
-    this.user.clave =  '';
-    this.user.rol = '';
+    this.user.NOMBRE =  '';
+    this.user.CLAVE =  '';
+    this.user.ROL = '';
 
     this.checkResult();
   }

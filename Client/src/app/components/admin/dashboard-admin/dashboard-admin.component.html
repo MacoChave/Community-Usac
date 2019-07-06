@@ -6,28 +6,36 @@
         <li class="menu_item">
             <a
                 class="menu_link"  
-                [routerLink]="[{outlets: {admin: ['user']}}]" routerLinkActive='active'>
+                [routerLink]="[{outlets: {admin: ['user']}}]" 
+                routerLinkActive='active' 
+                (click)='toggle()'>
                 Usuario
             </a>
         </li>
         <li class="menu_item">
             <a
                 class="menu_link"  
-                [routerLink]="[{outlets: {admin: ['facultad']}}]" routerLinkActive='active'>
+                [routerLink]="[{outlets: {admin: ['facultad']}}]" 
+                routerLinkActive='active' 
+                (click)='toggle()'>
                 Facultad
             </a>
         </li>
         <li class="menu_item">
             <a
                 class="menu_link"  
-                [routerLink]="[{outlets: {admin: ['carrera']}}]" routerLinkActive='active'>
+                [routerLink]="[{outlets: {admin: ['carrera']}}]" 
+                routerLinkActive='active' 
+                (click)='toggle()'>
                 Carrera
             </a>
         </li>
         <li class="menu_item">
             <a
                 class="menu_link"  
-                [routerLink]="[{outlets: {admin: ['cargo']}}]" routerLinkActive='active'>
+                [routerLink]="[{outlets: {admin: ['cargo']}}]" 
+                routerLinkActive='active' 
+                (click)='toggle()'>
                 Cargo
             </a>
         </li>

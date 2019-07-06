@@ -1,1 +1,52 @@
-<p>user-add works!</p>
+<h2 mat-dialog-title>Formulario usuario</h2>
+<div class="flex_container">
+    <form class="" (ngSubmit)='save()'>
+        <div class="grid_container">
+            <mat-form-field class="item rol">
+                <mat-label>Pick a rol</mat-label>
+                <mat-select [(value)]='user.ROL'>
+                    <mat-option *ngFor="let position of positions" [value]="position.CARGO">
+                        {{position.CARGO}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <div class="id" *ngIf="user.ROL == 'estudiante'; else empleado">
+                <mat-form-field class="item carnet" class="login_item">
+                    <input matInput placeholder="Type no carnet" [(ngModel)]='user.CARNET' name="carnet">
+                </mat-form-field>
+            </div>
+            <ng-template class="id" #empleado>
+                <mat-form-field class="item registro" class="login_item">
+                    <input matInput placeholder="Type no registro" [(ngModel)]='user.NO_REGISTRO' name="no_registro">
+                </mat-form-field>
+            </ng-template>
+            
+            <mat-form-field class="item username" class="login_item">
+                <input matInput placeholder="Type user name" required [(ngModel)]='user.NOMBRE' name="nombre">
+            </mat-form-field>
+            
+            <mat-form-field class="item password" class="example-full-width">
+                <input matInput type="password" placeholder="Type your password" required [(ngModel)]='user.CLAVE' name="clave">
+            </mat-form-field>
+            
+            <mat-form-field class="item mail" class="example-full-width">
+                <input matInput placeholder="Email" required [(ngModel)]='user.CORREO' name="correo">
+            </mat-form-field>
+            
+            <mat-form-field class="item phone" class="example-full-width">
+                <input type="tel" matInput placeholder="Telephone" [(ngModel)]='user.TELEFONO' name="telefono">
+            </mat-form-field>
+
+            <div class="image">
+                <input type="file" name="url_photo" id="url_photo" [(ngModel)]='user.URL_FOTO'>
+                <img class="profile_image" [src]="user.URL_PHOTO == null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_photo">
+            </div>
+            <!-- <mat-form-field class="item image" class="example-full-width">
+                <input matInput placeholder="Type your image">
+            </mat-form-field> -->
+    
+            <button class="item button" mat-flat-button color="accent">Aceptar</button>
+        </div>
+    </form>
+</div>

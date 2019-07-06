@@ -1,4 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { UserServiceService } from 'src/app/services/user-service.service';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { UserAddComponent } from '../user-add/user-add.component';
 
 @Component({
   selector: 'user',
@@ -7,11 +10,48 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  @HostBinding('class') clases = 'grid_container';
+  @HostBinding('class') clases = 'user_container';
+
+  result: any = [];
   
-  constructor() { }
+  constructor(
+    private userService: UserServiceService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe(
+      res => this.result = res,
+      err => console.error(err)
+    );
   }
 
+  deleteUser(id: string) {
+    console.log('DELETE USER ' + id);
+    this.userService.deleteUser(id).subscribe(
+      res => alert('Usuario eliminado'),
+      err => alert('No se ha podido eliminar el usuario')
+    );
+  }
+
+  editUser(id: string) {
+    
+    const dialogRef = this.dialog.open(
+      UserAddComponent, 
+      {
+        data: id,
+        height: '90vh',
+        width: '70vh'
+      }
+    );
+  }
+
+  addUser() {
+    const dialogRef = this.dialog.open(
+      UserAddComponent, 
+      {
+        data: {}
+      }
+    );
+  }
 }

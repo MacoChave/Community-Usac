@@ -2,18 +2,18 @@
     <h2>Sign in</h2>
     <form class="login_form" (ngSubmit)="login()">
         <mat-form-field class="login_item">
-        <input matInput [(ngModel)]="user.nombre" type="text" name="name" placeholder="Username" required>
+            <input matInput [(ngModel)]="user.NOMBRE" type="text" name="name" placeholder="Username" required>
         </mat-form-field>
         <mat-form-field class="login_item">
-        <input matInput [(ngModel)]="user.clave" type="password" name="pass" placeholder="Password" required>
+            <input matInput [(ngModel)]="user.CLAVE" type="password" name="pass" placeholder="Password" required>
         </mat-form-field>
         <mat-form-field>
-        <mat-label>Pick your rol</mat-label>
-        <mat-select [(value)]="user.rol">
-            <mat-option *ngFor="let item of items" [value]="item">
-            {{item}}
-            </mat-option>
-        </mat-select>
+            <mat-label>Pick your rol</mat-label>
+            <mat-select [(value)]="user.ROL">
+                <mat-option *ngFor="let item of items" [value]="item">
+                    {{item}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
         <button mat-flat-button color="accent">Sign in</button>
     </form>

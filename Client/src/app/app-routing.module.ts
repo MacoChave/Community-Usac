@@ -32,11 +32,16 @@ const routes: Routes = [
         component: UserComponent,
         outlet: 'admin'
       },
-      {
-        path: 'user/add',
-        component: UserAddComponent,
-        outlet: 'admin'
-      },
+      // {
+      //   path: 'user/add',
+      //   component: UserAddComponent,
+      //   outlet: 'admin'
+      // },
+      // {
+      //   path: 'user/edit:id',
+      //   component: UserAddComponent,
+      //   outlet: 'admin'
+      // },
       {
         path: 'facultad',
         component: FacultadComponent,

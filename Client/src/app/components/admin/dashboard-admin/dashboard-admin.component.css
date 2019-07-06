@@ -6,7 +6,7 @@
     color: #ffffff;
     position: fixed;
     top: 48pt;
-    right: 1rem;
+    right: 32pt;
     z-index: 10;
 }
 
@@ -28,7 +28,7 @@
     height: 180pt;
     border-radius: 1.5rem;
     background: #1e1e1e;
-    transition: 1s height ease-in-out;
+    transition: .5s height ease-in-out;
     padding-left: .3rem;
     padding-top: 1.5rem;
     overflow: hidden;
