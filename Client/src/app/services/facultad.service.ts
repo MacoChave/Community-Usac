@@ -23,11 +23,11 @@ export class FacultadService {
     return this.http.post(`${this.API_URI}`, facultad);
   }
 
-  updateFacultades (id: string, facultad: Facultad) {
+  updateFacultad (id: string, facultad: Facultad) {
     return this.http.put(`${this.API_URI}/${id}`, facultad);
   }
 
-  deleteFacultades (id: string) {
+  deleteFacultad (id: string) {
     return this.http.delete(`${this.API_URI}/${id}`);
   }
 }

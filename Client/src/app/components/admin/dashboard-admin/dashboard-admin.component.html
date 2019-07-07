@@ -41,7 +41,18 @@
         </li>
         <li class="menu_item">
             <a
-                class="menu_link"> 
+                class="menu_link"  
+                [routerLink]="[{outlets: {admin: ['ciencia']}}]" 
+                routerLinkActive='active' 
+                (click)='toggle()'>
+                Ciencia
+            </a>
+        </li>
+        <li class="menu_item">
+            <a
+                class="menu_link" 
+                routerLinkActive='active' 
+                (click)='toggle()'> 
                 Reportes
             </a>
         </li>

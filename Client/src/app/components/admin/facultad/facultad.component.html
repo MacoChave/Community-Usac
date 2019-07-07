@@ -1,1 +1,34 @@
-<p>facultad works!</p>
+<div class="grid_container" *ngIf='result != null && result.length > 0; else emptyContainer'>
+    <div class="item" *ngFor='let res of result'>
+        <div class="header">
+            <h3> {{res.NOMBRE}} </h3>
+        </div>
+        <div class="container">
+            <p> {{res.DESCRIPCION}} </p>
+        </div>
+        <div class="footer">
+            <button mat-button color="accent" (click)='editFacultad(res.COD_FACULTAD)'>Edit</button>
+            <button mat-button color="warn" (click)='deleteCarrera(res.COD_FACULTAD)'>Delete</button>
+        </div>
+    </div>
+    <div class="item">
+        <div class="header">
+            <h3>Add new facultad</h3>
+        </div>
+        <div class="container"></div>
+        <div class="footer">
+            <button mat-button color="accent" (click)='addFacultad()'>Add</button>
+        </div>
+    </div>
+</div>
+<ng-template class="grid_container" #emptyContainer>
+    <div class="header">
+        <h3>Add new facultad</h3>
+    </div>
+    <div class="container">
+        No hay elementos que mostrar
+    </div>
+    <div class="footer">
+        <button mat-button color="accent" (click)='addFacultad()'>Add</button>
+    </div>
+</ng-template>

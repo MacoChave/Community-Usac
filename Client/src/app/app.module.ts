@@ -41,6 +41,8 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { DetallePreguntaService } from './services/detalle-pregunta.service';
 import { RespuestaService } from './services/respuesta.service';
 import { DetalleRespuestaService } from './services/detalle-respuesta.service';
+import { CienciaComponent } from './components/admin/ciencia/ciencia.component';
+import { CienciaAddComponent } from './components/admin/ciencia-add/ciencia-add.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { DetalleRespuestaService } from './services/detalle-respuesta.service';
     CarreraAddComponent,
     CargoComponent,
     CargoAddComponent,
-    AdminBasicComponent
+    AdminBasicComponent,
+    CienciaComponent,
+    CienciaAddComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,10 @@ import { DetalleRespuestaService } from './services/detalle-respuesta.service';
   bootstrap: [AppComponent],
   entryComponents: [
     UserAddComponent,
-    FacultadAddComponent
+    FacultadAddComponent,
+    CarreraAddComponent,
+    CargoAddComponent,
+    CienciaAddComponent
   ]
 })
 export class AppModule { }

@@ -23,15 +23,15 @@ export class CarreraService {
     return this.http.get(`${this.API_URI}/facultad/${facultad}`);
   }
 
-  saveCarreras (carrera: Carrera) {
+  saveCarrera (carrera: Carrera) {
     return this.http.post(`${this.API_URI}`, carrera);
   }
 
-  updateCarreras (id: string, carrera: Carrera) {
+  updateCarrera (id: string, carrera: Carrera) {
     return this.http.put(`${this.API_URI}/${id}`, carrera);
   }
 
-  deleteCarreras (id: string) {
+  deleteCarrera (id: string) {
     return this.http.delete(`${this.API_URI}/${id}`);
   }
 }

@@ -3,33 +3,34 @@
         <div class="header">
             <h3> {{res.NOMBRE}} </h3>
             <p> {{res.FACULTAD}} </p>
+            <p> {{res.CARRERA}} </p>
         </div>
         <div class="container">
             <p> {{res.DESCRIPCION}} </p>
         </div>
         <div class="footer">
-            <button mat-button color="accent" (click)='editCarrera(res.COD_CARRERA)'>Edit</button>
-            <button mat-button color="warn" (click)='deleteCarrera(res.COD_CARRERA)'>Delete</button>
+            <button mat-button color="accent" (click)='editCiencia(res.COD_CIENCIA)'>Edit</button>
+            <button mat-button color="warn" (click)='deleteCiencia(res.COD_CIENCIA)'>Delete</button>
         </div>
     </div>
     <div class="item">
         <div class="header">
-            <h3>Add new facultad</h3>
+            <h3>Add new carreer</h3>
         </div>
         <div class="container"></div>
         <div class="footer">
-            <button mat-button color="accent" (click)='addCarrera()'>Add</button>
+            <button mat-button color="accent" (click)='addCiencia()'>Add</button>
         </div>
     </div>
 </div>
 <ng-template class="grid_container" #emptyContainer>
     <div class="header">
-        <h3>Add new facultad</h3>
+        <h3>Add new carreer</h3>
     </div>
     <div class="container">
         No hay elementos que mostrar
     </div>
     <div class="footer">
-        <button mat-button color="accent" (click)='addCarrera()'>Add</button>
+        <button mat-button color="accent" (click)='addCiencia()'>Add</button>
     </div>
 </ng-template>
