@@ -1,1 +1,32 @@
-<p>ciencia-add works!</p>
+<h2 mat-dialog-title>Formulario ciencia</h2>
+<form (ngSubmit)='save()'>
+    <div class="flex_container">
+        <mat-form-field class="flex_item nombre">
+            <input matInput placeholder="Type name" required [(ngModel)]='ciencia.NOMBRE' name="name">
+        </mat-form-field>
+        
+        <mat-form-field class="flex_item descripcion">
+            <textarea matInput placeholder="Type descripcion" [(ngModel)]='ciencia.DESCRIPCION' name='description'></textarea>
+        </mat-form-field>
+        
+        <mat-form-field class="flex_item facultad">
+            <mat-label>Pick a facultad</mat-label>
+            <mat-select [(value)]='ciencia.FACULTAD' (selectionChange)='changeFacultad()'>
+                <mat-option *ngFor='let facultad of facultades' [value]='facultad.NOMBRE'>
+                    {{facultad.NOMBRE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field class="flex_item facultad">
+            <mat-label>Pick a Carrea</mat-label>
+            <mat-select [(value)]='ciencia.CARRERA'>
+                <mat-option *ngFor='let carrera of carreras' [value]='carrera.NOMBRE'>
+                    {{carrera.NOMBRE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <button class="flex_item" mat-flat-button color='accent'>Aceptar</button>
+    </div>
+</form>

@@ -23,7 +23,7 @@
 
                 <div class="item_flex detalle" *ngIf="detalle.CARGO == 'Estudiante'; else nonstudent">
                     <mat-form-field>
-                        <input matInput placeholder="Type student identifier" [(ngModel)]='user.CARNET' name="carnet">
+                        <textarea matInput placeholder="Type student identifier" [(ngModel)]='user.CARNET' name="carnet"></textarea>
                     </mat-form-field>
                 </div>
                 <ng-template class="item_flex detalle" #nonstudent>

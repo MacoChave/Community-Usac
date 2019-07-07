@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     ejecutor.query(
         `SELECT * FROM VIEW_CIENCIA
         WHERE
-            m.cod_ciencia = :id`, 
+            cod_ciencia = :id`, 
         [id]
     )
     .then(result => {

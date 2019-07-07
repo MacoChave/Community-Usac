@@ -163,15 +163,15 @@ BEGIN
     FROM Cargo 
     WHERE cargo LIKE i_cargo;
 
-    SELECT c.cod_carrera INTO s_carrera
-    FROM Carrera C
-    WHERE c.nombre LIKE i_carrera;
+    SELECT cod_carrera INTO s_carrera
+    FROM Carrera
+    WHERE nombre LIKE i_carrera;
 
-    SELECT f.cod_facultad INTO s_facultad
-    FROM Facultad F
-    WHERE f.nombre LIKE i_facultad;
+    SELECT cod_facultad INTO s_facultad
+    FROM Facultad
+    WHERE nombre LIKE i_facultad;
 
-    IF cod_usuario > 0 AND cod_cargo > 0 AND cod_carrera > 0 AND cod_facultad > 0 THEN 
+    IF s_usuario > 0 AND s_cargo > 0 AND s_carrera > 0 AND s_facultad > 0 THEN 
         INSERT INTO Detalle_cargo 
             (cod_usuario, cod_cargo, cod_facultad, cod_carrera) 
         VALUES 
@@ -511,9 +511,12 @@ CREATE OR REPLACE PROCEDURE PROC_C_DETALLERES(
     correcta IN NUMBER
 )
 IS 
+    s_pregunta NUMBER;
+    s_respuesta NUMBER;
+BEGIN 
     s_pregunta := 0;
     s_respuesta := 0;
-BEGIN 
+    
     SELECT cod_pregunta INTO s_pregunta
     FROM Pregunta 
     WHERE descripcion LIKE i_pregunta;
@@ -528,5 +531,5 @@ BEGIN
         VALUES 
             (s_pregunta, s_respuesta, correcta);
     END IF;
-END PROC_C_RESPUESTA;
+END;
 

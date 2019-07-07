@@ -23,8 +23,8 @@ export class CienciaService {
     return this.http.post(`${this.API_URI}`, ciencia);
   }
 
-  updateCiencia (id: string, ciencia: Ciencia) {
-    return this.http.put(`${this.API_URI}/${id}`, ciencia);
+  updateCiencia (ciencia: Ciencia) {
+    return this.http.put(`${this.API_URI}/${ciencia.COD_CIENCIA}`, ciencia);
   }
 
   deleteCiencia (id: string) {

@@ -27,11 +27,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {CARGO} = req.body; //OBTENER JSON
+    const {CARGO, DESCRIPCION} = req.body; //OBTENER JSON
     ejecutor.query(
-        `INSERT INTO Cargo (cargo) 
-        VALUES (:cargo)`,
-        [CARGO]
+        `INSERT INTO Cargo (cargo, descripcion) 
+        VALUES (:cargo, :descripcion)`,
+        [CARGO, DESCRIPCION]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});
@@ -39,13 +39,14 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    const {CARGO} = req.body;
+    const {CARGO, DESCRIPCION} = req.body;
     ejecutor.query(
         `UPDATE Cargo SET 
-            cargo = :cargo 
+            cargo = :cargo, 
+            descripcion = :descripcion
         WHERE 
             cod_cargo = :id`,
-        [CARGO, req.params.id]
+        [CARGO, DESCRIPCION, req.params.id]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});

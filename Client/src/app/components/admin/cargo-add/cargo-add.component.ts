@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, Inject } from '@angular/core';
+import { Cargo } from 'src/app/models/Cargo';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { CargoService } from 'src/app/services/cargo.service';
 
 @Component({
   selector: 'cargo/add',
@@ -7,9 +10,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CargoAddComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  @HostBinding('class') classes = 'add_cargo';
+  
+  cargo: Cargo = {
+    COD_CARGO: 0,
+    CARGO: '',
+    DESCRIPCION: ''
   }
 
+  constructor(
+    private dialogRef: MatDialogRef<CargoAddComponent>, 
+    private cargoService: CargoService, 
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
+
+  ngOnInit() {
+    if (!isNaN(this.data)) {
+      // ACTUALIZAR CARGO
+      this.cargoService.getPosition(this.data).subscribe(
+        res => this.cargo = res[0],
+        err => console.error(err)
+      )
+    }
+  }
+
+  save () {
+    if (!isNaN(this.data)) {
+      console.log('Actualizar');
+      this.cargoService.updatePosition(this.cargo).subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      )
+    }
+    else {
+      console.log('Guardar');
+      this.cargoService.savePosition(this.cargo).subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      )
+    }
+
+    this.dialogRef.close();
+  }
 }

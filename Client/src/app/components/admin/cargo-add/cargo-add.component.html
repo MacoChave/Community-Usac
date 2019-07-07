@@ -1,1 +1,12 @@
-<p>cargo-add works!</p>
+<h2 mat-dialog-title>Formulario cargo</h2>
+<form (ngSubmit)='save()'>
+    <div class="flex_container">
+        <mat-form-field class="item_flex name">
+            <input matInput placeholder="Type name" required [(ngModel)]='cargo.CARGO' name="name">
+        </mat-form-field>
+        <mat-form-field class="item_flex description">
+            <textarea matInput placeholder="Type description" required [(ngModel)]="cargo.DESCRIPCION" name="description"></textarea>
+        </mat-form-field>
+        <button class="item_flex button" mat-flat-button color='accent'>Aceptar</button>
+    </div>
+</form>

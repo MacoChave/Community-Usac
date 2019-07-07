@@ -23,8 +23,8 @@ export class CargoService {
     return this.http.post(`${this.API_URI}`, cargo);
   }
 
-  updatePosition (id: string, cargo: Cargo) {
-    return this.http.put(`${this.API_URI}/${id}`, cargo);
+  updatePosition (cargo: Cargo) {
+    return this.http.put(`${this.API_URI}/${cargo.COD_CARGO}`, cargo);
   }
 
   deletePosition (id: string) {
