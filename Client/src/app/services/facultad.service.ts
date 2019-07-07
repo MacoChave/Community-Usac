@@ -23,8 +23,8 @@ export class FacultadService {
     return this.http.post(`${this.API_URI}`, facultad);
   }
 
-  updateFacultad (id: string, facultad: Facultad) {
-    return this.http.put(`${this.API_URI}/${id}`, facultad);
+  updateFacultad (facultad: Facultad) {
+    return this.http.put(`${this.API_URI}/${facultad.COD_FACULTAD}`, facultad);
   }
 
   deleteFacultad (id: string) {

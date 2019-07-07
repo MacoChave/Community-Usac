@@ -1,1 +1,14 @@
-<p>facultad-add works!</p>
+<h2 mat-dialog-title>Formulario facultad</h2>
+<form (ngSubmit)='save()'>
+    <div class="flex_container">
+        <mat-form-field class="item_flex name">
+            <input matInput placeholder="Type name" required [(ngModel)]='facultad.NOMBRE' name='name'>
+        </mat-form-field>
+
+        <mat-form-field class="item_flex description">
+            <textarea matInput placeholder="Type descriptioin" [(ngModel)]='facultad.DESCRIPCION' name='description'></textarea>
+        </mat-form-field>
+
+        <button class="item_grid button" mat-flat-button color="accent">Aceptar</button>
+    </div>
+</form>
