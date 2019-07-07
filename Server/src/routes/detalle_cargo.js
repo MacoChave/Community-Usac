@@ -27,6 +27,7 @@ router.get('/:nombre', (req, res) => {
 
 router.post('/', (req, res) => {
     const { USUARIO, CARGO, FACULTAD, CARRERA } = req.body;
+    console.log(req.body);
     ejecutor.query(
         `BEGIN
             PROC_C_DETALLE_CARGO(

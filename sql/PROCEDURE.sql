@@ -1,3 +1,30 @@
+CREATE OR REPLACE PROCEDURE PROC_C_USUARIO (
+    i_CARNET IN NUMBER, 
+    i_NO_REGISTRO IN NUMBER, 
+    i_NOMBRE in VARCHAR2, 
+    i_URL_FOTO in VARCHAR2, 
+    i_CORREO in VARCHAR2, 
+    i_TELEFONO IN NUMBER, 
+    i_CLAVE in VARCHAR2, 
+    i_ROL in VARCHAR2
+)
+IS 
+    s_ROL NUMBER;
+BEGIN 
+    s_ROL := 0;
+
+    SELECT COD_ROL INTO s_ROL
+    FROM ROL 
+    WHERE ROL LIKE i_ROL;
+
+    IF s_ROL > 0 THEN 
+        INSERT INTO Usuario 
+            (carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol) 
+        VALUES 
+            (i_CARNET, i_NO_REGISTRO, i_NOMBRE, i_URL_FOTO, i_CORREO, i_TELEFONO, i_CLAVE, s_ROL)
+    END IF;
+END;
+
 CREATE OR REPLACE PROCEDURE PROC_C_CARRERA (
     i_facultad IN VARCHAR2,
     i_nombre IN VARCHAR2,

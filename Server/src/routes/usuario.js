@@ -29,7 +29,6 @@ router.get('/:id', (req, res) => {
 
 router.post('/login', (req, res) => {
     const {NOMBRE, CLAVE, ROL} = req.body;
-    console.log(`${NOMBRE}, ${CLAVE}, ${ROL}`);
     ejecutor.query(
         `SELECT * FROM VIEW_USUARIO 
         WHERE 
@@ -39,26 +38,28 @@ router.post('/login', (req, res) => {
         [NOMBRE, CLAVE, ROL]
     )
     .then(result => {
-        res.json(result.rows);
+        res.json(result.rowsAffected);
     });
 });
 
 router.post('/', (req, res) => {
-    const {CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, COD_ROL} = req.body;
-    ejecutor.query(
-        `INSERT INTO Usuario 
-            (carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol) 
-        VALUES 
-            (:carnet, :no_registro, :nombre, :url_foto, :correo, :telefono, :clave, :cod_rol)`,
-        [CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, COD_ROL]
+    const {CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, ROL} = req.body;
+    console.log(req.body);
+    ejecutor.sp(
+        `BEGIN
+            PROC_C_USUARIO(
+                :carnet, :no_registro, :nombre, :url_foto, :correo, :telefono, :clave, :rol
+            );
+        END`,
+        [CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, ROL]
     )
-    then(result => {
+    .then(result => {
         res.json({message: result.rowsAffected});
     });
 });
 
 router.put('/:id', (req, res) => {
-    const {CARNET, NOREGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE} = req.body;
+    const {CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE} = req.body;
     ejecutor.query(
         `UPDATE Usuario SET 
             carnet = :carnet,
@@ -70,7 +71,7 @@ router.put('/:id', (req, res) => {
             clave = :clave
         WHERE 
             cod_usuario = :id`,
-        [CARNET, NOREGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, req.params.id]
+        [CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, req.params.id]
     )
     .then(result => {
         res.json({message: result.rowsAffected});

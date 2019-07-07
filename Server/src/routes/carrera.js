@@ -17,8 +17,20 @@ router.get('/:id', (req, res) => {
     const {id} = req.params; //OBTENER ID
     ejecutor.query(
         `SELECT * FROM VIEW_CARRERA
-        WHERE cod_carrera = :id`
-        , [id]
+        WHERE cod_carrera = :id`, 
+        [id]
+    )
+    .then(result => {
+        return res.json(result.rows);
+    });
+});
+
+router.get('/facultad/:facultad', (req, res) => {
+    const FACULTAD = req.params.facultad;
+    ejecutor.query(
+        `SELECT * FROM VIEW_CARRERA 
+        WHERE FACULTAD LIKE :facultad`,
+        [FACULTAD]
     )
     .then(result => {
         return res.json(result.rows);

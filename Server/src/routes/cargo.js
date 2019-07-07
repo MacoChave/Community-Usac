@@ -5,10 +5,11 @@ const router = new Router();
 
 router.get('/', (req, res) => {
     ejecutor.query(
-        `SELECT * FROM Cargo`, 
+        `SELECT * FROM CARGO`, 
         []
     )
-    .then((result) => {
+    .then(result => {
+        console.log(res.rows);
         return res.json(result.rows);
     });
 });

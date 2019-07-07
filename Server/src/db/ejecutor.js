@@ -37,6 +37,42 @@ module.exports = {
             }
         }
     },
+    sp: async (query, bindParam) => {
+        let connection;
+        let result;
+        query += ";";
+    
+        try {
+            connection = await oracledb.getConnection(
+                {
+                    user: dbConfig.user,
+                    password: dbConfig.password,
+                    connectString: dbConfig.connectString
+                }
+            );
+    
+            result = await connection.execute(
+                query,
+                bindParam,
+                {
+                    outFormat: oracledb.OBJECT,
+                    autoCommit: true
+                }
+            );
+        } catch (err) {
+            console.error(err);
+            result = {error: err}
+        } finally {
+            if (connection) {
+                try {
+                    await connection.close();
+                    return result;
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        }
+    },
     execute: (query, bindParam) => {
         return new Promise(
             async (res, rej) => {
