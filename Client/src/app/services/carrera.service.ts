@@ -27,8 +27,8 @@ export class CarreraService {
     return this.http.post(`${this.API_URI}`, carrera);
   }
 
-  updateCarrera (id: string, carrera: Carrera) {
-    return this.http.put(`${this.API_URI}/${id}`, carrera);
+  updateCarrera (carrera: Carrera) {
+    return this.http.put(`${this.API_URI}/${carrera.COD_CARRERA}`, carrera);
   }
 
   deleteCarrera (id: string) {

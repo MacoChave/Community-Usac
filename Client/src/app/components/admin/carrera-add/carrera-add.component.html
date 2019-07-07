@@ -1,1 +1,20 @@
-<p>carrera-add works!</p>
+<h2 mat-dialog-title>Formulario carrera</h2>
+<form (ngSubmit)='save()'>
+    <div class="flex_container">
+        <mat-form-field class="item_flex">
+            <mat-label>Pick a facultad</mat-label>
+            <mat-select [(value)]='carrera.FACULTAD'>
+                <mat-option *ngFor="let facultad of facultades" [value]="facultad.NOMBRE">
+                    {{facultad.NOMBRE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="item_flex">
+            <input matInput placeholder="Type name" required [(ngModel)]='carrera.NOMBRE' name='name'>
+        </mat-form-field>
+        <mat-form-field class="item_flex">
+            <input matInput placeholder="Type description" required [(ngModel)]='carrera.DESCRIPCION' name='description'>
+        </mat-form-field>
+        <button class="item_flex button" mat-flat-button color='accent'>Aceptar</button>
+    </div>
+</form>
