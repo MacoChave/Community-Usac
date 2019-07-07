@@ -1,16 +1,15 @@
 <div class="grid_container" *ngIf='result != null && result.length > 0; else emptyContainer'>
     <div class="item" *ngFor='let res of result'>
         <div class="header">
-            <!-- res.URL_FOTO == null ? '../../../../assets/profile_image.jpg' : 'res.URL_FOTO' -->
-            <img class="profile_image" [src]="res.URL_FOTO == null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_image">
-            <h3>Name: {{res.NOMBRE}} </h3>
-            <p>Rol: {{res.ROL}} </p>
+            <img class="profile_image" [src]="res.URL_FOTO != '' || res.URL_FOTO != null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_image">
+            <h3><b>Name:</b> {{res.NOMBRE}} </h3>
+            <p><b>Rol:</b> {{res.ROL}} </p>
         </div>
         <div class="container">
-            <p>Carnet: {{res.CARNET}} </p>
-            <p>No registro: {{NO_REGISTRO}} </p>
-            <p>Correo: {{CORREO}} </p>
-            <p>Telefono: {{TELEFONO}} </p>
+            <p *ngIf="res.CARNET > 0"><b>Carnet:</b> {{res.CARNET}} </p>
+            <p *ngIf="res.NO_REGISTRO > 0"><b>No registro:</b> {{res.NO_REGISTRO}} </p>
+            <p *ngIf="res.CORREO != ''"><b>Correo:</b> {{res.CORREO}} </p>
+            <p *ngIf="res.TELEFONO > 0"><b>Telefono:</b> {{res.TELEFONO}} </p>
         </div>
         <div class="footer">
             <button mat-button color="accent" (click)='editUser(res.COD_USUARIO)'>Edit</button>
@@ -21,11 +20,20 @@
         <div class="header">
             <h3>Add new user</h3>
         </div>
+        <div class="container"></div>
         <div class="footer">
-            <button mat-button color="accent" (click)='addUser()'>Add</button>
+            <button mat-button color="primary" (click)='addUser()'>Add</button>
         </div>
     </div>
 </div>
 <ng-template #emptyContainer>
-
+    <div class="header">
+        <h3>Add new user</h3>
+    </div>
+    <div class="container">
+        No hay elementos que mostrar
+    </div>
+    <div class="footer">
+        <button mat-button color="accent" (click)='addUser()'>Add</button>
+    </div>
 </ng-template>

@@ -9,7 +9,7 @@
 }
 
 .item {
-    max-width: 200pt;
+    min-height: 15pt;
 }
 
 .item .header {
@@ -37,13 +37,13 @@
 }
 
 @media screen and (min-width: 426px) {
-    .grid-container {
+    .grid_container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (min-width: 769px) {
-    .grid-container {
+    .grid_container {
         grid-template-columns: repeat(3, 1fr);
     }
 }

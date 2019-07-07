@@ -35,13 +35,12 @@ export class UserComponent implements OnInit {
   }
 
   editUser(id: string) {
-    
     const dialogRef = this.dialog.open(
       UserAddComponent, 
       {
         data: id,
-        height: '90vh',
-        width: '70vh'
+        maxHeight: '90vh',
+        minWidth: '80vw'
       }
     );
   }
@@ -50,7 +49,9 @@ export class UserComponent implements OnInit {
     const dialogRef = this.dialog.open(
       UserAddComponent, 
       {
-        data: {}
+        data: {},
+        maxHeight: '90vh',
+        minWidth: '80vw'
       }
     );
   }

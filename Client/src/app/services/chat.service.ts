@@ -15,7 +15,7 @@ export class ChatService {
     return this.http.get(`${this.API_URI}`);
   }
 
-  getChat (id: number) {
+  getChat (id: string) {
     return this.http.get(`${this.API_URI}/${id}`);
   }
 
@@ -23,11 +23,11 @@ export class ChatService {
     return this.http.post(`${this.API_URI}`, chat);
   }
 
-  updateChat (id: number, chat: Chat) {
+  updateChat (id: string, chat: Chat) {
     return this.http.put(`${this.API_URI}/${id}`, chat);
   }
 
-  deleteChat (id: number) {
+  deleteChat (id: string) {
     return this.http.delete(`${this.API_URI}/${id}`);
   }
 }

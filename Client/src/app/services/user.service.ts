@@ -26,8 +26,8 @@ export class UserService {
     return this.http.post(`${this.API_URI}`, user);
   }
 
-  updateUser (user: User, id:string) {
-    return this.http.put(`${this.API_URI}/${id}`, user);
+  updateUser (user: User) {
+    return this.http.put(`${this.API_URI}/${user.COD_USUARIO}`, user);
   }
 
   deleteUser (id: string) {

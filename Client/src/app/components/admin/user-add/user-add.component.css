@@ -1,24 +1,21 @@
 .flex_container {
     flex-direction: column;
-    padding: 10pt;
-}
-
-.user_form {
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
 }
 
 .grid_container {
-    grid-template-areas: "rol id"
-                         "username password"
-                         "mail phone"
+    grid-template-areas: "rol rol"
+                         "cargo cargo"
+                         "username username"
+                         "phone password"
+                         "mail mail"
                          "url url"
                          "button button";
-    margin: 0;
 }
 
 .rol {grid-area: rol}
-.id {grid-area: id}
+.cargo {grid-area: cargo;}
+
 .username {grid-area: username}
 .password {grid-area: password}
 .mail {grid-area: mail}
@@ -35,3 +32,27 @@
     margin: 15pt;
 }
 .button {grid-area: button}
+
+@media screen and (min-width: 426px) {
+    .grid_container {
+        grid-template-areas: "rol rol"
+        "cargo cargo"
+        "username username"
+        "phone password"
+        "mail mail"
+        "url url"
+        "button button";
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .grid_container {
+        grid-template-areas: "rol rol"
+        "cargo cargo"
+        "username username"
+        "phone password"
+        "mail mail"
+        "url url"
+        "button button";
+    }
+}

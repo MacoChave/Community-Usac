@@ -15,23 +15,23 @@ export class CarreraService {
     return this.http.get(`${this.API_URI}`);
   }
 
-
-  getCarrera (id: number) {
+  getCarrera (id: string) {
     return this.http.get(`${this.API_URI}/${id}`);
   }
 
+  getCarreraByFacultad (facultad: string) {
+    return this.http.get(`${this.API_URI}/facultad/${facultad}`);
+  }
 
   saveCarreras (carrera: Carrera) {
     return this.http.post(`${this.API_URI}`, carrera);
   }
 
-
-  updateCarreras (id: number, carrera: Carrera) {
+  updateCarreras (id: string, carrera: Carrera) {
     return this.http.put(`${this.API_URI}/${id}`, carrera);
   }
 
-
-  deleteCarreras (id: number) {
+  deleteCarreras (id: string) {
     return this.http.delete(`${this.API_URI}/${id}`);
   }
 }

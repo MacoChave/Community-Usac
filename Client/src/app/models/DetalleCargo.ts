@@ -1,6 +1,6 @@
 export interface DetalleCargo {
     NOMBRE      ?: string;
-    RANGO       ?: string;
+    CARGO       ?: string;
     FACULTAD    ?: string;
     CARRERA     ?: string;
 }

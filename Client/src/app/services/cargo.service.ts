@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Position } from '../models/Position';
+import { Cargo } from '../models/Cargo';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PositionService {
+export class CargoService {
 
   API_URI = 'http://localhost:3000/api/cargo';
 
@@ -19,12 +19,12 @@ export class PositionService {
     return this.http.get(`${this.API_URI}/${id}`);
   }
 
-  savePosition (position: Position) {
-    return this.http.post(`${this.API_URI}`, position);
+  savePosition (cargo: Cargo) {
+    return this.http.post(`${this.API_URI}`, cargo);
   }
 
-  updatePosition (id: string, position: Position) {
-    return this.http.put(`${this.API_URI}/${id}`, position);
+  updatePosition (id: string, cargo: Cargo) {
+    return this.http.put(`${this.API_URI}/${id}`, cargo);
   }
 
   deletePosition (id: string) {

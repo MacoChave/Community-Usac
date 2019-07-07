@@ -23,7 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
 import { UserService } from './services/user.service';
-import { PositionService } from './services/cargo.service';
+import { CargoService } from './services/cargo.service';
 import { RolService } from './services/rol.service';
 import { FacultadService } from './services/facultad.service';
 import { CarreraService } from './services/carrera.service';
@@ -31,6 +31,16 @@ import { CienciaService } from './services/ciencia.service';
 import { AsignacionService } from './services/asignacion.service';
 import { ChatService } from './services/chat.service';
 import { DetalleCargoService } from './services/detalle-cargo.service';
+import { TemaService } from './services/tema.service';
+import { SrcTemaService } from './services/src-tema.service';
+import { EtiquetaService } from './services/etiqueta.service';
+import { ComentarioService } from './services/comentario.service';
+import { ExamenService } from './services/examen.service';
+import { PreguntaService } from './services/pregunta.service';
+import { TipoPreguntaService } from './services/tipo-pregunta.service';
+import { DetallePreguntaService } from './services/detalle-pregunta.service';
+import { RespuestaService } from './services/respuesta.service';
+import { DetalleRespuestaService } from './services/detalle-respuesta.service';
 
 @NgModule({
   declarations: [
@@ -58,19 +68,30 @@ import { DetalleCargoService } from './services/detalle-cargo.service';
     MaterialModule
   ],
   providers: [
-    UserService,
-    PositionService,
+    CargoService,
     RolService,
+    UserService,
     FacultadService,
     CarreraService,
     CienciaService,
+    ChatService,
     DetalleCargoService,
     AsignacionService,
-    ChatService
+    TemaService,
+    SrcTemaService,
+    EtiquetaService,
+    ComentarioService,
+    ExamenService,
+    PreguntaService,
+    TipoPreguntaService,
+    DetallePreguntaService,
+    RespuestaService,
+    DetalleRespuestaService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    UserAddComponent
+    UserAddComponent,
+    FacultadAddComponent
   ]
 })
 export class AppModule { }
