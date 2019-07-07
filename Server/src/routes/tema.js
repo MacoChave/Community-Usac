@@ -27,10 +27,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { USUARIO, TITULO, DESCRIPCION } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_TEMA(:usuario, :titulo, :descripcion);
-            COMMIT;
         END`,
         [USUARIO, TITULO, DESCRIPCION]
     )
@@ -42,10 +41,9 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const { USUARIO, TITULO, DESCRIPCION } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_U_TEMA(:id :titulo, :descripcion);
-            COMMIT;
         END`,
         [id, TITULO, DESCRIPCION]
     )
@@ -57,10 +55,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
     const { MOTIVO } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN 
             PROC_D_TEMA(:id, :motivo);
-            COMMIT;
         END`,
         [id, MOTIVO]
     )

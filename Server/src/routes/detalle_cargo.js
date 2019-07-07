@@ -28,12 +28,11 @@ router.get('/:nombre', (req, res) => {
 router.post('/', (req, res) => {
     const { USUARIO, CARGO, FACULTAD, CARRERA } = req.body;
     console.log(req.body);
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_DETALLE_CARGO(
                 :usuario, :cargo, :facultad, :carrera
             );
-            COMMIT;
         END`,
         [USUARIO, CARGO, FACULTAD, CARRERA]
     )

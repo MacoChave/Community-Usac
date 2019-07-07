@@ -39,12 +39,12 @@ router.get('/facultad/:facultad', (req, res) => {
 
 router.post('/', (req, res) => {
     const {FACULTAD, NOMBRE, DESCRIPCION} = req.body;
-    ejecutor.query(
+    console.log(req.body);
+    ejecutor.sp(
         `BEGIN
             PROC_C_CARRERA(
                 :facultad, :nombre, :descripcion
             );
-            COMMIT;
         END`,
         [FACULTAD, NOMBRE, DESCRIPCION]
     )
@@ -56,12 +56,12 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const {FACULTAD, NOMBRE, DESCRIPCION} = req.body;
-    ejecutor.query(
+    console.log(req.body);
+    ejecutor.sp(
         `BEGIN
             PROC_U_CARRERA(
                 :cod_carrera, :facultad, :nombre, :descripcion
             );
-            COMMIT;
         END`,
         [id, FACULTAD, NOMBRE, DESCRIPCION]
     )

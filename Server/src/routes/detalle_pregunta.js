@@ -27,12 +27,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const { PREGUNTA, EXAMEN, USUARIO } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_DETALLEPREG(
                 :pregunta, :examen, :usuario
             );
-            COMMINT;
         END`,
         [PREGUNTA, EXAMEN, USUARIO]
     )

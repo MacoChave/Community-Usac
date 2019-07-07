@@ -27,10 +27,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { IMAGEN, TAG, TEMA } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN 
             PROC_C_SRCTEMA(:imagen, :tag, :tema);
-            COMMIT;
         END`,
         [IMAGEN, TAG, TEMA]
     )
@@ -42,10 +41,9 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const { IMAGEN, TAG, TEMA } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN 
             PROC_C_SRCTEMA(:id, :imagen, :tag, :tema);
-            COMMIT;
         END`,
         [id, IMAGEN, TAG, TEMA]
     )

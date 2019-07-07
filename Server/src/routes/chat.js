@@ -28,12 +28,11 @@ router.post('/one', (req, res) => {
 
 router.post('/', (req, res) => {
     const { EMISOR, RECEPTOR, CHAT } = req.params.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN 
             PROC_C_CHAT(
                 :emisor, :receptor, :chat
             );
-            COMMIT;
         END`,
         [EMISOR, RECEPTOR, CHAT]
     )

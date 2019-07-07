@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { CONTENIDO, IMAGEN, TAG, TEMA, USUARIO } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_COMENTARIO(
                 :contenido, 
@@ -35,7 +35,6 @@ router.post('/', (req, res) => {
                 :tag, 
                 :usuario
             );
-            COMMIT;
         END`,
         [CONTENIDO, IMAGEN, TAG, TEMA, USUARIO]
     )
@@ -47,7 +46,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const { CONTENIDO, IMAGEN, TAG } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_U_COMENTARIO(
                 :id, 
@@ -55,7 +54,6 @@ router.put('/:id', (req, res) => {
                 :imagen, 
                 :tag
             );
-            COMMIT;
         END`,
         [id, CONTENIDO, IMAGEN, TAG]
     )
@@ -66,10 +64,9 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN 
             PROC_D_EXAMEN(:id)
-            COMMIT;
         END`,
         [id]
     )

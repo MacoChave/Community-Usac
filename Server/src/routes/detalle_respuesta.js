@@ -26,10 +26,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const { PREGUNTA, RESPUESTA } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN 
             PROC_C_DETALLERES(:pregunta, :respuesta)
-            COMMIT;
         END`,
         [PREGUNTA, RESPUESTA]
     )

@@ -27,10 +27,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { DESCRIPCION, TIPO } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_PREGUNTA(:descripcion, :tipo);
-            COMMIT;
         END`,
         [DESCRIPCION, TIPO]
     )
@@ -42,10 +41,9 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const { DESCRIPCION, TIPO } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_U_PREGUNTA(:id, :descripcion, :tipo);
-            COMMIT;
         END`,
         [id, DESCRIPCION, TIPO]
     )

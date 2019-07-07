@@ -27,12 +27,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const { USUARIO, CIENCIA } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_ASIGNACION(
                 :usuario, :ciencia
             );
-            COMMIT;
         END`,
         [USUARIO, CIENCIA]
     )

@@ -28,12 +28,11 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const {NOMBRE, DESCRIPCION, CARRERA, FACULTAD} = req.body; //OBTENER JSON
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_CIENCIA(
                 :nombre, :descripcion, :facultad, :carrera
             );
-            COMMIT;
         END`,
         [NOMBRE, DESCRIPCION, FACULTAD, CARRERA]
     )
@@ -45,13 +44,12 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const {NOMBRE, DESCRIPCION} = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_U_CIENCIA(
                 :id, :nombre, :descripcion
             );
-            COMMIT;
-        END;`,
+        END`,
         [id, NOMBRE, DESCRIPCION]
     )
     .then(result => {

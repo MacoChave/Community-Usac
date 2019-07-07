@@ -27,10 +27,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const { TEMA, CIENCIA } = req.body;
-    ejecutor.query(
+    ejecutor.sp(
         `BEGIN
             PROC_C_ETIQUETA(:tema, :ciencia);
-            COMMIT;
         END`,
         [TEMA, CIENCIA]
     )
