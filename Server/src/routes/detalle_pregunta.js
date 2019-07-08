@@ -13,27 +13,28 @@ router.get('/', (req, res) => {
     })
 })
 
-// router.get('/:id', (req, res) => {
-//     const id = req.params.id;
-//     ejecutor.query(
-//         `SELECT * FROM VIEW_DETALLEPREG 
-//         WHERE `,
-//         []
-//     )
-//     .then(result => {
-//         return res.json(result.rows);
-//     })
-// })
+router.post('/examen', (req, res) => {
+    const { EXAMEN } = req.params.body;
+    ejecutor.query(
+        `SELECT * FROM VIEW_DETALLEPREG 
+        WHERE 
+        examen = :examen`,
+        [EXAMEN]
+    )
+    .then(result => {
+        return res.json(result.rows);
+    })
+})
 
 router.post('/', (req, res) => {
-    const { PREGUNTA, EXAMEN, USUARIO } = req.body;
+    const { PREGUNTA, EXAMEN } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_C_DETALLEPREG(
-                :pregunta, :examen, :usuario
+                :pregunta, :examen
             );
         END`,
-        [PREGUNTA, EXAMEN, USUARIO]
+        [PREGUNTA, EXAMEN]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -52,15 +53,18 @@ router.post('/', (req, res) => {
 //     })
 // })
 
-// router.delete('/:id', (req, res) => {
-//     const id = req.params.id;
-//     ejecutor.query(
-//         `DELETE FROM Detalle_pregunta `,
-//         []
-//     )
-//     .then(result => {
-//         return res.json(result.rowsAffected);
-//     })
-// })
+router.delete('/', (req, res) => {
+    const { PREGUNTA, EXAMEN } = req.params.id;
+    ejecutor.query(
+        `DELETE FROM Detalle_pregunta 
+        WHERE 
+        cod_pregunta = :pregunta AND 
+        cod_examen = :examen`,
+        [PREGUNTA, EXAMEN]
+    )
+    .then(result => {
+        return res.json(result.rowsAffected);
+    })
+})
 
 module.exports = router;

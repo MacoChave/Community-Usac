@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
     const id = req.params.id;
     ejecutor.query(
         `SELECT * FROM VIEW_SRC_TEMA 
-        WHERE cod_srs_tema = :id`,
+        WHERE cod_source = :id`,
         [id]
     )
     .then(result => {
@@ -56,7 +56,7 @@ router.delete('/:id', (req, res) => {
     const id = req.params.id;
     ejecutor.query(
         `DELETE FROM Src_tema
-        WHERE cod_srs_tema = :id`,
+        WHERE cod_source = :id`,
         [id]
     )
     .then(result => {

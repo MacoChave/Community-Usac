@@ -41,11 +41,6 @@ router.post('/', (req, res) => {
     })
 })
 
-// router.put('/:id', (req, res) => {
-//     const id = req.params.id;
-//     return res.json({message: 'Update chat ' + id});
-// })
-
 router.delete('/:id', (req, res) => {
     const { COD_EMISOR, COD_RECEPTOR } = req.params.body;
     ejecutor.query(

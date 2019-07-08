@@ -40,10 +40,10 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { DESCRIPCION, TIPO } = req.body;
+    const { DESCRIPCION } = req.body;
     ejecutor.sp(
         `BEGIN
-            PROC_U_PREGUNTA(:id, :descripcion, :tipo);
+            PROC_U_PREGUNTA(:id, :descripcion);
         END`,
         [id, DESCRIPCION, TIPO]
     )

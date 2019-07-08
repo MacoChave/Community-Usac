@@ -32,9 +32,9 @@ WHERE
     dc.cod_facultad = c.cod_facultad AND 
     dc.cod_carrera = c.cod_carrera;
 
-CREATE VIEW VIEW_ASIGNACION AS 
+CREATE OR REPLACE VIEW VIEW_ASIGNACION AS 
 SELECT 
-    u.nombre AS usuario, c.nombre AS ciencia 
+    u.nombre AS usuario, c.nombre AS ciencia, f.nombre AS facultad, c.nombre AS carrera 
 FROM 
     Asignacion A, Usuario U, Ciencia M, Facultad F, Carrera C  
 WHERE 

@@ -509,16 +509,16 @@ BEGIN
     END IF;
 END PROC_C_PREGUNTA;
 
--- CREATE OR REPLACE PROCEDURE PROC_U_PREGUNTA(
---     i_cod_pregunta IN NUMBER,
---     i_descripcion IN VARCHAR2
--- )
--- IS 
--- BEGIN 
---     UPDATE Pregunta 
---     SET 
---         descripcion = i_descripcion;
--- END PROC_U_PREGUNTA;
+CREATE OR REPLACE PROCEDURE PROC_U_PREGUNTA(
+    i_cod_pregunta IN NUMBER,
+    i_descripcion IN VARCHAR2
+)
+IS 
+BEGIN 
+    UPDATE Pregunta 
+    SET 
+        descripcion = i_descripcion;
+END PROC_U_PREGUNTA;
 
 CREATE OR REPLACE PROCEDURE PROC_C_DETALLEPREG(
     i_pregunta IN VARCHAR2,

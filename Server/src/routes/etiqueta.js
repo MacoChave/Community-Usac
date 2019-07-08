@@ -13,25 +13,28 @@ router.get('/', (req, res) => {
     })
 })
 
-// router.get('/:id', (req, res) => {
-//     const id = req.params.id;
-//     ejecutor.query(
-//         `SELECT * FROM VIEW_ETIQUETA 
-//         WHERE `,
-//         []
-//     )
-//     .then(result => {
-//         return res.json(result.rows);
-//     })
-// })
+router.get('/:tema', (req, res) => {
+    const TEMA = req.params.id;
+    ejecutor.query(
+        `SELECT * FROM VIEW_ETIQUETA 
+        WHERE 
+        tema LIKE :tema`,
+        [TEMA]
+    )
+    .then(result => {
+        return res.json(result.rows);
+    })
+})
 
 router.post('/', (req, res) => {
-    const { TEMA, CIENCIA } = req.body;
+    const { TEMA, CIENCIA, FACULTAD, CARRERA } = req.body;
     ejecutor.sp(
         `BEGIN
-            PROC_C_ETIQUETA(:tema, :ciencia);
+            PROC_C_ETIQUETA(
+                :tema, :ciencia, :facultad, :carrera
+            );
         END`,
-        [TEMA, CIENCIA]
+        [TEMA, CIENCIA, FACULTAD, CARRERA]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -50,18 +53,18 @@ router.post('/', (req, res) => {
 //     })
 // })
 
-router.delete('/', (req, res) => {
-    const { COD_TEMA, COD_CIENCIA } = req.body;
-    ejecutor.query(
-        `DELETE FROM Etiqueta 
-        WHERE 
-            cod_tema = :tema, 
-            cod_ciencia = :ciencia`,
-        [COD_TEMA, COD_CIENCIA]
-    )
-    .then(result => {
-        return res.json(result.rowsAffected);
-    })
-})
+// router.delete('/', (req, res) => {
+//     const { COD_TEMA, COD_CIENCIA } = req.body;
+//     ejecutor.query(
+//         `DELETE FROM Etiqueta 
+//         WHERE 
+//             cod_tema = :tema, 
+//             cod_ciencia = :ciencia`,
+//         [COD_TEMA, COD_CIENCIA]
+//     )
+//     .then(result => {
+//         return res.json(result.rowsAffected);
+//     })
+// })
 
 module.exports = router;

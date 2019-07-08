@@ -64,10 +64,9 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    ejecutor.sp(
-        `BEGIN 
-            PROC_D_EXAMEN(:id)
-        END`,
+    ejecutor.query(
+        `DELETE FROM Comentario 
+        WHERE cod_comentario = :id`,
         [id]
     )
     .then(result => {
