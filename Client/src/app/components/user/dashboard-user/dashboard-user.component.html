@@ -10,7 +10,7 @@
                 
                 routerLinkActive='active' 
                 (click)='toggle()'>
-                Usuario
+                Perfil
                 <span class="tooltip">Perfil de usuario</span>
             </a>
         </li>
@@ -21,18 +21,18 @@
                 
                 routerLinkActive='active' 
                 (click)='toggle()'>
-                Facultad
+                Historia
                 <span class="tooltip">Mis posts</span>
             </a>
         </li>
         <li class="menu_item">
             <a
                 class="menu_link"  
-                [routerLink]="[{outlets: {user: ['temas']}}]" 
+                [routerLink]="[{outlets: {user: ['tema']}}]" 
                 
                 routerLinkActive='active' 
                 (click)='toggle()'>
-                Carrera
+                Temas
                 <span class="tooltip">Todos los posts</span>
             </a>
         </li>
@@ -43,7 +43,7 @@
                 
                 routerLinkActive='active' 
                 (click)='toggle()'>
-                Cargo
+                Examen
                 <span class="tooltip">Crear un examen</span>
             </a>
         </li>
@@ -54,7 +54,7 @@
                 
                 routerLinkActive='active' 
                 (click)='toggle()'>
-                Ciencia
+                Sala
                 <span class="tooltip">Ir a sala</span>
             </a>
         </li>

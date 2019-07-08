@@ -1,6 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { DetalleCargo } from 'src/app/models/DetalleCargo';
+import { DetalleCargoService } from 'src/app/services/detalle-cargo.service';
 
 @Component({
   selector: 'usuario',
@@ -15,12 +17,15 @@ export class DashboardUserComponent implements OnInit {
   hide = true;
   classMenu = 'menu hide_menu';
   user: User;
+  detalleCargo: DetalleCargo = {};
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private detalleCargoService: DetalleCargoService
+    ) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('session'));
-    console.log(this.user);
   }
   
   toggle() {

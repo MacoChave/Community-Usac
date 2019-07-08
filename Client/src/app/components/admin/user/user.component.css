@@ -30,12 +30,6 @@
     justify-content: flex-end;
 }
 
-.fab_button {
-    position: fixed;
-    bottom: 32pt;
-    right: 32pt;
-}
-
 @media screen and (min-width: 426px) {
     .grid_container {
         grid-template-columns: repeat(2, 1fr);

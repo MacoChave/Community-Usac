@@ -18,6 +18,10 @@ import { CarreraComponent } from './components/admin/carrera/carrera.component';
 import { CarreraAddComponent } from './components/admin/carrera-add/carrera-add.component';
 import { CargoComponent } from './components/admin/cargo/cargo.component';
 import { CargoAddComponent } from './components/admin/cargo-add/cargo-add.component';
+import { CienciaComponent } from './components/admin/ciencia/ciencia.component';
+import { CienciaAddComponent } from './components/admin/ciencia-add/ciencia-add.component';
+import { PerfilComponent } from './components/user/perfil/perfil.component';
+import { TemaComponent } from './components/user/tema/tema.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
@@ -41,9 +45,10 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { DetallePreguntaService } from './services/detalle-pregunta.service';
 import { RespuestaService } from './services/respuesta.service';
 import { DetalleRespuestaService } from './services/detalle-respuesta.service';
-import { CienciaComponent } from './components/admin/ciencia/ciencia.component';
-import { CienciaAddComponent } from './components/admin/ciencia-add/ciencia-add.component';
-import { PerfilComponent } from './components/user/perfil/perfil.component';
+import { HistoriaComponent } from './components/user/historia/historia.component';
+import { ExamenComponent } from './components/user/examen/examen.component';
+import { SalaComponent } from './components/user/sala/sala.component';
+import { AddTemaComponent } from './components/user/add-tema/add-tema.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +68,12 @@ import { PerfilComponent } from './components/user/perfil/perfil.component';
     AdminBasicComponent,
     CienciaComponent,
     CienciaAddComponent,
-    PerfilComponent
+    PerfilComponent,
+    TemaComponent,
+    HistoriaComponent,
+    ExamenComponent,
+    SalaComponent,
+    AddTemaComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +110,8 @@ import { PerfilComponent } from './components/user/perfil/perfil.component';
     FacultadAddComponent,
     CarreraAddComponent,
     CargoAddComponent,
-    CienciaAddComponent
+    CienciaAddComponent, 
+    AddTemaComponent
   ]
 })
 export class AppModule { }

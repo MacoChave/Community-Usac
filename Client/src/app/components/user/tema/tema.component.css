@@ -1,0 +1,15 @@
+
+.fab_button {
+    position: fixed;
+    background: gold;
+    bottom: 32pt;
+    border-radius: 50%;
+    font-size: 3em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32pt;
+    width: 32pt;
+    right: 32pt;
+}

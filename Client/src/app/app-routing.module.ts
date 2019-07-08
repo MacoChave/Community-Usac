@@ -10,6 +10,10 @@ import { CarreraComponent } from './components/admin/carrera/carrera.component';
 import { CargoComponent } from './components/admin/cargo/cargo.component';
 import { CienciaComponent } from './components/admin/ciencia/ciencia.component';
 import { PerfilComponent } from './components/user/perfil/perfil.component';
+import { TemaComponent } from './components/user/tema/tema.component';
+import { HistoriaComponent } from './components/user/historia/historia.component';
+import { ExamenComponent } from './components/user/examen/examen.component';
+import { SalaComponent } from './components/user/sala/sala.component';
 
 const routes: Routes = [
   {
@@ -59,6 +63,26 @@ const routes: Routes = [
       {
         path: 'perfil',
         component: PerfilComponent,
+        outlet: 'user'
+      },
+      {
+        path: 'tema',
+        component: TemaComponent,
+        outlet: 'user'
+      },
+      {
+        path: 'historia',
+        component: HistoriaComponent,
+        outlet: 'user'
+      },
+      {
+        path: 'examen',
+        component: ExamenComponent,
+        outlet: 'user'
+      },
+      {
+        path: 'sala',
+        component: SalaComponent,
         outlet: 'user'
       }
     ]
