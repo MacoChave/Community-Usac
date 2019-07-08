@@ -25,25 +25,27 @@ WHERE
 CREATE VIEW VIEW_DETALLE_CARGO AS 
 SELECT u.nombre, r.cargo, f.nombre AS facultad, c.nombre AS carrera
 FROM 
-    Detalle_cargo DC, Usuario u, Cargo R, Facultad F, Carrera C 
+    Detalle_cargo DC, Usuario U, Cargo R, Facultad F, Carrera C 
 WHERE 
     dc.cod_usuario = u.cod_usuario AND 
     dc.cod_cargo = r.cod_cargo AND 
-    dc.cod_facultad = f.cod_facultad AND 
+    dc.cod_facultad = c.cod_facultad AND 
     dc.cod_carrera = c.cod_carrera;
 
 CREATE VIEW VIEW_ASIGNACION AS 
 SELECT 
     u.nombre AS usuario, c.nombre AS ciencia 
 FROM 
-    Asignacion A, Usuario U, Ciencia C 
+    Asignacion A, Usuario U, Ciencia M, Facultad F, Carrera C  
 WHERE 
     a.cod_usuario = u.cod_usuario AND 
-    a.cod_ciencia = c.cod_ciencia;
+    a.cod_ciencia = m.cod_ciencia AND 
+    m.cod_facultad = f.cod_facultad AND 
+    m.cod_carrera = c.cod_carrera;
 
 CREATE VIEW VIEW_TEMA AS 
 SELECT 
-    t.cod_tema, u.nombre AS usuario, t.titulo, t.descripcion, t.fecha_creacion, t.fecha_cierre 
+    t.cod_tema, u.nombre AS usuario, t.titulo, t.descripcion, t.fecha_creacion, t.fecha_cierre, t.motivo_cierre 
 FROM 
     Tema T, Usuario U
 WHERE 
@@ -59,12 +61,14 @@ WHERE
 
 CREATE OR REPLACE VIEW VIEW_ETIQUETA AS 
 SELECT 
-    t.titulo AS tema, c.nombre AS ciencia 
+    t.titulo AS tema, m.nombre AS ciencia 
 FROM 
-    Etiqueta E, Tema T, Ciencia C 
+    Etiqueta E, Tema T, Ciencia M, Facultad F, Carrera C 
 WHERE 
     e.cod_tema = t.cod_tema AND 
-    e.cod_ciencia = c.cod_ciencia;
+    e.cod_ciencia = m.cod_ciencia AND
+    m.cod_faculad = f.cod_facultad AND 
+    m.cod_carrera = c.cod_carrera;
 
 CREATE VIEW VIEW_COMENTARIO AS 
 SELECT 
@@ -79,11 +83,15 @@ WHERE
 CREATE OR REPLACE VIEW VIEW_EXAMEN AS 
 SELECT 
     e.cod_examen, e.titulo, e.tema, e.fecha_creacion, e.fecha_modificacion, 
-    e.tiempo, e.duracion, e.activo, e.log, u.nombre, u.url_foto
+    e.duracion, e.activo, e.log, c.nombre AS carrera, f.nombre AS facultad, 
+    u.nombre, u.url_foto
 FROM
-    Examen E, Usuario U 
+    Examen E, Usuario U, Ciencia M, Carrera C, Facultad F 
 WHERE 
-    e.cod_usuario = u.cod_usuario;
+    e.cod_usuario = u.cod_usuario AND 
+    e.cod_ciencia = m.cod_ciencia AND 
+    m.cod_facultad = f.cod_facultad AND 
+    m.cod_carrera = c.cod_carrera;
 
 CREATE OR REPLACE VIEW VIEW_PREGUNTA AS 
 SELECT p.cod_pregunta, p.descripcion, tp.nombre AS tipo 
@@ -94,16 +102,14 @@ WHERE
 
 CREATE OR REPLACE VIEW VIEW_DETALLEPREG AS 
 SELECT 
-    dt.cod_pregunta, e.titulo AS examen, p.descripcion AS pregunta, 
-    tp.nombre AS tipo, u.nombre AS creador, u.url_foto, 
-    dt.fecha_creacion
+    dt.cod_pregunta, e.titulo AS examen, 
+    p.descripcion AS pregunta, tp.nombre AS tipo
 FROM 
-    Detalle_pregunta DT, Pregunta P, Examen E, Usuario U, 
+    Detalle_pregunta DT, Pregunta P, Examen E, 
     Tipo_pregunta TP
 WHERE 
     dt.cod_pregunta = p.cod_pregunta AND 
     dt.cod_examen = e.cod_examen AND 
-    dt.cod_usuario = u.cod_usuario AND 
     p.cod_tipo_pregunta = tp.cod_tipo_pregunta;
 
 CREATE VIEW VIEW_DETALLERES AS 

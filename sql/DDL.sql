@@ -99,15 +99,21 @@ BEGIN
     FROM dual;
 END;
 
+/* ********************************************************
+ * MODIFICACION : PK_COD_FACULTAD
+***********************************************************/
 CREATE TABLE Ciencia (
     cod_ciencia           NUMBER,
     nombre                VARCHAR2(50) NOT NULL,
     descripcion           VARCHAR2(200),
     cod_carrera           NUMBER NOT NULL,
     cod_facultad          NUMBER NOT NULL,
-    CONSTRAINT PK_Ciencia PRIMARY KEY (cod_ciencia),
+    CONSTRAINT PK_Ciencia PRIMARY KEY (cod_ciencia, cod_carrera, cod_facultad),
     CONSTRAINT FK_CarreraCiencia FOREIGN KEY (cod_carrera, cod_facultad) REFERENCES Carrera(cod_carrera, cod_facultad)
 );
+/* ********************************************************
+ * MODIFICACION 
+***********************************************************/
 
 CREATE SEQUENCE SEQ_CIENCIA;
 
@@ -130,24 +136,38 @@ CREATE TABLE Chat (
     CONSTRAINT FK_UsuarioChatR FOREIGN KEY (cod_receptor) REFERENCES Usuario(cod_usuario)
 );
 
+/* ********************************************************
+ * MODIFICACION : PK COD_FACULTAD
+***********************************************************/
 CREATE TABLE Detalle_cargo (
     cod_usuario           NUMBER NOT NULL,
     cod_cargo             NUMBER NOT NULL,
     cod_facultad          NUMBER NOT NULL,
     cod_carrera           NUMBER NOT NULL,
-    CONSTRAINT PK_DetalleCargo PRIMARY KEY (cod_usuario, cod_cargo, cod_carrera),
+    CONSTRAINT PK_DetalleCargo PRIMARY KEY (cod_usuario, cod_cargo, cod_carrera, cod_facultad),
     CONSTRAINT FK_UsuarioCargo FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario),
     CONSTRAINT FK_CargoDetalle FOREIGN KEY (cod_cargo) REFERENCES Cargo(cod_cargo),
     CONSTRAINT FK_CarreraCargo FOREIGN KEY (cod_carrera, cod_facultad) REFERENCES Carrera(cod_carrera, cod_facultad)
 );
+/* ********************************************************
+ * MODIFICACION 
+***********************************************************/
 
+/* ********************************************************
+ * MODIFICACION : PK COD_CARRERA PK COD_FACULTAD
+***********************************************************/
 CREATE TABLE Asignacion ( 
     cod_usuario                         NUMBER NOT NULL,
     cod_ciencia                         NUMBER NOT NULL,
-    CONSTRAINT PK_ASIGNACION PRIMARY KEY (cod_usuario, cod_ciencia),
+    cod_facultad                        NUMBER NOT NULL,
+    cod_carrera                         NUMBER NOT NULL,
+    CONSTRAINT PK_ASIGNACION PRIMARY KEY (cod_usuario, cod_ciencia, cod_facultad, cod_ciencia),
     CONSTRAINT FK_UsuarioAsignacion FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario),
-    CONSTRAINT FK_CienciaAsignacion FOREIGN KEY (cod_ciencia) REFERENCES Ciencia(cod_ciencia)
+    CONSTRAINT FK_CienciaAsignacion FOREIGN KEY (cod_ciencia, cod_facultad, cod_carrera) REFERENCES Ciencia(cod_ciencia, cod_facultad, cod_carrera)
 );
+/* ********************************************************
+ * MODIFICACION 
+***********************************************************/
 
 CREATE TABLE Tema (
     cod_tema              NUMBER,
@@ -192,13 +212,21 @@ BEGIN
     FROM dual;
 END;
 
+/* ********************************************************
+ * MODIFICACION : 
+***********************************************************/
 CREATE TABLE Etiqueta (
-    cod_tema                   NUMBER NOT NULL,
-    cod_ciencia                NUMBER NOT NULL,
-    CONSTRAINT PK_Etiqueta PRIMARY KEY (cod_tema, cod_ciencia),
+    cod_tema                    NUMBER NOT NULL,
+    cod_ciencia                 NUMBER NOT NULL,
+    cod_facultad                NUMBER NOT NULL,
+    cod_carrera                 NUMBER NOT NULL,
+    CONSTRAINT PK_Etiqueta PRIMARY KEY (cod_tema, cod_ciencia, cod_facultad, cod_carrera),
     CONSTRAINT FK_TemaEtiqueta FOREIGN KEY (cod_tema) REFERENCES Tema(cod_tema),
-    CONSTRAINT FK_CienciaTema FOREIGN KEY (cod_ciencia) REFERENCES Ciencia(cod_ciencia)
+    CONSTRAINT FK_CienciaTema FOREIGN KEY (cod_ciencia, cod_facultad, cod_carrera) REFERENCES Ciencia(cod_ciencia, cod_facultad, cod_carrera)
 );
+/* ********************************************************
+ * MODIFICACION 
+***********************************************************/
 
 CREATE TABLE Comentario (
     cod_comentario             NUMBER,
@@ -224,20 +252,30 @@ BEGIN
     FROM dual;
 END;
 
+/* ********************************************************
+ * MODIFICACION : FK COD_CIENCIA, COD_FACULTAD, COD_CARRERA
+***********************************************************/
 CREATE TABLE Examen (
     cod_examen            NUMBER,
-    cod_usuario           NUMBER NOT NULL,
     titulo                VARCHAR2(50) NOT NULL,
     tema                  VARCHAR2(100) NOT NULL,
+    sala                  VARCHAR2(50)
     fecha_creacion        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    tiempo                NUMBER NOT NULL,
-    duracion              NUMBER NOT NULL,
-    activo                NUMBER DEFAULT 1,
+    fecha_modificacion    TIMESTAMP,
+    duracion              NUMBER,
+    estado                CHAR DEFAULT 'P',
     log                   VARCHAR(200), 
-    CONSTRAINT PK_Examen PRIMARY KEY (cod_examen, cod_usuario),
-    CONSTRAINT FK_UsuarioExamen FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario)
+    cod_ciencia           NUMBER NOT NULL, 
+    cod_facultad          NUMBER NOT NULL, 
+    cod_carrera           NUMBER NOT NULL, 
+    cod_usuario           NUMBER NOT NULL,
+    CONSTRAINT PK_Examen PRIMARY KEY (cod_examen),
+    CONSTRAINT FK_UsuarioExamen FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario), 
+    CONSTRAINT FK_CianciaExamen FOREIGN KEY (cod_ciencia, cod_facultad, cod_carrera) REFERENCES Ciencia(cod_ciencia, cod_facultad, cod_carrera)
 );
+/* ********************************************************
+ * MODIFICACION 
+***********************************************************/
 
 CREATE SEQUENCE SEQ_EXAMEN;
 
@@ -275,15 +313,19 @@ CREATE TABLE Pregunta (
     CONSTRAINT FK_TipopPregunta FOREIGN KEY (cod_tipo_pregunta) REFERENCES Tipo_pregunta(cod_tipo_pregunta)
 );
 
+/* ********************************************************
+ * MODIFICACION : FK ONLY COD_PREGUNTA, COD_EXAMEN
+***********************************************************/
 CREATE TABLE Detalle_pregunta (
     cod_pregunta          NUMBER NOT NULL,
     cod_examen            NUMBER NOT NULL,
-    cod_usuario           NUMBER NOT NULL,
-    fecha_creacion        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PK_DetalleP PRIMARY KEY (cod_pregunta, cod_examen, cod_usuario),
     CONSTRAINT FK_PreguntaDetalle FOREIGN KEY (cod_pregunta) REFERENCES Pregunta(cod_pregunta),
     CONSTRAINT FK_ExamenPregunta FOREIGN KEY (cod_examen, cod_usuario) REFERENCES Examen(cod_examen, cod_usuario)
 );
+/* ********************************************************
+ * MODIFICACION 
+***********************************************************/
 
 CREATE TABLE Respuesta (
     cod_respuesta   NUMBER,
