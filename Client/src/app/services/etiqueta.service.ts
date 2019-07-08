@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Etiqueta } from '../models/Etiqueta';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EtiquetaService {
 
-  API_URI = 'http://localhost:3000/api/tema/etiqueta';
-
   constructor(private http: HttpClient) { }
 
   getEtiquetas () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.ETIQUETA}`);
   }
 
-  getEtiqueta (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+  getEtiqueta (tema: string) {
+    return this.http.get(`${Uri.ETIQUETA}/${tema}`);
   }
 
   saveEtiquetas (etiqueta: Etiqueta) {
-    return this.http.post(`${this.API_URI}`, etiqueta);
+    return this.http.post(`${Uri.ETIQUETA}`, etiqueta);
   }
 
-  updateEtiquetas (id: string, etiqueta: Etiqueta) {
-    return this.http.put(`${this.API_URI}/${id}`, etiqueta);
-  }
+  // updateEtiquetas (id: string, etiqueta: Etiqueta) {
+  //   return this.http.put(`${Uri.ETIQUETA}/${id}`, etiqueta);
+  // }
 
-  deleteEtiquetas (id: string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
-  }
+  // deleteEtiquetas (id: string) {
+  //   return this.http.delete(`${Uri.ETIQUETA}/${id}`);
+  // }
 }

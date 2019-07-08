@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Uri } from '../models/Uri';
+import { DetalleRespuesta } from '../models/DetalleRespuesta';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DetallePreguntaService {
 
-  API_URI = 'http://localhost:3000/api/examen/pregunta/detalle';
-
   constructor(private http: HttpClient) { }
 
   getDetallesRes () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.DETALLE_RESPUESTA}`);
   }
 
-  getDetalleRes (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+  getDetalleRes (detalle: DetalleRespuesta) {
+    return this.http.post(`${Uri.DETALLE_RESPUESTA}/examen`, detalle);
   }
 
-  saveDetalleRes (id: string, detalle: DetallePreguntaService) {
-    return this.http.post(`${this.API_URI}/${id}`, detalle);
+  saveDetalleRes (detalle: DetallePreguntaService) {
+    return this.http.post(`${Uri.DETALLE_RESPUESTA}/`, detalle);
   }
 
-  updateDetalleRes (id: string, detalle: DetallePreguntaService) {
-    return this.http.put(`${this.API_URI}/${id}`, detalle);
-  }
+  // updateDetalleRes (id: string, detalle: DetallePreguntaService) {
+  //   return this.http.put(`${Uri.DETALLE_RESPUESTA}/${id}`, detalle);
+  // }
 
-  deleteDetalleRes (id: string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
-  }
+  // deleteDetalleRes (id: string) {
+  //   return this.http.delete(`${Uri.DETALLE_RESPUESTA}/${id}`);
+  // }
 }

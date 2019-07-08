@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Examen } from '../models/Examen';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamenService {
 
-  API_URI = 'http://localhost:3000/api/examen';
-
   constructor(private http: HttpClient) { }
 
   getExamenes () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.EXAMEN}`);
   }
 
   getExamen (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+    return this.http.get(`${Uri.EXAMEN}/${id}`);
   }
 
   saveExamen (examen: Examen) {
-    return this.http.post(`${this.API_URI}`, examen);
+    return this.http.post(`${Uri.EXAMEN}`, examen);
   }
 
   updateExamen (id: string, examen: Examen) {
-    return this.http.put(`${this.API_URI}/${id}`, examen);
+    return this.http.put(`${Uri.EXAMEN}/edit/${id}`, examen);
+  }
+
+  launchExamen (id: string, examen: Examen) {
+    return this.http.put(`${Uri.EXAMEN}/edit/${id}`, examen);
   }
 
   deleteExamen (id: string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
+    return this.http.delete(`${Uri.EXAMEN}/${id}`);
   }
 }

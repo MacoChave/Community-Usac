@@ -40,11 +40,12 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
+    const { RESPUESTA } = req.body;
     ejecutor.query(
         `UPDATE FROM Respuesta 
         SET respuesta = :respuesta 
         WHERE cod_respuesta = :id`,
-        [id]
+        [RESPUESTA, id]
     )
     .then(result => {
         return res.json(result.rowsAffected);

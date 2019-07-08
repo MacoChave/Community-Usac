@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chat } from '../models/Chat';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  API_URI = 'http://localhost:3000/api/chat';
-
   constructor(private http: HttpClient) { }
 
   getChats () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.CHAT}`);
   }
 
-  getChat (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+  getChat (chat: Chat) {
+    return this.http.post(`${Uri.CHAT}/one`, chat);
   }
 
   saveChats (chat: Chat) {
-    return this.http.post(`${this.API_URI}`, chat);
+    return this.http.post(`${Uri.CHAT}`, chat);
   }
 
-  updateChat (id: string, chat: Chat) {
-    return this.http.put(`${this.API_URI}/${id}`, chat);
-  }
+  // updateChat (id: string, chat: Chat) {
+  //   return this.http.put(`${Uri.CHAT}/${id}`, chat);
+  // }
 
-  deleteChat (id: string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
-  }
+  // deleteChat (chat: Chat) {
+  //   return this.http.delete(`${Uri.CHAT}`, chat);
+  // }
 }

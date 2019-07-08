@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Rol } from '../models/Rol';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
 
-  API_URI = 'http://localhost:3000/api/rol';
-
   constructor(private http:HttpClient) { }
 
   getRols () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.ROL}`);
   }
 
   getRol (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+    return this.http.get(`${Uri.ROL}/${id}`);
   }
 
   saveRols (rol: Rol) {
-    return this.http.post(`${this.API_URI}`, rol);
+    return this.http.post(`${Uri.ROL}`, rol);
   }
 
   updateRols (id: string, rol: Rol) {
-    return this.http.put(`${this.API_URI}/${id}`, rol);
+    return this.http.put(`${Uri.ROL}/${id}`, rol);
   }
 
   deleteRols (id:string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
+    return this.http.delete(`${Uri.ROL}/${id}`);
   }
 }

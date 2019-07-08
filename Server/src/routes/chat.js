@@ -41,18 +41,18 @@ router.post('/', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
-    const { COD_EMISOR, COD_RECEPTOR } = req.params.body;
-    ejecutor.query(
-        `DELETE FROM Chat
-        WHERE 
-            cod_emisor = :cod_emisor AND 
-            cod_receptor = :cod_receptor`,
-        [COD_EMISOR, COD_RECEPTOR]
-    )
-    .then(result => {
-        return res.json(result.rowsAffected);
-    })
-})
+// router.delete('/', (req, res) => {
+//     const { COD_EMISOR, COD_RECEPTOR } = req.params.body;
+//     ejecutor.query(
+//         `DELETE FROM Chat
+//         WHERE 
+//             cod_emisor = :cod_emisor AND 
+//             cod_receptor = :cod_receptor`,
+//         [COD_EMISOR, COD_RECEPTOR]
+//     )
+//     .then(result => {
+//         return res.json(result.rowsAffected);
+//     })
+// })
 
 module.exports = router;

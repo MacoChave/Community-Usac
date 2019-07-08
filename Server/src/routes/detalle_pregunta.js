@@ -53,18 +53,18 @@ router.post('/', (req, res) => {
 //     })
 // })
 
-router.delete('/', (req, res) => {
-    const { PREGUNTA, EXAMEN } = req.params.id;
-    ejecutor.query(
-        `DELETE FROM Detalle_pregunta 
-        WHERE 
-        cod_pregunta = :pregunta AND 
-        cod_examen = :examen`,
-        [PREGUNTA, EXAMEN]
-    )
-    .then(result => {
-        return res.json(result.rowsAffected);
-    })
+// router.delete('/', (req, res) => {
+//     const { PREGUNTA, EXAMEN } = req.params.id;
+//     ejecutor.query(
+//         `DELETE FROM Detalle_pregunta 
+//         WHERE 
+//         cod_pregunta = :pregunta AND 
+//         cod_examen = :examen`,
+//         [PREGUNTA, EXAMEN]
+//     )
+//     .then(result => {
+//         return res.json(result.rowsAffected);
+//     })
 })
 
 module.exports = router;

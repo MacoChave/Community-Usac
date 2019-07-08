@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SrcTema } from '../models/SrcTema';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SrcTemaService {
 
-  API_URI = 'http://localhost:3000/api/tema/source';
-
   constructor(private http: HttpClient) { }
 
   getSources () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.SRC_TEMA}`);
   }
 
   getSource (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+    return this.http.get(`${Uri.SRC_TEMA}/${id}`);
   }
 
   saveSources (source: SrcTema) {
-    return this.http.post(`${this.API_URI}`, source);
+    return this.http.post(`${Uri.SRC_TEMA}`, source);
   }
 
   updateSources (id: string, source: SrcTema) {
-    return this.http.put(`${this.API_URI}/${id}`, source);
+    return this.http.put(`${Uri.SRC_TEMA}/${id}`, source);
   }
 
   deleteSources (id: string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
+    return this.http.delete(`${Uri.SRC_TEMA}/${id}`);
   }
 }

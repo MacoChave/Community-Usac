@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Carrera } from '../models/Carrera';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarreraService {
 
-  API_URI = 'http://localhost:3000/api/carrera';
-
   constructor(private http: HttpClient) { }
 
   getCarreras () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.CARRERA}`);
   }
 
   getCarrera (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+    return this.http.get(`${Uri.CARRERA}/${id}`);
   }
 
   getCarreraByFacultad (facultad: string) {
-    return this.http.get(`${this.API_URI}/facultad/${facultad}`);
+    return this.http.get(`${Uri.CARRERA}/facultad/${facultad}`);
   }
 
   saveCarrera (carrera: Carrera) {
-    return this.http.post(`${this.API_URI}`, carrera);
+    return this.http.post(`${Uri.CARRERA}`, carrera);
   }
 
   updateCarrera (carrera: Carrera) {
-    return this.http.put(`${this.API_URI}/${carrera.COD_CARRERA}`, carrera);
+    return this.http.put(`${Uri.CARRERA}/${carrera.COD_CARRERA}`, carrera);
   }
 
   deleteCarrera (id: string) {
-    return this.http.delete(`${this.API_URI}/${id}`);
+    return this.http.delete(`${Uri.CARRERA}/${id}`);
   }
 }

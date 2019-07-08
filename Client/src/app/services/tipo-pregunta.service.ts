@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TipoPregunta } from '../models/TipoPregunta';
+import { Uri } from '../models/Uri';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoPreguntaService {
 
-  API_URI = 'http://localhost:3000/api/examen/pregunta/tipo';
-
   constructor(private http: HttpClient) { }
 
   getTipoPreguntas () {
-    return this.http.get(`${this.API_URI}`);
+    return this.http.get(`${Uri.TIPO_PREGUNTA}`);
   }
 
   getTipoPregunta (id: string) {
-    return this.http.get(`${this.API_URI}/${id}`);
+    return this.http.get(`${Uri.TIPO_PREGUNTA}/${id}`);
   }
 
   saveTipoPregunta (id: string, tipo: TipoPregunta) {
-    return this.http.post(`${this.API_URI}`, tipo);
+    return this.http.post(`${Uri.TIPO_PREGUNTA}`, tipo);
   }
 
   updateTipoPregunta (id: string, tipo: TipoPregunta) {
-    return this.http.put(`${this.API_URI}/${id}`, tipo);
+    return this.http.put(`${Uri.TIPO_PREGUNTA}/${id}`, tipo);
   }
 
   deleteTipoPregunta (id: string, tipo: TipoPregunta) {
-    return this.http.delete(`${this.API_URI}/${id}`);
+    return this.http.delete(`${Uri.TIPO_PREGUNTA}/${id}`);
   }
 }
