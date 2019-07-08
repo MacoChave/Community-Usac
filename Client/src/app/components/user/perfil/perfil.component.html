@@ -1,0 +1,30 @@
+ <form (ngSubmit)='save()'>
+     <div class="grid_container">
+         <mat-form-field class="item_grid carnet">
+             <input matInput placeholder="Carnet" name='carnet' [(ngModel)]='user.CARNET' readonly>
+         </mat-form-field>
+         <mat-form-field class="item_grid registro">
+            <input matInput placeholder="No registro" name='registro' [(ngModel)]='user.NO_REGISTRO' readonly>
+         </mat-form-field>
+         <mat-form-field class="item_grid nombre">
+            <input matInput placeholder="Nombre" name='name' [(ngModel)]='user.NOMBRE' readonly>
+         </mat-form-field>
+         <div class="item_grid image">
+            <input type="file" name="url_photo" id="url_photo" [(ngModel)]='user.URL_FOTO'>
+            <img class="profile_image" [src]="user.URL_PHOTO == null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_photo">
+         </div>
+         <mat-form-field class="item_grid mail">
+            <input matInput type="email" placeholder="Correo" name='mail' [(ngModel)]='user.CORREO'>
+         </mat-form-field>
+         <mat-form-field class="item_grid phone">
+            <input matInput type="tel" placeholder="Telefono" name='phone' [(ngModel)]='user.TELEFONO'>
+         </mat-form-field>
+         <mat-form-field class="item_grid pass">
+            <input matInput type="password" placeholder="Contraseña" name='pass' [(ngModel)]='user.CLAVE'>
+         </mat-form-field>
+         <mat-form-field class="item_grid rol">
+            <input matInput placeholder="Rol" name='rol' [(ngModel)]='user.ROL' readonly>
+         </mat-form-field>
+         <button class="item_grid button" mat-flat-button color='accent'>Guardar</button>
+     </div>
+ </form>

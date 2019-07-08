@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
         [NOMBRE, CLAVE, ROL]
     )
     .then(result => {
-        res.json(result.rowsAffected);
+        res.json(result.rows);
     });
 });
 

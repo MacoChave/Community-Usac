@@ -43,6 +43,7 @@ import { RespuestaService } from './services/respuesta.service';
 import { DetalleRespuestaService } from './services/detalle-respuesta.service';
 import { CienciaComponent } from './components/admin/ciencia/ciencia.component';
 import { CienciaAddComponent } from './components/admin/ciencia-add/ciencia-add.component';
+import { PerfilComponent } from './components/user/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { CienciaAddComponent } from './components/admin/ciencia-add/ciencia-add.
     CargoAddComponent,
     AdminBasicComponent,
     CienciaComponent,
-    CienciaAddComponent
+    CienciaAddComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

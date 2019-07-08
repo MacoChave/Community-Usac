@@ -9,6 +9,7 @@ import { FacultadComponent } from './components/admin/facultad/facultad.componen
 import { CarreraComponent } from './components/admin/carrera/carrera.component';
 import { CargoComponent } from './components/admin/cargo/cargo.component';
 import { CienciaComponent } from './components/admin/ciencia/ciencia.component';
+import { PerfilComponent } from './components/user/perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,14 @@ const routes: Routes = [
   },
   {
     path: 'usuario',
-    component: DashboardUserComponent
+    component: DashboardUserComponent,
+    children: [
+      {
+        path: 'perfil',
+        component: PerfilComponent,
+        outlet: 'user'
+      }
+    ]
   },
   {
     path: '**',

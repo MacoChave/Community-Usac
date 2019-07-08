@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'usuario',
@@ -7,11 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardUserComponent implements OnInit {
 
+  @HostBinding('class') clases = 'dashboard';
+  
   title = 'Dashboard Usuario';
+  hide = true;
+  classMenu: string;
+  user: User;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('session'));
+    console.log(this.user);
+  }
+  
+  toggle() {
+    this.hide = !this.hide;
+    this.classMenu = this.hide ? 'menu hide_menu' : 'menu';
   }
 
+  signOut() {
+    localStorage.removeItem('session');
+    this.router.navigate(['']);
+  }
 }
