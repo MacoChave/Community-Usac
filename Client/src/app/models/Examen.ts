@@ -2,12 +2,15 @@ export interface Examen {
     COD_EXAMEN          ?: number;
     TITULO              ?: string;
     TEMA                ?: string;
+    SALA                ?: string;
     FECHA_CREACION      ?: Date;
-    FECHA_MODIFICACION  ?:Date;
-    TIEMPO              ?: number;
+    FECHA_MODIFICACION  ?: Date;
     DURACION            ?: number;
-    ACTIVO              ?: number;
+    ESTADO              ?: number;
     LOG                 ?: string;
-    USUARIO             ?: string;
+    CIENCIA             ?: string;
+    CARRERA             ?: string;
+    FACULTAD            ?: string;
+    NOMBRE              ?: string;
     URL_FOTO            ?: string;
 }

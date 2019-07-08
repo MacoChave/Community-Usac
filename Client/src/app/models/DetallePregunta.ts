@@ -3,7 +3,4 @@ export interface DetallePregunta {
     EXAMEN              ?: string;
     PREGUNTA            ?: string;
     TIPO                ?: string;
-    CREADOR             ?: string;
-    URL_FOTO            ?: string;
-    FECHA_CREACION      ?: Date;
 }
