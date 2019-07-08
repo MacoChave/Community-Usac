@@ -13,7 +13,7 @@ export class DashboardUserComponent implements OnInit {
   
   title = 'Dashboard Usuario';
   hide = true;
-  classMenu: string;
+  classMenu = 'menu hide_menu';
   user: User;
 
   constructor(private router: Router) { }
