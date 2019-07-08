@@ -1,7 +1,7 @@
 CREATE TABLE Cargo (
     cod_cargo   NUMBER,
     cargo       VARCHAR2(50) NOT NULL,
-    descripcion VARCHAR2(200)
+    descripcion VARCHAR2(200),
     CONSTRAINT PK_Cargo PRIMARY KEY (cod_cargo)
 );
 
@@ -18,7 +18,7 @@ END;
 
 CREATE TABLE Rol (
     cod_rol         NUMBER,
-    rol             VARCHAR2(50)
+    rol             VARCHAR2(50),
     CONSTRAINT PK_Rol PRIMARY KEY (cod_rol)
 );
 
@@ -161,7 +161,7 @@ CREATE TABLE Asignacion (
     cod_ciencia                         NUMBER NOT NULL,
     cod_facultad                        NUMBER NOT NULL,
     cod_carrera                         NUMBER NOT NULL,
-    CONSTRAINT PK_ASIGNACION PRIMARY KEY (cod_usuario, cod_ciencia, cod_facultad, cod_ciencia),
+    CONSTRAINT PK_ASIGNACION PRIMARY KEY (cod_usuario, cod_ciencia, cod_facultad, cod_carrera),
     CONSTRAINT FK_UsuarioAsignacion FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario),
     CONSTRAINT FK_CienciaAsignacion FOREIGN KEY (cod_ciencia, cod_facultad, cod_carrera) REFERENCES Ciencia(cod_ciencia, cod_facultad, cod_carrera)
 );
@@ -193,22 +193,22 @@ BEGIN
 END;
 
 CREATE TABLE Src_tema (
-    cod_srs_tema               NUMBER,
+    cod_source                 NUMBER,
     url_imagen                 VARCHAR2(100) NOT NULL,
     tag                        VARCHAR2(50),
     cod_tema                   NUMBER NOT NULL,
-    CONSTRAINT PK_SrcTema PRIMARY KEY (cod_srs_tema),
+    CONSTRAINT PK_SrcTema PRIMARY KEY (cod_source),
     CONSTRAINT FK_TemaSrc FOREIGN KEY (cod_tema) REFERENCES Tema(cod_tema)
 );
 
 CREATE SEQUENCE SEQ_SRC_TEMA;
 
-CREATE TRIGGER TRG_SRC_TEMA
+CREATE OR REPLACE TRIGGER TRG_SRC_TEMA
     BEFORE INSERT ON Src_tema
     FOR EACH ROW
 BEGIN 
     SELECT SEQ_SRC_TEMA.NEXTVAL
-    INTO :new.cod_srs_tema
+    INTO :new.cod_source
     FROM dual;
 END;
 
@@ -233,7 +233,7 @@ CREATE TABLE Comentario (
     contenido                  VARCHAR2(200),
     url_imagen                 VARCHAR2(100),
     tag                        VARCHAR2(50),
-    fecha_creacion             TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    fecha_creacion             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cod_tema                   NUMBER NOT NULL,
     cod_usuario                NUMBER NOT NULL,
     CONSTRAINT PK_Comentario PRIMARY KEY (cod_comentario),
@@ -259,7 +259,7 @@ CREATE TABLE Examen (
     cod_examen            NUMBER,
     titulo                VARCHAR2(50) NOT NULL,
     tema                  VARCHAR2(100) NOT NULL,
-    sala                  VARCHAR2(50)
+    sala                  VARCHAR2(50),
     fecha_creacion        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion    TIMESTAMP,
     duracion              NUMBER,
@@ -313,15 +313,26 @@ CREATE TABLE Pregunta (
     CONSTRAINT FK_TipopPregunta FOREIGN KEY (cod_tipo_pregunta) REFERENCES Tipo_pregunta(cod_tipo_pregunta)
 );
 
+CREATE SEQUENCE SEQ_PREGUNTA;
+
+CREATE OR REPLACE TRIGGER TRG_PREGUNTA
+    BEFORE INSERT ON Pregunta
+    FOR EACH ROW
+BEGIN 
+    SELECT SEQ_PREGUNTA.NEXTVAL
+    INTO :new.cod_pregunta
+    FROM dual;
+END;
+
 /* ********************************************************
  * MODIFICACION : FK ONLY COD_PREGUNTA, COD_EXAMEN
 ***********************************************************/
 CREATE TABLE Detalle_pregunta (
     cod_pregunta          NUMBER NOT NULL,
     cod_examen            NUMBER NOT NULL,
-    CONSTRAINT PK_DetalleP PRIMARY KEY (cod_pregunta, cod_examen, cod_usuario),
+    CONSTRAINT PK_DetalleP PRIMARY KEY (cod_pregunta, cod_examen),
     CONSTRAINT FK_PreguntaDetalle FOREIGN KEY (cod_pregunta) REFERENCES Pregunta(cod_pregunta),
-    CONSTRAINT FK_ExamenPregunta FOREIGN KEY (cod_examen, cod_usuario) REFERENCES Examen(cod_examen, cod_usuario)
+    CONSTRAINT FK_ExamenPregunta FOREIGN KEY (cod_examen) REFERENCES Examen(cod_examen)
 );
 /* ********************************************************
  * MODIFICACION 

@@ -53,7 +53,7 @@ WHERE
 
 CREATE VIEW VIEW_SRC_TEMA AS 
 SELECT 
-    st.cod_srs_tema, st.url_imagen, st.tag, t.titulo
+    st.cod_source, st.url_imagen, st.tag, t.titulo
 FROM 
     Src_tema ST, Tema T 
 WHERE 
@@ -61,13 +61,13 @@ WHERE
 
 CREATE OR REPLACE VIEW VIEW_ETIQUETA AS 
 SELECT 
-    t.titulo AS tema, m.nombre AS ciencia 
+    t.titulo AS tema, m.nombre AS ciencia, f.nombre AS facultad, c.nombre AS carrera 
 FROM 
     Etiqueta E, Tema T, Ciencia M, Facultad F, Carrera C 
 WHERE 
     e.cod_tema = t.cod_tema AND 
     e.cod_ciencia = m.cod_ciencia AND
-    m.cod_faculad = f.cod_facultad AND 
+    m.cod_facultad = f.cod_facultad AND 
     m.cod_carrera = c.cod_carrera;
 
 CREATE VIEW VIEW_COMENTARIO AS 
@@ -82,9 +82,9 @@ WHERE
 
 CREATE OR REPLACE VIEW VIEW_EXAMEN AS 
 SELECT 
-    e.cod_examen, e.titulo, e.tema, e.fecha_creacion, e.fecha_modificacion, 
-    e.duracion, e.activo, e.log, c.nombre AS carrera, f.nombre AS facultad, 
-    u.nombre, u.url_foto
+    e.cod_examen, e.titulo, e.sala, e.tema, e.fecha_creacion, e.fecha_modificacion, 
+    e.duracion, e.estado, e.log, m.nombre AS ciencia, c.nombre AS carrera, 
+    f.nombre AS facultad, u.nombre, u.url_foto
 FROM
     Examen E, Usuario U, Ciencia M, Carrera C, Facultad F 
 WHERE 

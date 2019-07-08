@@ -95,6 +95,6 @@ VALUES ('admin', 'admin@community.usac.edu.gt', 'admin', 1);
 
 /* FILL CIENCIA */
 BEGIN
-    c_ciencia('MIA', 'Manejo e Implementación de Archivos', 'Ingeniería', 'Ingeniería en Ciencias y Sistemas');
+    proc_c_ciencia('MIA', 'Manejo e Implementación de Archivos', 'Ingeniería', 'Ingeniería en Ciencias y Sistemas');
     COMMIT;
 END;

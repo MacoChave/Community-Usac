@@ -188,8 +188,8 @@ CREATE OR REPLACE PROCEDURE PROC_C_ASIGNACION(
 IS 
     s_usuario NUMBER;
     s_ciencia NUMBER;
-    s_facultad IN VARCHAR2;
-    s_carrera IN VARCHAR2;
+    s_facultad NUMBER;
+    s_carrera NUMBER;
 BEGIN 
     s_usuario := 0;
     s_ciencia := 0;
@@ -260,7 +260,7 @@ END PROC_U_TEMA;
 
 CREATE OR REPLACE PROCEDURE PROC_D_TEMA(
     i_cod_tema IN NUMBER,
-    i_motivo IN VARCHAR2,
+    i_motivo IN VARCHAR2
 )
 IS 
 BEGIN 
@@ -306,7 +306,7 @@ BEGIN
     SET 
         url_imagen = i_image, 
         tag = i_tag
-    WHERE cod_srs_tema = i_src_tema;
+    WHERE cod_source = i_src_tema;
 END PROC_U_SRCTEMA;
 
 CREATE OR REPLACE PROCEDURE PROC_C_ETIQUETA(
@@ -411,9 +411,9 @@ CREATE OR REPLACE PROCEDURE PROC_C_EXAMEN(
 )
 IS 
     s_usuario NUMBER;
-    i_ciencia NUMBER;
-    i_facultad NUMBER;
-    i_carrera NUMBER;
+    s_ciencia NUMBER;
+    s_facultad NUMBER;
+    s_carrera NUMBER;
 BEGIN 
     s_usuario := 0;
     s_ciencia := 0;
@@ -469,7 +469,7 @@ IS
 BEGIN 
     UPDATE Examen 
     SET
-        activo = 'D'
+        estado = 'D'
     WHERE 
         cod_examen = i_cod_examen;
 END PROC_D_EXAMEN;
@@ -482,7 +482,7 @@ IS
 BEGIN 
     UPDATE Examen 
     SET
-        activo = 'l', 
+        estado = 'l', 
         sala = i_sala
     WHERE 
         cod_examen = i_cod_examen;
