@@ -22,15 +22,15 @@ WHERE
     m.cod_carrera = c.cod_carrera AND 
     m.cod_facultad = f.cod_facultad;
 
-CREATE VIEW VIEW_DETALLE_CARGO AS 
-SELECT u.nombre, r.cargo, f.nombre AS facultad, c.nombre AS carrera
+CREATE OR REPLACE VIEW VIEW_DETALLE_CARGO AS 
+SELECT u.nombre, r.cargo, c.nombre, f.nombre
 FROM 
-    Detalle_cargo DC, Usuario U, Cargo R, Facultad F, Carrera C 
+    detalle_cargo DC, Usuario U, Cargo R, Carrera C, Facultad F
 WHERE 
     dc.cod_usuario = u.cod_usuario AND 
     dc.cod_cargo = r.cod_cargo AND 
-    dc.cod_facultad = c.cod_facultad AND 
-    dc.cod_carrera = c.cod_carrera;
+    dc.cod_carrera = c.cod_carrera AND 
+    dc.cod_facultad = f.cod_facultad;
 
 CREATE OR REPLACE VIEW VIEW_ASIGNACION AS 
 SELECT 
@@ -40,8 +40,8 @@ FROM
 WHERE 
     a.cod_usuario = u.cod_usuario AND 
     a.cod_ciencia = m.cod_ciencia AND 
-    m.cod_facultad = f.cod_facultad AND 
-    m.cod_carrera = c.cod_carrera;
+    a.cod_facultad = f.cod_facultad AND 
+    a.cod_carrera = c.cod_carrera;
 
 CREATE VIEW VIEW_TEMA AS 
 SELECT 
@@ -67,8 +67,8 @@ FROM
 WHERE 
     e.cod_tema = t.cod_tema AND 
     e.cod_ciencia = m.cod_ciencia AND
-    m.cod_facultad = f.cod_facultad AND 
-    m.cod_carrera = c.cod_carrera;
+    e.cod_facultad = f.cod_facultad AND 
+    e.cod_carrera = c.cod_carrera;
 
 CREATE VIEW VIEW_COMENTARIO AS 
 SELECT 
@@ -90,8 +90,8 @@ FROM
 WHERE 
     e.cod_usuario = u.cod_usuario AND 
     e.cod_ciencia = m.cod_ciencia AND 
-    m.cod_facultad = f.cod_facultad AND 
-    m.cod_carrera = c.cod_carrera;
+    e.cod_facultad = f.cod_facultad AND 
+    e.cod_carrera = c.cod_carrera;
 
 CREATE OR REPLACE VIEW VIEW_PREGUNTA AS 
 SELECT p.cod_pregunta, p.descripcion, tp.nombre AS tipo 

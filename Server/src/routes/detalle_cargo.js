@@ -5,7 +5,7 @@ const router = new Router();
 
 router.get('/', (req, res) => {
     ejecutor.query(
-        `SELECT * FROM Detalle_cargo`,
+        `SELECT * FROM view_detalle_cargo`,
         []
     )
     .then(result => {
@@ -27,15 +27,15 @@ router.get('/:nombre', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { USUARIO, CARGO, FACULTAD, CARRERA } = req.body;
+    const { NOMBRE, CARGO, FACULTAD, CARRERA } = req.body;
     console.log(req.body);
     ejecutor.sp(
         `BEGIN
             PROC_C_DETALLE_CARGO(
-                :usuario, :cargo, :facultad, :carrera
+                :nombre, :cargo, :facultad, :carrera
             );
         END`,
-        [USUARIO, CARGO, FACULTAD, CARRERA]
+        [NOMBRE, CARGO, FACULTAD, CARRERA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

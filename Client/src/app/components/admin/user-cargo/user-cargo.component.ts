@@ -81,8 +81,8 @@ export class UserCargoComponent implements OnInit {
     this.detalleCargoService.saveDetalleCargo(this.detalle).subscribe(
       res => {
         console.log(this.detalle)
-        // this.loadDetalles();
-        // this.clearDetalleCargo();
+        this.loadDetalles();
+        this.clearDetalleCargo();
       },
       err => console.log(err)
     );
