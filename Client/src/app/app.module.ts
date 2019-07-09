@@ -49,6 +49,7 @@ import { HistoriaComponent } from './components/user/historia/historia.component
 import { ExamenComponent } from './components/user/examen/examen.component';
 import { SalaComponent } from './components/user/sala/sala.component';
 import { AddTemaComponent } from './components/user/add-tema/add-tema.component';
+import { PickDetalleCargoComponent } from './components/modal/pick-detalle-cargo/pick-detalle-cargo.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AddTemaComponent } from './components/user/add-tema/add-tema.component'
     HistoriaComponent,
     ExamenComponent,
     SalaComponent,
-    AddTemaComponent
+    AddTemaComponent,
+    PickDetalleCargoComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +114,8 @@ import { AddTemaComponent } from './components/user/add-tema/add-tema.component'
     CarreraAddComponent,
     CargoAddComponent,
     CienciaAddComponent, 
-    AddTemaComponent
+    AddTemaComponent,
+    PickDetalleCargoComponent
   ]
 })
 export class AppModule { }

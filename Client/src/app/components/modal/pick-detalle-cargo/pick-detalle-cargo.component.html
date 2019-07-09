@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Selección de cargo</h1>
+<mat-form-field class="flex_item">
+    <mat-label>Cargo para iniciar sesión</mat-label>
+    <mat-select [(value)]='detalleCargo'>
+        <mat-option *ngFor="let result of results" [value]="result">
+            {{result.CARGO}} {{result.FACULTAD}} {{result.CARRERA}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div class="flex_item">
+    <button mat-button color="accent" (click)='onClick()'>Aceptar</button>
+</div>
+

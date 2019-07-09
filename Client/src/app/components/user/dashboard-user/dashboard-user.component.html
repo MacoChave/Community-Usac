@@ -36,7 +36,7 @@
                 <span class="tooltip">Todos los posts</span>
             </a>
         </li>
-        <li class="menu_item">
+        <li class="menu_item" *ngIf="detalleCargo.CARGO == 'Profesor'">
             <a
                 class="menu_link"  
                 [routerLink]="[{outlets: {user: ['examen']}}]" 
@@ -47,7 +47,7 @@
                 <span class="tooltip">Crear un examen</span>
             </a>
         </li>
-        <li class="menu_item">
+        <li class="menu_item" *ngIf="detalleCargo.CARGO == 'Estudiante'">
             <a
                 class="menu_link"  
                 [routerLink]="[{outlets: {user: ['sala']}}]" 

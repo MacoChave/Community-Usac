@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { DetalleCargo } from 'src/app/models/DetalleCargo';
 import { DetalleCargoService } from 'src/app/services/detalle-cargo.service';
+import { MatDialog } from '@angular/material';
+import { PickDetalleCargoComponent } from '../../modal/pick-detalle-cargo/pick-detalle-cargo.component';
 
 @Component({
   selector: 'usuario',
@@ -17,11 +19,16 @@ export class DashboardUserComponent implements OnInit {
   hide = true;
   classMenu: string;
   user: User;
-  detalleCargo: DetalleCargo = {};
+  detalleCargo: DetalleCargo = {
+    CARGO: '',
+    CARRERA: '',
+    FACULTAD: '',
+    NOMBRE: ''
+  }
 
   constructor(
-    private router: Router,
-    private detalleCargoService: DetalleCargoService
+    private router: Router, 
+    private dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -29,6 +36,18 @@ export class DashboardUserComponent implements OnInit {
     if (this.user == null)
       this.router.navigate(['']);
     this.classMenu = 'menu hide_menu';
+    const dialogRef = this.dialog.open(
+      PickDetalleCargoComponent, 
+      {
+        data: this.user,
+        height: '40vh',
+        width: '40vw'
+      }
+    )
+
+    dialogRef.beforeClosed().subscribe(res => {
+      this.detalleCargo = res;
+    });
   }
   
   toggle() {
