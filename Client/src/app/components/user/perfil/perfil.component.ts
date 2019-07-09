@@ -23,8 +23,8 @@ export class PerfilComponent implements OnInit {
 
   save() {
     this.userService.updateUser(this.user).subscribe(
-      res => console.log(res),
-      err => console.error(err)
+      res => alert('Perfil guardado'),
+      err => alert('Perfil no pudo ser guardado')
     );
   }
 }

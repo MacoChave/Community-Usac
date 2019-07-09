@@ -12,6 +12,7 @@
             <p *ngIf="res.TELEFONO > 0"><b>Telefono:</b> {{res.TELEFONO}} </p>
         </div>
         <div class="footer">
+            <button *ngIf="res.ROL == 'user'" mat-button color="accent" (click)='cargoUser(res.NOMBRE)'>Ver cargos</button>
             <button mat-button color="accent" (click)='editUser(res.COD_USUARIO)'>Edit</button>
             <button mat-button color="warn" (click)='deleteUser(res.COD_USUARIO)'>Delete</button>
         </div>

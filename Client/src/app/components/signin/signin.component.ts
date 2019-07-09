@@ -26,18 +26,8 @@ export class SigninComponent implements OnInit {
     CLAVE: '',
     ROL: '',
   }
-  currentUser: User = {
-    COD_USUARIO: 0,
-    CARNET: 0,
-    NO_REGISTRO: 0,
-    NOMBRE: '',
-    URL_FOTO: '',
-    CORREO: '',
-    TELEFONO: 0,
-    CLAVE: '',
-    ROL: '',
-  }
-  result: any = [];
+
+  result: any;
   items: string[] = ['admin', 'user'];
 
   constructor(
@@ -49,17 +39,8 @@ export class SigninComponent implements OnInit {
   }
 
   login() {
-    delete this.user.COD_USUARIO;
-    delete this.user.CARNET;
-    delete this.user.NO_REGISTRO;
-    delete this.user.URL_FOTO;
-    delete this.user.CORREO;
-    delete this.user.TELEFONO;
-
-    console.log(this.user);
-
     this.userService.validateUser(this.user).subscribe(
-      res => this.result = res,
+      res => this.result = res[0],
       err => console.error(err)
     );
 
@@ -71,15 +52,14 @@ export class SigninComponent implements OnInit {
   }
 
   checkResult() {
-    console.log(this.result);
-    if (this.result.length > 0)
+    if (this.result != null)
     {
-      localStorage.setItem('session', JSON.stringify(this.result[0]));
-      if (this.result[0].ROL === 'admin')
+      localStorage.setItem('session', JSON.stringify(this.result));
+      if (this.result.ROL === 'admin')
         this.router.navigate(['administrador']);
       else
         this.router.navigate(['usuario']);
     }
-    else console.log('Session failed');
+    else alert('Credenciales no válidas');
   }
 }

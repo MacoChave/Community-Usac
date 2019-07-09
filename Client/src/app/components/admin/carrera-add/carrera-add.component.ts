@@ -48,15 +48,15 @@ export class CarreraAddComponent implements OnInit {
       // ACTUALIZAR CARRERA
       console.log(this.carrera);
       this.carreraService.updateCarrera(this.carrera).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Carrera agregado'),
+        err => alert('Carrera no pudo agregarse')
       )
     }
     else {
       // GUARDAR CARRERA
       this.carreraService.saveCarrera(this.carrera).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Carrera agregado'),
+        err => alert('Carrera no pudo guardarse')
       )
     }
 

@@ -5,10 +5,11 @@ const router = new Router();
 
 router.get('/', (req, res) => {
     ejecutor.query(
-        `SELECT * FROM VIEW_DETALLE_CARGO`,
+        `SELECT * FROM Detalle_cargo`,
         []
     )
     .then(result => {
+        console.log(result);
         return res.json(result.rows);
     })
 })

@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
         []
     )
     .then(result => {
-        console.log(res.rows);
         return res.json(result.rows);
     });
 });

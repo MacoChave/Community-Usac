@@ -29,6 +29,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/login', (req, res) => {
     const {NOMBRE, CLAVE, ROL} = req.body;
+    console.log(req.body);
     ejecutor.query(
         `SELECT * FROM VIEW_USUARIO 
         WHERE 

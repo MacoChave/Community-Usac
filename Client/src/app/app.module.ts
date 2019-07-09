@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { DashboardUserComponent } from './components/user/dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './components/admin/dashboard-admin/dashboard-admin.component';
-import { AdminBasicComponent } from './components/admin/admin-basic/admin-basic.component';
+import { UserCargoComponent  } from './components/admin/user-cargo/user-cargo.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserComponent } from './components/admin/user/user.component';
@@ -65,7 +65,7 @@ import { AddTemaComponent } from './components/user/add-tema/add-tema.component'
     CarreraAddComponent,
     CargoComponent,
     CargoAddComponent,
-    AdminBasicComponent,
+    UserCargoComponent,
     CienciaComponent,
     CienciaAddComponent,
     PerfilComponent,
@@ -107,6 +107,7 @@ import { AddTemaComponent } from './components/user/add-tema/add-tema.component'
   bootstrap: [AppComponent],
   entryComponents: [
     UserAddComponent,
+    UserCargoComponent,
     FacultadAddComponent,
     CarreraAddComponent,
     CargoAddComponent,

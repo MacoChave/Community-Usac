@@ -15,7 +15,7 @@ export class DashboardUserComponent implements OnInit {
   
   title = 'Dashboard Usuario';
   hide = true;
-  classMenu = 'menu hide_menu';
+  classMenu: string;
   user: User;
   detalleCargo: DetalleCargo = {};
 
@@ -26,6 +26,9 @@ export class DashboardUserComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('session'));
+    if (this.user == null)
+      this.router.navigate(['']);
+    this.classMenu = 'menu hide_menu';
   }
   
   toggle() {

@@ -38,15 +38,15 @@ export class CargoAddComponent implements OnInit {
     if (!isNaN(this.data)) {
       console.log('Actualizar');
       this.cargoService.updatePosition(this.cargo).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Cargo agregado'),
+        err => alert('Cargo no se pudo agregar')
       )
     }
     else {
       console.log('Guardar');
       this.cargoService.savePosition(this.cargo).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Cargo actualizado'),
+        err => alert('Cargo se pudo actualizar')
       )
     }
 

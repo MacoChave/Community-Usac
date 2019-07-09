@@ -36,18 +36,16 @@ export class FacultadAddComponent implements OnInit {
   save () {
     if (!isNaN(this.data)) {
       // ACTUALIZAR FACULTAD
-      console.log('ACTUALIZAR FACULTAD');
       this.facultadService.updateFacultad(this.facultad).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Facultad agregada'),
+        err => alert('Facultad no pudo ser actualizada')
       )
     }
     else {
       // GUARDAR FACULTAD
-      console.log('GUARDAR FACULTAD');
       this.facultadService.saveFacultad(this.facultad).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Facultad agregada'),
+        err => alert('Facultad no pudo ser agregada')
       )
     }
 

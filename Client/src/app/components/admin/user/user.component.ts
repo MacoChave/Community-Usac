@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material';
 import { UserAddComponent } from '../user-add/user-add.component';
+import { UserCargoComponent } from '../user-cargo/user-cargo.component';
 
 @Component({
   selector: 'user',
@@ -54,5 +55,16 @@ export class UserComponent implements OnInit {
         minWidth: '80vw'
       }
     );
+  }
+
+  cargoUser(id: string) {
+    const dialogRef = this.dialog.open(
+      UserCargoComponent, 
+      {
+        data: id,
+        maxHeight: '90vh',
+        minWidth: '80vw'
+      }
+    )
   }
 }

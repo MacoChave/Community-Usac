@@ -65,6 +65,6 @@ router.post('/', (req, res) => {
 //     .then(result => {
 //         return res.json(result.rowsAffected);
 //     })
-})
+// })
 
 module.exports = router;

@@ -59,18 +59,16 @@ export class CienciaAddComponent implements OnInit {
   save() {
     if (!isNaN(this.data)) {
       // ACTUALIZAR CIENCIA
-      console.log('ACTUALIZAR');
       this.cienciaService.updateCiencia(this.ciencia).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Ciencia agregado'),
+        err => alert('Ciencia no pudo actualizarse')
       )
     }
     else {
       // AGREGAR CIENCIA
-      console.log('AGREGAR');
       this.cienciaService.saveCiencia(this.ciencia).subscribe(
-        res => console.log(res),
-        err => console.error(err)
+        res => alert('Ciencia agregado'),
+        err => alert('Ciencia no pudo agregarse')
       )
     }
 

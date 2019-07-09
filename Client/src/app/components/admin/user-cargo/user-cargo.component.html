@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Agregar / Quitar cargos</h2>
+<div class="row">
+    <div class="column">
+        <h3>Nombre</h3>
+    </div>
+    <div class="column">
+        <h3>Cargo</h3>
+    </div>
+    <div class="column">
+        <h3>Facultad</h3>
+    </div>
+    <div class="column">
+        <h3>Carrera</h3>
+    </div>
+    <div class="column">
+        <h3>Eliminar</h3>
+    </div>
+</div>
+<div class="row" *ngFor="let detalle of detalles">
+    <div class="column">
+        <p>detalle.CARGO</p>
+    </div>
+    <div class="column">
+        <p>detalle.NOMBRE</p>
+    </div>
+    <div class="column">
+        <p>detalle.CARRERA</p>
+    </div>
+    <div class="column">
+        <p>detalle.FACULTAD</p>
+    </div>
+    <div class="column">
+        <button mat-icon-button color="primary" aria-label="Eliminar cargo">
+            <mat-icon>remove</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <mat-select class="column" [(value)]='detalle.CARGO'>
+        <mat-option *ngFor="let cargo of cargos" [value]="cargo.CARGO">
+            {{cargo.CARGO}}
+        </mat-option>
+    </mat-select>
+    <mat-select class="column" [(value)]='detalle.FACULTAD' (selectionChange)='searchCarrera()'>
+        <mat-option *ngFor="let facultad of facultades" [value]="facultad.NOMBRE">
+            {{facultad.NOMBRE}}
+        </mat-option>
+    </mat-select>
+    <mat-select class="column" [(value)]='detalle.CARRERA'>
+        <mat-option *ngFor="let carrera of carreras" [value]="carrera.NOMBRE">
+            {{carrera.NOMBRE}}
+        </mat-option>
+    </mat-select>
+    <div class="column">
+        <button mat-icon-button color="primary" aria-label="Eliminar cargo" (click)='save()'>
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
