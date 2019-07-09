@@ -1,0 +1,29 @@
+.grid_container {
+    grid-gap: 10pt;
+    grid-template-areas:    "chooser chooser"
+                            "tag add_button"
+                            "image_source image_source";
+}
+
+.chooser {
+    grid-area: chooser;
+}
+
+.tag {
+    grid-area: tag;
+}
+
+.add_button {
+    grid-area: add_button;
+}
+
+.image_source {
+    grid-area: image_source;
+    width: 120pt;
+    height: 120pt;
+    margin: 15pt;
+}
+
+.flex_container {
+    flex-direction: column;
+}

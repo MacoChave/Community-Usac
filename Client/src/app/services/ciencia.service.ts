@@ -18,6 +18,10 @@ export class CienciaService {
     return this.http.get(`${Uri.CIENCIA}/${id}`);
   }
 
+  getCienciaByCarrera (carrera: string) {
+    return this.http.get(`${Uri.CIENCIA}/carrera/${carrera}`);
+  }
+
   saveCiencia (ciencia: Ciencia) {
     return this.http.post(`${Uri.CIENCIA}`, ciencia);
   }

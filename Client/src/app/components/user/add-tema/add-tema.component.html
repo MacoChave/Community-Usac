@@ -1,23 +1,65 @@
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step>
         <form>
-            <div>
-                <button mat-button matStepperNext>Next</button>
+            <div class="flex_container">
+                <mat-form-field class="item">
+                    <input matInput [(ngModel)]='tema.TITULO' [(ngModel)]='source.TITULO' [(ngModel)]='label.TEMA' placeholder="Titulo del post" name="title" required>
+                </mat-form-field>
+                
+                <mat-form-field class="item">
+                    <textarea matInput [(ngModel)]='tema.DESCRIPCION' placeholder="Escriba el contenido aquí" name="content" required></textarea>
+                </mat-form-field>
             </div>
+            
+            <button mat-button color="primary" matStepperNext (click)='saveTema()'>Next</button>
         </form>
     </mat-step>
     <mat-step>
         <form>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+            <div class="grid_container">
+                <input class="grid_item chooser" type="file" name="url_photo" [(ngModel)]='source.URL_IMAGEN'>
+                <mat-form-field class="grid_item tag">
+                    <input matInput [(ngModel)]='source.TAG' placeholder="Titulo del post" name="tag" required>
+                </mat-form-field>
+                <button class="grid_item add_button" mat-icon-button color="accent" aria-label="Agregar recurso" (click)="addSource()">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <img class="grid_item image_source" [src]="user.URL_PHOTO == null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_photo">
             </div>
+            <button mat-button color="primary" matStepperNext>Next</button>
         </form>
     </mat-step>
     <mat-step>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
+        <mat-form-field class="item_flex">
+            <mat-label>Seleccionar facultad</mat-label>
+            <mat-select [(value)]='label.FACULTAD' (selectionChange)='changeFacultad()'>
+                <mat-option *ngFor="let facultad of facultades" [value]="facultad.NOMBRE">
+                    {{facultad.NOMBRE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="item_flex">
+            <mat-label>Seleccionar carrera</mat-label>
+            <mat-select [(value)]='label.CARRERA' (selectionChange)='changeCarrera()'>
+                <mat-option *ngFor="let carrera of carreras" [value]="carrera.NOMBRE">
+                    {{carrera.NOMBRE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="item_flex">
+            <mat-label>Seleccionar Ciencia</mat-label>
+            <mat-select [(value)]='label.CIENCIA'>
+                <mat-option *ngFor="let ciencia of ciencias" [value]="ciencia.NOMBRE">
+                    {{ciencia.NOMBRE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-icon-button color="accent" aria-label="Agregar etiqueta" (click)="addLabel()">
+            <mat-icon>add</mat-icon>
+        </button>
+
+        <button mat-button color="primary" (click)="end()">Terminar</button>
     </mat-step>
 </mat-horizontal-stepper>

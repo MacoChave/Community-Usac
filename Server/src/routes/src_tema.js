@@ -27,6 +27,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { IMAGEN, TAG, TEMA } = req.body;
+    console.log(req.body);
     ejecutor.sp(
         `BEGIN 
             PROC_C_SRCTEMA(:imagen, :tag, :tema);

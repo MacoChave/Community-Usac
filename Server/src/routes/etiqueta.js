@@ -28,6 +28,7 @@ router.get('/:tema', (req, res) => {
 
 router.post('/', (req, res) => {
     const { TEMA, CIENCIA, FACULTAD, CARRERA } = req.body;
+    console.log(req.body);
     ejecutor.sp(
         `BEGIN
             PROC_C_ETIQUETA(

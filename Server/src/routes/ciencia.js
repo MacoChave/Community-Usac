@@ -26,6 +26,18 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.get('/carrera/:carrera', (req, res) => {
+    const{ CARRERA } = req.params;
+    ejecutor.query(
+        `SELECT * FROM VIEW_CIENCIA 
+        WHERE CARRERA LIKE :carrera`,
+        [CARRERA]
+    )
+    .then(result => {
+        return res.json(result.rows);
+    });
+});
+
 router.post('/', (req, res) => {
     const {NOMBRE, DESCRIPCION, CARRERA, FACULTAD} = req.body; //OBTENER JSON
     ejecutor.sp(
