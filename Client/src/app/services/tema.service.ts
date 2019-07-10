@@ -15,7 +15,7 @@ export class TemaService {
   }
 
 
-  getTema (id: string) {
+  getTema (id: number) {
     return this.http.get(`${Uri.TEMA}/${id}`);
   }
 

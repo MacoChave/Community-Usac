@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { DetalleCargoService } from 'src/app/services/detalle-cargo.service';
 import { Cargo } from 'src/app/models/Cargo';
 import { CargoService } from 'src/app/services/cargo.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'user_cargo',
@@ -39,18 +40,29 @@ export class UserCargoComponent implements OnInit {
 
   carreras: Carrera = {};
 
+  result: any;
+
   constructor(
     private detalleCargoService: DetalleCargoService, 
     private cargoService: CargoService, 
     private carreraService: CarreraService, 
     private facultadService: FacultadService, 
+    private userService: UserService, 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
     this.clearDetalleCargo();
 
-    this.loadDetalles();
+    this.userService.getUser(this.data).subscribe(
+      res => {
+        this.result = res[0];
+        console.log(this.result);
+        this.detalle.COD_USUARIO = this.result.COD_USUARIO;
+        this.loadDetalles();
+      },
+      err => console.error(err)
+    );
 
     this.facultadService.getFacultades().subscribe(
       res => this.facultades = res,
@@ -64,35 +76,36 @@ export class UserCargoComponent implements OnInit {
   }
 
   clearDetalleCargo () {
-    this.detalle.CARGO = '';
-    this.detalle.CARRERA = '';
-    this.detalle.FACULTAD = '';
+    this.detalle.COD_CARGO = 0;
+    this.detalle.COD_CARRERA = 0;
+    this.detalle.COD_FACULTAD = 0;
   }
 
   loadDetalles() {
-    this.detalleCargoService.getDetalleCargo(this.data).subscribe(
+    this.detalleCargoService.getDetalleCargo(this.result.NOMBRE).subscribe(
       res => {
         this.detalles = res;
-        console.log(this.detalle);
+        this.clearDetalleCargo();
+        console.log(this.detalles);
       },
       err => console.log(err)
     );
   }
 
   save() {
+    console.log(this.detalle);
     this.detalleCargoService.saveDetalleCargo(this.detalle).subscribe(
-      res => {
-        console.log(this.detalle)
-        this.loadDetalles();
-        this.clearDetalleCargo();
-      },
+      res => this.loadDetalles(),
       err => console.log(err)
     );
   }
 
   searchCarrera() {
     this.carreraService.getCarreraByFacultad(this.detalle.COD_FACULTAD).subscribe(
-      res => this.carreras = res,
+      res => {
+        this.carreras = res;
+        console.log(this.carreras);
+      },
       err => console.log(err)
     )
   }

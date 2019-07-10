@@ -25,6 +25,7 @@ router.get('/:nombre', (req, res) => {
         [nombre]
     )
     .then(result => {
+        console.log(result.rows);
         return res.json(result.rows);
     })
 })

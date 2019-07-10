@@ -3,7 +3,7 @@
         <form>
             <div class="flex_container">
                 <mat-form-field class="item">
-                    <input matInput [(ngModel)]='tema.TITULO' [(ngModel)]='source.TITULO' [(ngModel)]='label.TEMA' placeholder="Titulo del post" name="title" required>
+                    <input matInput [(ngModel)]='tema.TITULO' placeholder="Titulo del post" name="title" required>
                 </mat-form-field>
                 
                 <mat-form-field class="item">
@@ -17,7 +17,7 @@
     <mat-step>
         <form>
             <div class="grid_container chooser">
-                <input class="grid_item chooser" type="file" name="url_photo" [(ngModel)]='source.URL_IMAGEN'>
+                <input [(ngModel)]='source.URL_IMAGEN' class="grid_item chooser" type="file" name="url_photo">
                 
                 <mat-form-field class="grid_item tag">
                     <input matInput [(ngModel)]='source.TAG' placeholder="Etiqueta de imagen" name="tag" required>

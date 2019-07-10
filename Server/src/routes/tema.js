@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     const id = req.params.id;
     ejecutor.query(
         `SELECT * FROM VIEW_TEMA 
-        WHERE cod_tema = :id`,
+        WHERE cod_usuario = :id`,
         [id]
     )
     .then(result => {

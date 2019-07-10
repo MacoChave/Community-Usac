@@ -22,6 +22,10 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers() {
     this.userService.getUsers().subscribe(
       res => this.result = res,
       err => console.error(err)
@@ -31,7 +35,10 @@ export class UserComponent implements OnInit {
   deleteUser(id: string) {
     console.log('DELETE USER ' + id);
     this.userService.deleteUser(id).subscribe(
-      res => alert('Usuario eliminado'),
+      res => {
+        alert('Usuario eliminado');
+        this.loadUsers();
+      },
       err => alert('No se ha podido eliminar el usuario')
     );
   }
@@ -45,6 +52,9 @@ export class UserComponent implements OnInit {
         minWidth: '80vw'
       }
     );
+    dialogRef.afterClosed().subscribe(obs => {
+      this.loadUsers();
+    });
   }
 
   addUser() {
@@ -56,9 +66,12 @@ export class UserComponent implements OnInit {
         minWidth: '80vw'
       }
     );
+    dialogRef.afterClosed().subscribe(obs => {
+      this.loadUsers();
+    });
   }
 
-  cargoUser(id: string) {
+  cargoUser(id: number) {
     const dialogRef = this.dialog.open(
       UserCargoComponent, 
       {

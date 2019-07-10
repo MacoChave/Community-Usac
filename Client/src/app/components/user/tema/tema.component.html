@@ -1,4 +1,31 @@
-<p>tema works!</p>
+<div class="grid_container" *ngIf='result != null && result.length > 0; else emptyContainer'>
+    <div class="item" *ngFor='let res of result'>
+        <div class="header">
+            <h3> {{res.TITULO}} </h3>
+            <p> {{res.USUARIO}} </p>
+        </div>
+        <div class="container">
+            <p> {{res.DESCRIPCION}} </p>
+        </div>
+        <div class="footer">
+            <p> {{res.FECHA_CREACION}} </p>
+            <button mat-button color="accent" (click)='editTema(res.COD_TEMA)'>Edit</button>
+            <button mat-button color="warn" (click)='deleteTema(res.COD_TEMA)'>Delete</button>
+        </div>
+    </div>
+</div>
+<ng-template class="grid_container" #emptyContainer>
+    <div class="header">
+        <h3>Temas</h3>
+    </div>
+    <div class="container">
+        No hay elementos que mostrar
+    </div>
+    <div class="footer">
+        <p>Agrega el primer tema</p>
+    </div>
+</ng-template>
+
 <div class="fab_button" (click)='addPost()'>
     <i class="material-icons icon">add</i>
 </div>

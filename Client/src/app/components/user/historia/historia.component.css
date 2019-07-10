@@ -1,0 +1,43 @@
+.profile_image {
+    width: 120pt;
+    height: 120pt;
+}
+
+.grid_container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 16pt;
+}
+
+.item {
+    min-height: 15pt;
+}
+
+.item .header {
+    padding: 10pt;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10pt 10pt 0 0;
+}
+
+.item .container {
+    padding: 20pt;
+    line-height: 2;
+}
+
+.item .footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (min-width: 426px) {
+    .grid_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .grid_container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

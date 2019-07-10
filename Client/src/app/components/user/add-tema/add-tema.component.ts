@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostBinding } from '@angular/core';
 import { Tema } from 'src/app/models/Tema';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SrcTema } from 'src/app/models/SrcTema';
@@ -20,6 +20,8 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./add-tema.component.css']
 })
 export class AddTemaComponent implements OnInit {
+
+  @HostBinding('class') classes = 'historia_container';
 
   isLinear = false;
 
@@ -45,7 +47,7 @@ export class AddTemaComponent implements OnInit {
     CIENCIA: ''
   }
 
-  codigo: any;
+  cod_tema: any;
 
   facultades: Facultad = {};
   carreras: Carrera = {};
@@ -65,6 +67,7 @@ export class AddTemaComponent implements OnInit {
   ngOnInit() {
     this.user = this.data;
     this.tema.USUARIO = this.user.NOMBRE;
+    this.tema.COD_USUARIO = this.user.COD_USUARIO;
     this.facultadService.getFacultades().subscribe(
       res => this.facultades = res,
       err => console.error(err)
@@ -88,10 +91,10 @@ export class AddTemaComponent implements OnInit {
   saveTema() {
     this.temaService.saveTema(this.tema).subscribe(
       res => {
-        this.codigo = res;
-        this.tema.COD_TEMA = this.codigo;
-        this.source.COD_TEMA = this.codigo;
-        this.label.COD_TEMA = this.codigo;
+        this.cod_tema = res;
+        this.tema.COD_TEMA = this.cod_tema;
+        this.source.COD_TEMA = this.cod_tema;
+        this.label.COD_TEMA = this.cod_tema;
       },
       err => console.error(err)
     );

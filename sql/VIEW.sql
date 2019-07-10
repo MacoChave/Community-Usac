@@ -45,7 +45,7 @@ WHERE
 
 CREATE VIEW VIEW_TEMA AS 
 SELECT 
-    t.cod_tema, u.nombre AS usuario, t.titulo, t.descripcion, t.fecha_creacion, t.fecha_cierre, t.motivo_cierre 
+    t.cod_tema, u.cod_usuario, u.nombre AS usuario, t.titulo, t.descripcion, t.fecha_creacion, t.fecha_cierre, t.motivo_cierre 
 FROM 
     Tema T, Usuario U
 WHERE 

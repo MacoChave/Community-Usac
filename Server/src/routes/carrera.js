@@ -29,7 +29,8 @@ router.get('/facultad/:facultad', (req, res) => {
     const COD_FACULTAD = req.params.facultad;
     ejecutor.query(
         `SELECT 
-            f.cod_facultad, f.nombre AS facultad, c.nombre
+            c.cod_carrera, c.nombre, 
+            f.nombre AS facultad, c.nombre
         FROM 
             Carrera C, Facultad F  
         WHERE 
