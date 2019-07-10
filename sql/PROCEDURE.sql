@@ -1,104 +1,66 @@
 CREATE OR REPLACE PROCEDURE PROC_C_USUARIO (
-    i_CARNET IN NUMBER, 
-    i_NO_REGISTRO IN NUMBER, 
-    i_NOMBRE in VARCHAR2, 
-    i_URL_FOTO in VARCHAR2, 
-    i_CORREO in VARCHAR2, 
-    i_TELEFONO IN NUMBER, 
-    i_CLAVE in VARCHAR2, 
-    i_ROL in VARCHAR2
+    i_codigo OUT NUMBER,
+    i_carnet IN NUMBER, 
+    i_registro IN NUMBER, 
+    i_nombre in VARCHAR2, 
+    i_url_foto in VARCHAR2, 
+    i_correo in VARCHAR2, 
+    i_telefono IN NUMBER, 
+    i_clave in VARCHAR2, 
+    i_rol in NUMBER
 )
 IS 
-    s_ROL NUMBER;
 BEGIN 
-    s_ROL := 0;
+    INSERT INTO Usuario 
+        (carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol) 
+    VALUES 
+        (i_carnet, i_registro, i_nombre, i_url_foto, i_correo, i_telefono, i_clave, i_rol);
 
-    SELECT COD_ROL INTO s_ROL
-    FROM ROL 
-    WHERE ROL LIKE i_ROL;
-
-    IF s_ROL > 0 THEN 
-        INSERT INTO Usuario 
-            (carnet, no_registro, nombre, url_foto, correo, telefono, clave, cod_rol) 
-        VALUES 
-            (i_CARNET, i_NO_REGISTRO, i_NOMBRE, i_URL_FOTO, i_CORREO, i_TELEFONO, i_CLAVE, s_ROL)
-    END IF;
+    i_codigo := SEQ_USUARIO.CURRVAL;
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_C_CARRERA (
-    i_facultad IN VARCHAR2,
+    i_facultad IN NUMBER,
     i_nombre IN VARCHAR2,
     i_descripcion IN VARCHAR2
 )
 IS 
-    s_facultad NUMBER;
 BEGIN
-    s_facultad := 0;
-
-    SELECT f.cod_facultad INTO s_facultad
-    FROM Facultad F
-    WHERE f.nombre LIKE i_facultad;
-    
-    IF s_facultad > 0 THEN
-        INSERT INTO Carrera 
-            (nombre, descripcion, cod_facultad)
-        VALUES 
-            (i_nombre, i_descripcion, s_facultad);
-    END IF;
+    INSERT INTO Carrera 
+        (nombre, descripcion, cod_facultad)
+    VALUES 
+        (i_nombre, i_descripcion, i_facultad);
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_U_CARRERA (
     i_carrera IN NUMBER,
-    i_facultad IN VARCHAR2,
+    i_facultad IN NUMBER,
     i_nombre IN VARCHAR2,
     i_descripcion IN VARCHAR2
 )
 IS 
-    s_facultad NUMBER;
 BEGIN
-    s_facultad := 0;
-
-    SELECT f.cod_facultad INTO s_facultad
-    FROM Facultad F
-    WHERE f.nombre LIKE i_facultad;
-    
-    IF s_facultad > 0 THEN
-        UPDATE Carrera 
-        SET 
-            nombre = i_nombre, 
-            descripcion = i_descripcion 
-        WHERE 
-            cod_carrera = i_carrera AND 
-            cod_facultad = i_facultad;
-    END IF;
+    UPDATE Carrera 
+    SET 
+        nombre = i_nombre, 
+        descripcion = i_descripcion 
+    WHERE 
+        cod_carrera = i_carrera AND 
+        cod_facultad = i_facultad;
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_C_CIENCIA (
     i_nombre IN VARCHAR2, 
     i_descripcion IN VARCHAR2, 
-    i_facultad IN VARCHAR2, 
-    i_carrera IN VARCHAR2)
+    i_facultad IN NUMBER, 
+    i_carrera IN NUMBER
+)
 IS 
-    s_carrera NUMBER;
-    s_facultad NUMBER;
 BEGIN
-    s_carrera := 0;
-    s_facultad := 0;
-
-    SELECT c.cod_carrera INTO s_carrera
-    FROM Carrera C
-    WHERE c.nombre LIKE i_carrera;
-
-    SELECT f.cod_facultad INTO s_facultad
-    FROM Facultad F
-    WHERE f.nombre LIKE i_facultad;
-    
-    IF s_carrera > 0 AND s_facultad > 0 THEN
-        INSERT INTO Ciencia 
-            (nombre, descripcion, cod_carrera, cod_facultad)
-        VALUES 
-            (i_nombre, i_descripcion, s_carrera, s_facultad);
-    END IF;
+    INSERT INTO Ciencia 
+        (nombre, descripcion, cod_carrera, cod_facultad)
+    VALUES 
+        (i_nombre, i_descripcion, i_carrera, i_facultad);
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_U_CIENCIA (
@@ -116,130 +78,63 @@ BEGIN
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_C_CHAT (
-    i_emisor IN VARCHAR2,
-    i_receptor IN VARCHAR2,
+    i_emisor IN NUMBER,
+    i_receptor IN NUMBER,
     i_chat IN VARCHAR2
 )
 IS 
-    s_emisor NUMBER;
-    s_receptor NUMBER;
 BEGIN 
-    s_emisor := 0;
-    s_receptor := 0;
-
-    SELECT cod_usuario INTO s_emisor
-    FROM Usuario 
-    WHERE nombre LIKE i_emisor;
-
-    SELECT cod_usuario INTO s_receptor
-    FROM Usuario 
-    WHERE nombre LIKE i_receptor;
-
-    IF s_emisor > 0 AND s_receptor > 0 THEN 
-        INSERT INTO Chat 
-            (cod_emisor, cod_receptor, url_chat)
-        VALUES 
-            (s_emisor, s_receptor, i_chat);
-    END IF;
+    INSERT INTO Chat 
+        (cod_emisor, cod_receptor, url_chat)
+    VALUES 
+        (i_emisor, i_receptor, i_chat);
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_C_DETALLE_CARGO (
-  i_usuario IN VARCHAR2,
-  i_cargo IN VARCHAR2,
-  i_facultad IN VARCHAR2,
-  i_carrera IN VARCHAR2
+    i_usuario IN NUMBER,
+    i_cargo IN NUMBER,
+    i_facultad IN NUMBER,
+    i_carrera IN NUMBER
 )
 IS
-    s_usuario NUMBER;
-    s_cargo NUMBER;
-    s_facultad NUMBER;
-    s_carrera NUMBER;
 BEGIN 
-    SELECT cod_usuario INTO s_usuario
-    FROM Usuario 
-    WHERE nombre LIKE i_usuario;
-
-    SELECT cod_cargo INTO s_cargo
-    FROM Cargo 
-    WHERE cargo LIKE i_cargo;
-
-    SELECT cod_carrera INTO s_carrera
-    FROM Carrera
-    WHERE nombre LIKE i_carrera;
-
-    SELECT cod_facultad INTO s_facultad
-    FROM Facultad
-    WHERE nombre LIKE i_facultad;
-
-    IF s_usuario > 0 AND s_cargo > 0 AND s_carrera > 0 AND s_facultad > 0 THEN 
-        INSERT INTO Detalle_cargo 
-            (cod_usuario, cod_cargo, cod_facultad, cod_carrera) 
-        VALUES 
-            (s_usuario, s_cargo, s_facultad, s_carrera);
-    END IF;
+    INSERT INTO Detalle_cargo 
+        (cod_usuario, cod_cargo, cod_facultad, cod_carrera) 
+    VALUES 
+        (i_usuario, i_cargo, i_facultad, i_carrera);
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_C_ASIGNACION(
-    i_usuario IN VARCHAR2,
-    i_ciencia IN VARCHAR2,
-    i_facultad IN VARCHAR2,
-    i_carrera IN VARCHAR2
+    i_usuario IN NUMBER,
+    i_ciencia IN NUMBER,
+    i_facultad IN NUMBER,
+    i_carrera IN NUMBER
 )
 IS 
-    s_usuario NUMBER;
-    s_ciencia NUMBER;
-    s_facultad NUMBER;
-    s_carrera NUMBER;
 BEGIN 
-    s_usuario := 0;
-    s_ciencia := 0;
-    s_facultad := 0;
-    s_carrera := 0;
-
-    SELECT cod_usuario INTO s_usuario
-    FROM Usuario 
-    WHERE nombre LIKE i_usuario;
-
-    SELECT cod_ciencia INTO s_ciencia 
-    FROM Ciencia 
-    WHERE nombre LIKE i_ciencia;
-
-    SELECT cod_facultad INTO s_facultad 
-    FROM Facultad 
-    WHERE nombre LIKE i_facultad;
-
-    SELECT cod_carrera INTO s_carrera
-    FROM Carrera  
-    WHERE nombre LIKE i_carrera;
-
-    IF s_usuario > 0 AND s_ciencia > 0 AND s_facultad > 0 AND s_carrera > 0 THEN 
-        INSERT INTO Asignacion 
-            (cod_usuario, cod_ciencia, cod_facultad, cod_carrera)
-        VALUES 
-            (s_usuario, s_ciencia, s_facultad, s_carrera);
-    END IF;
+    INSERT INTO Asignacion 
+        (cod_usuario, cod_ciencia, cod_facultad, cod_carrera)
+    VALUES 
+        (i_usuario, i_ciencia, i_facultad, i_carrera);
 END;
 
 CREATE OR REPLACE PROCEDURE PROC_C_TEMA(
-    i_usuario IN VARCHAR2,
+    i_codigo OUT NUMBER,
+    i_usuario IN NUMBER,
     i_titulo IN VARCHAR2,
     i_descripcion IN VARCHAR2
 )
 IS 
-    s_usuario NUMBER;
 BEGIN 
-    s_usuario := 0;
-
-    SELECT cod_usuario INTO s_usuario
-    FROM Usuario
-    WHERE nombre LIKE i_usuario;
-
-    IF s_usuario > 0 THEN 
-        INSERT INTO Tema 
-            (cod_usuario, titulo, descripcion)
-        VALUES 
-            (s_usuario, i_titulo, i_descripcion);
-    END IF;
+    INSERT INTO Tema 
+        (cod_usuario, titulo, descripcion, fecha_cierre)
+    VALUES 
+        (i_usuario, i_titulo, i_descripcion, null);
+    
+    i_codigo := SEQ_TEMA.currval;
+    
+EXCEPTION
+    WHEN OTHERS THEN i_codigo := 0;
 END PROC_C_TEMA;
 
 CREATE OR REPLACE PROCEDURE PROC_U_TEMA(
@@ -276,23 +171,14 @@ END PROC_D_TEMA;
 CREATE OR REPLACE PROCEDURE PROC_C_SRCTEMA(
     i_image IN VARCHAR2,
     i_tag IN VARCHAR2,
-    i_tema IN VARCHAR2
+    i_tema IN NUMBER
 )
 IS 
-    s_tema NUMBER;
 BEGIN 
-    s_tema := 0;
-
-    SELECT cod_tema INTO s_tema
-    FROM Tema 
-    Where titulo LIKE i_tema;
-
-    IF s_tema > 0 THEN 
-        INSERT INTO Src_tema 
-            (url_imagen, tag, cod_tema) 
-        VALUES 
-            (i_image, i_tag, s_tema);
-    END IF;
+    INSERT INTO Src_tema 
+        (url_imagen, tag, cod_tema) 
+    VALUES 
+        (i_image, i_tag, i_tema);
 END PROC_C_SRCTEMA;
 
 CREATE OR REPLACE PROCEDURE PROC_U_SRCTEMA(
@@ -310,75 +196,35 @@ BEGIN
 END PROC_U_SRCTEMA;
 
 CREATE OR REPLACE PROCEDURE PROC_C_ETIQUETA(
-    i_tema IN VARCHAR2,
-    i_ciencia IN VARCHAR2,
-    i_facultad IN VARCHAR2,
-    i_carrera IN VARCHAR2
+    i_tema IN NUMBER,
+    i_ciencia IN NUMBER,
+    i_facultad IN NUMBER,
+    i_carrera IN NUMBER
 )
 IS 
-    s_tema NUMBER;
-    s_ciencia NUMBER;
-    s_facultad NUMBER;
-    s_carrera NUMBER;
 BEGIN 
-    s_tema := 0;
-    s_ciencia := 0;
-    s_facultad := 0;
-    s_carrera := 0;
-
-    SELECT cod_tema INTO s_tema
-    FROM Tema 
-    Where titulo LIKE i_tema;
-
-    SELECT cod_ciencia INTO s_ciencia
-    FROM Ciencia 
-    WHERE nombre LIKE i_ciencia;
-
-    SELECT cod_facultad INTO s_facultad 
-    FROM Facultad 
-    WHERE nombre LIKE i_facultad;
-
-    SELECT cod_carrera INTO s_carrera
-    FROM Carrera  
-    WHERE nombre LIKE i_carrera;
-
-    IF s_tema > 0 AND s_ciencia > 0 AND s_facultad > 0 AND s_carrera > 0 THEN 
-        INSERT INTO Etiqueta 
-            (cod_tema, cod_ciencia, cod_facultad, cod_carrera)
-        VALUES 
-            (s_tema, s_ciencia, i_facultad, i_carrera);
-    END IF;
+    INSERT INTO Etiqueta 
+        (cod_tema, cod_ciencia, cod_facultad, cod_carrera)
+    VALUES 
+        (i_tema, i_ciencia, i_facultad, i_carrera);
 END PROC_C_ETIQUETA;
 
 CREATE OR REPLACE PROCEDURE PROC_C_COMENTARIO(
+    i_codigo OUT NUMBER,
     i_contendido IN VARCHAR2,
     i_imagen IN VARCHAR2,
     i_tag IN VARCHAR2,
-    i_tema IN VARCHAR2,
-    i_usuario IN VARCHAR2
+    i_tema IN NUMBER,
+    i_usuario IN NUMBER
 )
 IS 
-    s_tema NUMBER;
-    s_usuario NUMBER;
 BEGIN 
-    s_tema := 0;
-    s_usuario := 0;
-
-    SELECT cod_tema INTO s_tema
-    FROM Tema 
-    Where titulo LIKE i_tema;
-
-    SELECT cod_usuario INTO s_usuario
-    FROM Usuario
-    WHERE nombre LIKE i_usuario;
-
-    IF s_tema > 0 AND s_usuario > 0 THEN
-        INSERT INTO Comentario 
-            (contenido, url_imagen, tag, cod_tema, cod_usuario)
-        VALUES 
-            (i_contendido, i_imagen, i_tag, s_tema, s_usuario);
-    END IF;
-  
+    INSERT INTO Comentario 
+        (contenido, url_imagen, tag, cod_tema, cod_usuario)
+    VALUES 
+        (i_contendido, i_imagen, i_tag, i_tema, i_usuario);  
+    
+    i_codigo := SEQ_COMENTARIO.currval;
 END PROC_C_COMENTARIO;
 
 CREATE OR REPLACE PROCEDURE PROC_U_COMENTARIO(
@@ -395,53 +241,28 @@ BEGIN
         url_imagen = i_imagen, 
         tag = i_tag 
     WHERE 
-        cod_comentario = i_cod_comentario;
-  
+        cod_comentario = i_cod_comentario;  
 END PROC_U_COMENTARIO;
 
 CREATE OR REPLACE PROCEDURE PROC_C_EXAMEN(
+    i_codigo OUT NUMBER,
     i_titulo IN VARCHAR2,
     i_tema IN VARCHAR2,
     i_duracion IN NUMBER,
     i_log IN VARCHAR2,
-    i_usuario IN VARCHAR2,
-    i_ciencia IN VARCHAR2,
-    i_facultad IN VARCHAR2,
-    i_carrera IN VARCHAR2
+    i_usuario IN NUMBER,
+    i_ciencia IN NUMBER,
+    i_facultad IN NUMBER,
+    i_carrera IN NUMBER
 )
 IS 
-    s_usuario NUMBER;
-    s_ciencia NUMBER;
-    s_facultad NUMBER;
-    s_carrera NUMBER;
 BEGIN 
-    s_usuario := 0;
-    s_ciencia := 0;
-    s_facultad := 0;
-    s_carrera := 0;
+    INSERT INTO Examen 
+        (cod_usuario, titulo, tema, duracion, log, cod_ciencia, cod_facultad, cod_carrera)
+    VALUES 
+        (i_usuario, i_titulo, i_tema, i_duracion, i_log, i_ciencia, i_facultad, i_carrera);
 
-    SELECT cod_usuario INTO s_usuario
-    FROM Usuario 
-    WHERE nombre LIKE i_usuario;
-
-    SELECT cod_ciencia INTO s_ciencia
-    FROM Ciencia 
-    WHERE nombre LIKE i_ciencia;
-
-    SELECT cod_facultad INTO s_facultad 
-    FROM Facultad 
-    WHERE nombre LIKE i_facultad;
-
-    SELECT cod_carrera INTO s_carrera
-    FROM Carrera  
-    WHERE nombre LIKE i_carrera;
-
-    IF s_usuario > 0 AND s_ciencia > 0 AND s_facultad > 0 AND s_carrera > 0 THEN 
-        INSERT INTO Examen 
-            (cod_usuario, titulo, tema, duracion, log, cod_ciencia, cod_facultad, cod_carrera)
-        VALUES 
-            (s_usuario, i_titulo, i_tema, i_duracion, i_log, s_ciencia, s_facultad, s_carrera);
-    END IF;
+    i_codigo := SEQ_EXAMEN.currval;
 END PROC_C_EXAMEN;
 
 CREATE OR REPLACE PROCEDURE PROC_U_EXAMEN(
@@ -489,24 +310,18 @@ BEGIN
 END PROC_D_EXAMEN;
 
 CREATE OR REPLACE PROCEDURE PROC_C_PREGUNTA(
+    i_codigo OUT NUMBER,
     i_descripcion IN VARCHAR2,
-    i_tipo IN VARCHAR2
+    i_tipo IN NUMBER
 )
 IS 
-    s_tipo NUMBER;
 BEGIN 
-    s_tipo := 0;
-
-    SELECT cod_tipo_pregunta INTO s_tipo
-    FROM Tipo_pregunta 
-    WHERE nombre LIKE i_tipo;
-
-    IF s_tipo > 0 THEN 
-        INSERT INTO Pregunta 
-            (descripcion, cod_tipo_pregunta)
-        VALUES 
-            (i_descripcion, s_tipo);
-    END IF;
+    INSERT INTO Pregunta 
+        (descripcion, cod_tipo_pregunta)
+    VALUES 
+        (i_descripcion, i_tipo);
+    
+    i_codigo := SEQ_PREGUNTA.currval;
 END PROC_C_PREGUNTA;
 
 CREATE OR REPLACE PROCEDURE PROC_U_PREGUNTA(
@@ -521,57 +336,26 @@ BEGIN
 END PROC_U_PREGUNTA;
 
 CREATE OR REPLACE PROCEDURE PROC_C_DETALLEPREG(
-    i_pregunta IN VARCHAR2,
-    i_examen IN VARCHAR2
+    i_pregunta IN NUMBER,
+    i_examen IN NUMBER
 )
 IS 
-    s_pregunta NUMBER;
-    s_examen NUMBER;
 BEGIN 
-    s_pregunta := 0;
-    s_examen := 0;
-
-    SELECT cod_pregunta INTO s_pregunta
-    FROM Pregunta 
-    WHERE descripcion LIKE i_pregunta;
-
-    SELECT cod_examen INTO s_examen
-    FROM Examen
-    WHERE titulo LIKE i_examen;
-
-    IF s_pregunta > 0 AND s_examen > 0 THEN 
-        INSERT INTO Detalle_pregunta 
-            (cod_pregunta, cod_examen)
-        VALUES 
-            (s_pregunta, s_examen);
-    END IF;
+    INSERT INTO Detalle_pregunta 
+        (cod_pregunta, cod_examen)
+    VALUES 
+        (i_pregunta, i_examen);
 END PROC_C_DETALLEPREG;
 
 CREATE OR REPLACE PROCEDURE PROC_C_DETALLERES(
-    i_pregunta IN VARCHAR2,
-    i_respuesta IN VARCHAR2,
+    i_pregunta IN NUMBER,
+    i_respuesta IN NUMBER,
     correcta IN NUMBER
 )
 IS 
-    s_pregunta NUMBER;
-    s_respuesta NUMBER;
 BEGIN 
-    s_pregunta := 0;
-    s_respuesta := 0;
-    
-    SELECT cod_pregunta INTO s_pregunta
-    FROM Pregunta 
-    WHERE descripcion LIKE i_pregunta;
-
-    SELECT cod_respuesta INTO s_respuesta
-    FROM Respuesta 
-    WHERE respuesta LIKE i_respuesta;
-
-    IF (s_pregunta > 0 AND s_respuesta > 0) THEN 
-        INSERT INTO Detalle_respuesta 
-            (cod_pregunta, cod_respuesta, correcta)
-        VALUES 
-            (s_pregunta, s_respuesta, correcta);
-    END IF;
+    INSERT INTO Detalle_respuesta 
+        (cod_pregunta, cod_respuesta, correcta)
+    VALUES 
+        (i_pregunta, i_respuesta, correcta);
 END;
-

@@ -7,4 +7,6 @@ export interface Comentario {
     TITULO              ?: string;
     NOMBRE              ?: string;
     URL_FOTO            ?: string;
+    COD_TEME            ?: number;
+    COD_USUARIO         ?: number;
 }

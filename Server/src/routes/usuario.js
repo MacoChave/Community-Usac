@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const oracledb = require('oracledb');
 const ejecutor = require('../db/ejecutor');
 
 const router = new Router();
@@ -44,18 +45,28 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, ROL} = req.body;
+    const {CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, COD_ROL} = req.body;
     console.log(req.body);
     ejecutor.sp(
         `BEGIN
             PROC_C_USUARIO(
-                :carnet, :no_registro, :nombre, :url_foto, :correo, :telefono, :clave, :rol
+                :codigo, :carnet, :no_registro, :nombre, :url_foto, :correo, :telefono, :clave, :rol
             );
         END`,
-        [CARNET, NO_REGISTRO, NOMBRE, URL_FOTO, CORREO, TELEFONO, CLAVE, ROL]
+        {
+            codigo: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }, 
+            carnet: CARNET, 
+            no_registro: NO_REGISTRO, 
+            nombre: NOMBRE, 
+            url_foto: URL_FOTO, 
+            correo: CORREO, 
+            telefono: TELEFONO, 
+            clave: CLAVE, 
+            rol: COD_ROL
+        }
     )
     .then(result => {
-        res.json({message: result.rowsAffected});
+        res.json(result.outBinds.codigo);
     });
 });
 

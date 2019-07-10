@@ -11,8 +11,8 @@
         
         <mat-form-field class="flex_item facultad">
             <mat-label>Pick a facultad</mat-label>
-            <mat-select [(value)]='ciencia.FACULTAD' (selectionChange)='changeFacultad()'>
-                <mat-option *ngFor='let facultad of facultades' [value]='facultad.NOMBRE'>
+            <mat-select [(value)]='ciencia.COD_FACULTAD' (selectionChange)='changeFacultad()'>
+                <mat-option *ngFor='let facultad of facultades' [value]='facultad.COD_FACULTAD'>
                     {{facultad.NOMBRE}}
                 </mat-option>
             </mat-select>
@@ -20,8 +20,8 @@
         
         <mat-form-field class="flex_item facultad">
             <mat-label>Pick a Carrea</mat-label>
-            <mat-select [(value)]='ciencia.CARRERA'>
-                <mat-option *ngFor='let carrera of carreras' [value]='carrera.NOMBRE'>
+            <mat-select [(value)]='ciencia.COD_CARRERA'>
+                <mat-option *ngFor='let carrera of carreras' [value]='carrera.COD_CARRERA'>
                     {{carrera.NOMBRE}}
                 </mat-option>
             </mat-select>

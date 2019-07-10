@@ -3,4 +3,5 @@ export interface SrcTema {
     URL_IMAGEN          ?: string;
     TAG                 ?: string;
     TITULO              ?: string;
+    COD_TEMA            ?: number;
 }

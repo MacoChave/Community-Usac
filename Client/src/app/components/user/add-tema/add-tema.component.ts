@@ -35,7 +35,8 @@ export class AddTemaComponent implements OnInit {
     TITULO: '',
     COD_SRC_TEMA: 0,
     TAG: '',
-    URL_IMAGEN: ''
+    URL_IMAGEN: '',
+    COD_TEMA: 0
   }
   label: Etiqueta = {
     TEMA: '',
@@ -43,6 +44,8 @@ export class AddTemaComponent implements OnInit {
     CARRERA: '',
     CIENCIA: ''
   }
+
+  codigo: any;
 
   facultades: Facultad = {};
   carreras: Carrera = {};
@@ -69,14 +72,14 @@ export class AddTemaComponent implements OnInit {
   }
 
   changeFacultad() {
-    this.carreraService.getCarreraByFacultad(this.label.FACULTAD).subscribe(
+    this.carreraService.getCarreraByFacultad(this.label.COD_FACULTAD).subscribe(
       res => this.carreras = res,
       err => console.error(err)
     )
   }
 
   changeCarrera() {
-    this.cienciaService.getCienciaByCarrera(this.label.CARRERA).subscribe(
+    this.cienciaService.getCienciaByCarrera(this.label.COD_CARRERA).subscribe(
       res => this.ciencias = res,
       err => console.error(err)
     );
@@ -84,7 +87,12 @@ export class AddTemaComponent implements OnInit {
 
   saveTema() {
     this.temaService.saveTema(this.tema).subscribe(
-      res => console.log(res),
+      res => {
+        this.codigo = res;
+        this.tema.COD_TEMA = this.codigo;
+        this.source.COD_TEMA = this.codigo;
+        this.label.COD_TEMA = this.codigo;
+      },
       err => console.error(err)
     );
   }
@@ -92,21 +100,21 @@ export class AddTemaComponent implements OnInit {
   addSource() {
     this.sourceService.saveSources(this.source).subscribe(
       res => {
-        console.log(res);
         this.clearSource();
       },
       err => console.error(err)
     );
+    console.log(this.source);
   }
 
   addLabel() {
     this.labelService.saveEtiquetas(this.label).subscribe(
       res => {
-        console.log(res);
         this.clearLabel();
       },
       err => console.error(err)
     );
+    console.log(this.label);
   }
 
   end () {

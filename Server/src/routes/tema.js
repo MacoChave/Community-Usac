@@ -1,4 +1,5 @@
 const { Router } = require('express');
+var oracledb = require('oracledb');
 const ejecutor = require('../db/ejecutor');
 
 const router = new Router();
@@ -26,22 +27,28 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { USUARIO, TITULO, DESCRIPCION } = req.body;
-    console.log(req.body);
+    const { COD_USUARIO, TITULO, DESCRIPCION } = req.body;
     ejecutor.sp(
         `BEGIN
-            PROC_C_TEMA(:usuario, :titulo, :descripcion);
+            PROC_C_TEMA(
+                :codigo, :usuario, :titulo, :descripcion
+            );
         END`,
-        [USUARIO, TITULO, DESCRIPCION]
+        {
+            codigo:  { type: oracledb.NUMBER, dir: oracledb.BIND_OUT },
+            usuario: COD_USUARIO,
+            titulo: TITULO,
+            descripcion: DESCRIPCION
+        }
     )
     .then(result => {
-        return res.json(result.rowsAffected);
+        return res.json(result.outBinds.codigo);
     })
 })
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { USUARIO, TITULO, DESCRIPCION } = req.body;
+    const { TITULO, DESCRIPCION } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_U_TEMA(:id :titulo, :descripcion);

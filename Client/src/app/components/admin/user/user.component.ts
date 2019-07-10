@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material';
 import { UserAddComponent } from '../user-add/user-add.component';
 import { UserCargoComponent } from '../user-cargo/user-cargo.component';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'user',
@@ -35,7 +36,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  editUser(id: string) {
+  editUser(id: number) {
     const dialogRef = this.dialog.open(
       UserAddComponent, 
       {
@@ -50,7 +51,7 @@ export class UserComponent implements OnInit {
     const dialogRef = this.dialog.open(
       UserAddComponent, 
       {
-        data: {},
+        data: null,
         maxHeight: '90vh',
         minWidth: '80vw'
       }

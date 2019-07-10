@@ -1,4 +1,5 @@
 const { Router } = require('express');
+var oracledb = require('oracledb');
 const ejecutor = require('../db/ejecutor');
 
 const router = new Router();
@@ -26,17 +27,20 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { TITULO, TEMA, DURACION, LOG, USUARIO, CIENCIA, FACULTAD, CARRERA } = req.body;
+    const { TITULO, TEMA, DURACION, LOG, COD_USUARIO, COD_CIENCIA, COD_FACULTAD, COD_CARRERA } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_C_EXAMEN(
                 :titulo, :tema, :duracion, :log, :usuario, :ciencia, :facultad, :carrera
             ); 
         END`,
-        [TITULO, TEMA, DURACION, LOG, USUARIO, CIENCIA, FACULTAD, CARRERA ]
+        {
+            codigo: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT },
+            TITULO, TEMA, DURACION, LOG, COD_USUARIO, COD_CIENCIA, COD_FACULTAD, COD_CARRERA 
+        }
     )
     .then(result => {
-        return res.json(result.rowsAffected);
+        return res.json(result.outBinds.codigo);
     })
 })
 

@@ -28,14 +28,14 @@ router.get('/:usuario', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { USUARIO, CIENCIA, FACULTAD, CARRERA } = req.body;
+    const { COD_USUARIO, COD_CIENCIA, COD_FACULTAD, COD_CARRERA } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_C_ASIGNACION(
                 :usuario, :ciencia, :facultad, :carrera
             );
         END`,
-        [USUARIO, CIENCIA, FACULTAD, CARRERA]
+        [COD_USUARIO, COD_CIENCIA, COD_FACULTAD, COD_CARRERA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

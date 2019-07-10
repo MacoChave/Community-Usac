@@ -3,25 +3,25 @@
     <form (ngSubmit)='save()'>
         <div class="grid_container">
             <mat-form-field class="item_grid rol">
-                <mat-label>Pick a rol</mat-label>
-                <mat-select [(value)]='user.ROL'>
-                    <mat-option *ngFor="let rol of roles" [value]="rol.ROL">
+                <mat-label>Seleccionar el rol</mat-label>
+                <mat-select [(value)]='user.COD_ROL'>
+                    <mat-option *ngFor="let rol of roles" [value]="rol.COD_ROL">
                         {{rol.ROL}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             
-            <div class="item_grid flex_container cargo" *ngIf="user.ROL != 'admin'; else admin">
+            <div class="item_grid flex_container cargo" *ngIf="user.COD_ROL != 1; else admin">
                 <mat-form-field class="item_flex">
                     <mat-label>Pick a position</mat-label>
-                    <mat-select [(value)]='detalle.CARGO'>
-                        <mat-option *ngFor="let cargo of cargos" [value]="cargo.CARGO">
+                    <mat-select [(value)]='detalle.COD_CARGO'>
+                        <mat-option *ngFor="let cargo of cargos" [value]="cargo.COD_CARGO">
                             {{cargo.CARGO}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
 
-                <div class="item_flex detalle" *ngIf="detalle.CARGO == 'Estudiante'; else nonstudent">
+                <div class="item_flex detalle" *ngIf="detalle.COD_CARGO == 2; else nonstudent">
                     <mat-form-field>
                         <input matInput placeholder="Type student identifier" [(ngModel)]='user.CARNET' name="carnet">
                     </mat-form-field>
@@ -34,8 +34,8 @@
 
                 <mat-form-field class="item_flex">
                     <mat-label>Pick a facultad</mat-label>
-                    <mat-select [(value)]='detalle.FACULTAD' (selectionChange)='changeFacultad()'>
-                        <mat-option *ngFor="let facultad of facultades" [value]="facultad.NOMBRE">
+                    <mat-select [(value)]='detalle.COD_FACULTAD' (selectionChange)='changeFacultad()'>
+                        <mat-option *ngFor="let facultad of facultades" [value]="facultad.COD_FACULTAD">
                             {{facultad.NOMBRE}}
                         </mat-option>
                     </mat-select>
@@ -43,8 +43,8 @@
 
                 <mat-form-field class="item_flex">
                     <mat-label>Pick a carreer</mat-label>
-                    <mat-select [(value)]='detalle.CARRERA'>
-                        <mat-option *ngFor="let carrera of carreras" [value]="carrera.NOMBRE">
+                    <mat-select [(value)]='detalle.COD_CARRERA'>
+                        <mat-option *ngFor="let carrera of carreras" [value]="carrera.COD_FACULTAD">
                             {{carrera.NOMBRE}}
                         </mat-option>
                     </mat-select>
@@ -70,7 +70,7 @@
             </mat-form-field>
 
             <div class="image">
-                <input type="file" name="url_photo" id="url_photo" [(ngModel)]='user.URL_FOTO'>
+                <input type="file" id="file" [(value)]='user.URL_FOTO'>
                 <img class="profile_image" [src]="user.URL_PHOTO == null ? '../../../../assets/profile_image.jpg' : res.URL_FOTO" alt="profile_photo">
             </div>
 

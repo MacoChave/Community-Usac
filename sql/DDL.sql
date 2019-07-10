@@ -76,6 +76,16 @@ BEGIN
     FROM dual;
 END;
 
+CREATE OR REPLACE TRIGGER TRG_FACULTAD_CARRERA
+    AFTER INSERT ON FACULTAD
+    FOR EACH ROW
+BEGIN 
+    INSERT INTO CARRERA 
+        (nombre, descripcion, cod_facultad)
+    VALUES 
+        ('Todos', 'Todas las carreras', SEQ_FACULTAD.CURRVAL);
+END;
+
 CREATE TABLE Carrera (
     cod_carrera    NUMBER,
     cod_facultad   NUMBER NOT NULL,
@@ -94,6 +104,16 @@ BEGIN
     SELECT SEQ_CARRERA.NEXTVAL
     INTO :new.cod_carrera
     FROM dual;
+END;
+
+CREATE OR REPLACE TRIGGER TRG_CARRERA_CIENCIA
+    AFTER INSERT ON CARRERA
+    FOR EACH ROW
+BEGIN 
+    INSERT INTO CIENCIA 
+        (nombre, descripcion, cod_facultad, cod_carrera)
+    VALUES 
+        ('Todas', 'Todas las ciencias', :new.cod_facultad, SEQ_CARRERA.CURRVAL);
 END;
 
 /* ********************************************************

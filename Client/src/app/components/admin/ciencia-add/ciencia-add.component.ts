@@ -20,6 +20,8 @@ export class CienciaAddComponent implements OnInit {
     DESCRIPCION: '',
     FACULTAD: '',
     CARRERA: '',
+    COD_CARRERA: 0,
+    COD_FACULTAD: 0
   }
 
   facultades: any = [];
@@ -50,7 +52,7 @@ export class CienciaAddComponent implements OnInit {
   }
 
   changeFacultad () {
-    this.carreraService.getCarreraByFacultad(this.ciencia.FACULTAD).subscribe(
+    this.carreraService.getCarreraByFacultad(this.ciencia.COD_FACULTAD).subscribe(
       res => this.carreras = res,
       err => console.error(err)
     )

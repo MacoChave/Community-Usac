@@ -19,7 +19,8 @@ export class CarreraAddComponent implements OnInit {
     COD_CARRERA: 0,
     NOMBRE: '',
     DESCRIPCION: '',
-    FACULTAD: ''
+    FACULTAD: '',
+    COD_FACULTAD: 0
   }
 
   constructor(

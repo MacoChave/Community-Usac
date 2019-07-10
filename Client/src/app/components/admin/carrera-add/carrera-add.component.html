@@ -3,8 +3,8 @@
     <div class="flex_container">
         <mat-form-field class="item_flex">
             <mat-label>Pick a facultad</mat-label>
-            <mat-select [(value)]='carrera.FACULTAD'>
-                <mat-option *ngFor="let facultad of facultades" [value]="facultad.NOMBRE">
+            <mat-select [(value)]='carrera.COD_FACULTAD'>
+                <mat-option *ngFor="let facultad of facultades" [value]="facultad.COD_FACULTAD">
                     {{facultad.NOMBRE}}
                 </mat-option>
             </mat-select>

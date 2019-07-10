@@ -17,8 +17,11 @@ router.get('/', (req, res) => {
 router.get('/:nombre', (req, res) => {
     const nombre = req.params.nombre;
     ejecutor.query(
-        `SELECT * FROM VIEW_DETALLE_CARGO
-        WHERE nombre LIKE :nombre`,
+        `SELECT * 
+        FROM 
+            VIEW_DETALLE_CARGO
+        WHERE 
+            nombre LIKE :nombre`,
         [nombre]
     )
     .then(result => {
@@ -27,7 +30,7 @@ router.get('/:nombre', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { NOMBRE, CARGO, FACULTAD, CARRERA } = req.body;
+    const { COD_USUARIO, COD_CARGO, COD_FACULTAD, COD_CARRERA } = req.body;
     console.log(req.body);
     ejecutor.sp(
         `BEGIN
@@ -35,7 +38,7 @@ router.post('/', (req, res) => {
                 :nombre, :cargo, :facultad, :carrera
             );
         END`,
-        [NOMBRE, CARGO, FACULTAD, CARRERA]
+        [COD_USUARIO, COD_CARGO, COD_FACULTAD, COD_CARRERA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

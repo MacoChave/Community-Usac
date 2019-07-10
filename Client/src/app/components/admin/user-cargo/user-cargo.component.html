@@ -36,18 +36,18 @@
     </div>
 </div>
 <div class="row">
-    <mat-select class="column" [(value)]='detalle.CARGO'>
-        <mat-option *ngFor="let cargo of cargos" [value]="cargo.CARGO">
+    <mat-select class="column" [(value)]='detalle.COD_CARGO'>
+        <mat-option *ngFor="let cargo of cargos" [value]="cargo.COD_CARGO">
             {{cargo.CARGO}}
         </mat-option>
     </mat-select>
-    <mat-select class="column" [(value)]='detalle.FACULTAD' (selectionChange)='searchCarrera()'>
-        <mat-option *ngFor="let facultad of facultades" [value]="facultad.NOMBRE">
+    <mat-select class="column" [(value)]='detalle.COD_FACULTAD' (selectionChange)='searchCarrera()'>
+        <mat-option *ngFor="let facultad of facultades" [value]="facultad.COD_FACULTAD">
             {{facultad.NOMBRE}}
         </mat-option>
     </mat-select>
-    <mat-select class="column" [(value)]='detalle.CARRERA'>
-        <mat-option *ngFor="let carrera of carreras" [value]="carrera.NOMBRE">
+    <mat-select class="column" [(value)]='detalle.COD_CARRERA'>
+        <mat-option *ngFor="let carrera of carreras" [value]="carrera.COD_FACULTAD">
             {{carrera.NOMBRE}}
         </mat-option>
     </mat-select>

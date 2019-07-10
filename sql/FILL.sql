@@ -31,8 +31,10 @@ INSERT ALL
     INTO Carrera (cod_facultad, nombre, descripcion) VALUES (3, 'Economía', 'Economía')
 SELECT 1 FROM DUAL;
 
-INSERT INTO Carrera (cod_facultad, nombre, descripcion) 
-VALUES (4, 'Ciencias Jurídicas y Sociales, Abogacía y Notariado', 'Licenciatura en Ciencias Jurídicas y Sociales, Abogacía y Notariado');
+INSERT INTO Carrera 
+    (cod_facultad, nombre, descripcion) 
+VALUES 
+    (4, 'Ciencias Jurídicas y Sociales', 'Licenciatura en Ciencias Jurídicas y Sociales, Abogacía y Notariado');
 
 INSERT ALL
     INTO Carrera (cod_facultad, nombre, descripcion) VALUES (5, 'Técnico de Fisioterapia', 'Técnico de Fisioterapia')
@@ -68,16 +70,17 @@ INSERT ALL
     INTO Carrera (cod_facultad, nombre, descripcion) VALUES (8, 'Ingeniería Ambiental', 'Ingeniería Ambiental')
 SELECT 1 FROM DUAL;
 
-INSERT INTO Carrera (cod_facultad, nombre, descripcion) 
-VALUES (9, 'Cirujano Dentista', 'Cirujano Dentista');
+INSERT INTO Carrera 
+    (cod_facultad, nombre, descripcion) 
+VALUES 
+    (9, 'Cirujano Dentista', 'Cirujano Dentista');
+    
 INSERT ALL
     INTO Carrera (cod_facultad, nombre, descripcion) VALUES (10, 'Medicina Veterinaria', 'Medicina Veterinaria')
     INTO Carrera (cod_facultad, nombre, descripcion) VALUES (10, 'Zootecnia', 'Zootecnia')
 SELECT 1 FROM DUAL;
 
 /* SHOW CARRERA X FACULTAD */
-SELECT * FROM Facultad;
-SELECT * FROM Carrera;
 SELECT f.nombre AS Facultad, c.nombre AS Carrera
 FROM Facultad F, Carrera C
 WHERE

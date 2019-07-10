@@ -18,7 +18,7 @@ export class CienciaService {
     return this.http.get(`${Uri.CIENCIA}/${id}`);
   }
 
-  getCienciaByCarrera (carrera: string) {
+  getCienciaByCarrera (carrera: number) {
     return this.http.get(`${Uri.CIENCIA}/carrera/${carrera}`);
   }
 

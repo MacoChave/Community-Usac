@@ -25,7 +25,7 @@ app.use('/api/ciencia', require('./routes/ciencia'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/cargo_detalle', require('./routes/detalle_cargo'));
 app.use('/api/usuario_asignacion', require('./routes/asignacion'));
-app.use('/app/tema', require('./routes/tema'));
+app.use('/api/tema', require('./routes/tema'));
 app.use('/api/tema_source', require('./routes/src_tema'));
 app.use('/api/tema_etiqueta', require('./routes/etiqueta'));
 app.use('/api/tema_comentario', require('./routes/comentario'));

@@ -13,4 +13,8 @@ export interface Examen {
     FACULTAD            ?: string;
     NOMBRE              ?: string;
     URL_FOTO            ?: string;
+    COD_CIENCIA         ?: number;
+    COD_CARRERA         ?: number;
+    COD_FACULTAD        ?: number;
+    COD_NOMBRE          ?: number;
 }

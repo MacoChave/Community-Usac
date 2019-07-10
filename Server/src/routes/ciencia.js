@@ -27,10 +27,15 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/carrera/:carrera', (req, res) => {
-    const{ CARRERA } = req.params;
+    const{ CARRERA } = req.params.carrera;
     ejecutor.query(
-        `SELECT * FROM VIEW_CIENCIA 
-        WHERE CARRERA LIKE :carrera`,
+        `SELECT 
+            m.cod_ciencia, m.nombre
+        FROM 
+            Ciencia M, Carrera C
+        WHERE 
+            m.cod_carrera = c.cod_carrera AND 
+            m.cod_carrera = :carrera`,
         [CARRERA]
     )
     .then(result => {
@@ -39,14 +44,14 @@ router.get('/carrera/:carrera', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {NOMBRE, DESCRIPCION, CARRERA, FACULTAD} = req.body; //OBTENER JSON
+    const {NOMBRE, DESCRIPCION, COD_CARRERA, COD_FACULTAD} = req.body; //OBTENER JSON
     ejecutor.sp(
         `BEGIN
             PROC_C_CIENCIA(
                 :nombre, :descripcion, :facultad, :carrera
             );
         END`,
-        [NOMBRE, DESCRIPCION, FACULTAD, CARRERA]
+        [NOMBRE, DESCRIPCION, COD_FACULTAD, COD_CARRERA]
     )
     .then(result => {
         return res.json({message: result.rowsAffected});

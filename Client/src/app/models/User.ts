@@ -8,4 +8,5 @@ export interface User {
     TELEFONO        ?: number;
     CLAVE           ?: string;
     ROL             ?: string;
+    COD_ROL         ?: number;
 }

@@ -23,22 +23,27 @@ export class UserAddComponent implements OnInit {
   @HostBinding('class') classes = 'add_user';
 
   user: User = {
-    COD_USUARIO: 0,
     CARNET: 0,
-    NO_REGISTRO: 0,
-    NOMBRE: '',
-    URL_FOTO: '',
-    CORREO: '',
-    TELEFONO: 0,
     CLAVE: '',
-    ROL: ''
-  };
+    COD_ROL: 0,
+    COD_USUARIO: 0,
+    CORREO: '',
+    NOMBRE: '',
+    NO_REGISTRO: 0,
+    ROL: '',
+    TELEFONO: 0,
+    URL_FOTO: ''
+  }
   
   detalle: DetalleCargo = {
     CARGO: '',
     CARRERA: '',
     FACULTAD: '',
-    NOMBRE: ''
+    NOMBRE: '',
+    COD_CARGO: 0,
+    COD_CARRERA: 0,
+    COD_FACULTAD: 0,
+    COD_USUARIO: 0
   }
 
   roles: Rol = {};
@@ -48,6 +53,10 @@ export class UserAddComponent implements OnInit {
   facultades: Facultad = {};
 
   carreras: Carrera = {};
+
+  fileToUpload: File = null;
+
+  cod_usuario: any;
 
   constructor(
     private dialogRef: MatDialogRef<UserAddComponent>, 
@@ -69,10 +78,13 @@ export class UserAddComponent implements OnInit {
       res => this.cargos = res,
       err => console.error(err)
     );
-    if (!isNaN(this.data)) {
+    this.facultadService.getFacultades().subscribe(
+      res => this.facultades = res,
+      err => console.error(err)
+      );
+    if (this.data != null) {
       this.userService.getUser(this.data).subscribe(
         res => {
-          this.user = res[0];
           this.detalleCargoService.getDetalleCargo(this.user.NOMBRE).subscribe(
             res => this.detalle = res[0],
             err => console.error(err)
@@ -81,16 +93,12 @@ export class UserAddComponent implements OnInit {
         err => console.error(err)
       );
     }
-    this.facultadService.getFacultades().subscribe(
-      res => this.facultades = res,
-      err => console.error(err)
-    );
   }
 
   changeFacultad() {
     console.log('¡CAMBIO DE FACULTAD!');
     console.log(this.detalle.FACULTAD);
-    this.carreraService.getCarreraByFacultad(this.detalle.FACULTAD).subscribe(
+    this.carreraService.getCarreraByFacultad(this.detalle.COD_FACULTAD).subscribe(
       res => {
         console.log(res);
         this.carreras = res;
@@ -100,11 +108,14 @@ export class UserAddComponent implements OnInit {
   }
 
   save() {
-    if (isNaN(this.data)) {
+    if (this.user.COD_USUARIO == 0) {
       // GUARDAR USUARIO
       console.log('Crear usuario');
       this.userService.saveUser(this.user).subscribe(
         res => {
+          this.cod_usuario = res;
+          this.user.COD_USUARIO = this.cod_usuario;
+          this.detalle.COD_USUARIO = this.user.COD_USUARIO;
           console.log(this.user);
           this.detalleCargoService.saveDetalleCargo(this.detalle).subscribe(
             res => console.log(this.detalle),
@@ -124,5 +135,17 @@ export class UserAddComponent implements OnInit {
       );
       this.dialogRef.close();
     }
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload.lastModified);
+    console.log(this.fileToUpload.name);
+    console.log(this.fileToUpload.size);
+    console.log(this.fileToUpload.type);
+  }
+
+  uploadFile() {
+    /* UPLOAD FILE */
   }
 }

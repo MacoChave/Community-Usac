@@ -18,7 +18,7 @@ export class CarreraService {
     return this.http.get(`${Uri.CARRERA}/${id}`);
   }
 
-  getCarreraByFacultad (facultad: string) {
+  getCarreraByFacultad (facultad: number) {
     return this.http.get(`${Uri.CARRERA}/facultad/${facultad}`);
   }
 

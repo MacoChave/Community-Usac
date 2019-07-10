@@ -3,4 +3,5 @@ export interface Carrera {
     FACULTAD            ?: string;
     NOMBRE              ?: string;
     DESCRIPCION         ?: string;
+    COD_FACULTAD        ?: number;
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, HostBinding, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { DetalleCargo } from 'src/app/models/DetalleCargo';
 import { Facultad } from 'src/app/models/Facultad';
 import { Carrera } from 'src/app/models/Carrera';
@@ -27,7 +26,11 @@ export class UserCargoComponent implements OnInit {
     CARGO: '',
     CARRERA: '',
     FACULTAD: '',
-    NOMBRE: this.data
+    NOMBRE: this.data,
+    COD_CARGO: 0,
+    COD_CARRERA: 0,
+    COD_FACULTAD: 0,
+    COD_USUARIO: 0
   }
 
   cargos: Cargo = {};
@@ -37,7 +40,6 @@ export class UserCargoComponent implements OnInit {
   carreras: Carrera = {};
 
   constructor(
-    private router: Router, 
     private detalleCargoService: DetalleCargoService, 
     private cargoService: CargoService, 
     private carreraService: CarreraService, 
@@ -89,7 +91,7 @@ export class UserCargoComponent implements OnInit {
   }
 
   searchCarrera() {
-    this.carreraService.getCarreraByFacultad(this.detalle.FACULTAD).subscribe(
+    this.carreraService.getCarreraByFacultad(this.detalle.COD_FACULTAD).subscribe(
       res => this.carreras = res,
       err => console.log(err)
     )

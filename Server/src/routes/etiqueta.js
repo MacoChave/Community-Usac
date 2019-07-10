@@ -27,7 +27,7 @@ router.get('/:tema', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { TEMA, CIENCIA, FACULTAD, CARRERA } = req.body;
+    const { COD_TEMA, COD_CIENCIA, COD_FACULTAD, COD_CARRERA } = req.body;
     console.log(req.body);
     ejecutor.sp(
         `BEGIN
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
                 :tema, :ciencia, :facultad, :carrera
             );
         END`,
-        [TEMA, CIENCIA, FACULTAD, CARRERA]
+        [COD_TEMA, COD_CIENCIA, COD_FACULTAD, COD_CARRERA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

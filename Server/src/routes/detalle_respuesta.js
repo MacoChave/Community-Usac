@@ -14,11 +14,17 @@ router.get('/', (req, res) => {
 })
 
 router.post('/pregunta', (req, res) => {
-    const { PREGUNTA } = req.params.body;
+    const { COD_PREGUNTA } = req.params.body;
     ejecutor.query(
-        `SELECT * FROM VIEW_DETALLE_PREG
-        WHERE pregunta LIKE :pregunta`,
-        [PREGUNTA]
+        `SELECT 
+            dp.cod_pregunta, e.titulo AS examen, 
+            p.descripcion AS pregunta
+        FROM 
+            Detalle_pregunta DP, Pregunta P, Examen E
+        WHERE 
+            dp.cod_pregunta = p.cod_pregunta AND 
+            dp.cod_examen = e.cod_examen`,
+        [COD_PREGUNTA]
     )
     .then(result => {
         return res.json(result.rows);
@@ -26,12 +32,12 @@ router.post('/pregunta', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { PREGUNTA, RESPUESTA, CORRECTA } = req.body;
+    const { COD_PREGUNTA, COD_RESPUESTA, CORRECTA } = req.body;
     ejecutor.sp(
         `BEGIN 
             PROC_C_DETALLERES(:pregunta, :respuesta, :correcta)
         END`,
-        [PREGUNTA, RESPUESTA, RESPUESTA]
+        [COD_PREGUNTA, COD_RESPUESTA, CORRECTA]
     )
     .then(result => {
         return res.json(result.rowsAffected);

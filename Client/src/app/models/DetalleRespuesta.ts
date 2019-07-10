@@ -1,5 +1,7 @@
 export interface DetalleRespuesta {
+    CORRECTA        ?: number;
     PREGUNTA        ?: string;
     RESPUESTA       ?: string;
-    CORRECTA        ?: number;
+    COD_PREGUNTA    ?: number;
+    COD_RESPUESTA   ?: number;
 }

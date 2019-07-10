@@ -27,14 +27,14 @@ router.post('/examen', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { PREGUNTA, EXAMEN } = req.body;
+    const { COD_PREGUNTA, COD_EXAMEN } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_C_DETALLEPREG(
                 :pregunta, :examen
             );
         END`,
-        [PREGUNTA, EXAMEN]
+        [COD_PREGUNTA, COD_EXAMEN]
     )
     .then(result => {
         return res.json(result.rowsAffected);

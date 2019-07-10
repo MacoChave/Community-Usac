@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { CONTENIDO, IMAGEN, TAG, TEMA, USUARIO } = req.body;
+    const { CONTENIDO, IMAGEN, TAG, TEMA, COD_USUARIO } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_C_COMENTARIO(
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
                 :usuario
             );
         END`,
-        [CONTENIDO, IMAGEN, TAG, TEMA, USUARIO]
+        [CONTENIDO, IMAGEN, TAG, TEMA, COD_USUARIO]
     )
     .then(result => {
         return res.json(result.rowsAffected);

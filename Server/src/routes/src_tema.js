@@ -26,13 +26,13 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { IMAGEN, TAG, TEMA } = req.body;
+    const { IMAGEN, TAG, COD_TEMA } = req.body;
     console.log(req.body);
     ejecutor.sp(
         `BEGIN 
             PROC_C_SRCTEMA(:imagen, :tag, :tema);
         END`,
-        [IMAGEN, TAG, TEMA]
+        [IMAGEN, TAG, COD_TEMA]
     )
     .then(result => {
         return res.json(result.rowsAffected);
@@ -41,12 +41,12 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { IMAGEN, TAG, TEMA } = req.body;
+    const { IMAGEN, TAG } = req.body;
     ejecutor.sp(
         `BEGIN 
-            PROC_C_SRCTEMA(:id, :imagen, :tag, :tema);
+            PROC_C_SRCTEMA(:id, :imagen, :tag);
         END`,
-        [id, IMAGEN, TAG, TEMA]
+        [id, IMAGEN, TAG]
     )
     .then(result => {
         return res.json(result.rowsAffected);
