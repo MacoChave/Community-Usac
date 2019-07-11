@@ -60,7 +60,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.put('/close/:id', (req, res) => {
     const id = req.params.id;
     const { MOTIVO } = req.body;
     ejecutor.sp(
@@ -68,6 +68,19 @@ router.delete('/:id', (req, res) => {
             PROC_D_TEMA(:id, :motivo);
         END`,
         [id, MOTIVO]
+    )
+    .then(result => {
+        return res.json(result.rowsAffected);
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    ejecutor.sp(
+        `BEGIN 
+            PROCEDURE PROC_SOLVER_TEMA(:id);
+        END`,
+        [id]
     )
     .then(result => {
         return res.json(result.rowsAffected);

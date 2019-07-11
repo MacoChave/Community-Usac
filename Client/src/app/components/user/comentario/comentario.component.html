@@ -1,0 +1,36 @@
+<form>
+    <div class="flex_container">
+        <mat-form-field class="flex_item">
+            <textarea matInput [(ngModel)]='comentario.CONTENIDO' placeholder="Escriba un comentario" name="comentario" required></textarea>
+        </mat-form-field>
+        <button class="flex_item button" mat-icon-button color="primary" (click)='addComment()' aria-label='Guardar comentario'>
+            <mat-icon>add_comment</mat-icon>
+        </button>
+    </div>
+    
+</form>
+
+<mat-paginator  *paginator
+                [length]="length"
+                [pageSize]="pageSize"
+                [pageIndex]='currentPage'
+                [showFirstLastButtons]='true'
+                [pageSizeOptions]="[5, 10, 50, 100]"
+                (page)="pageEvent = getServerData($event)">
+</mat-paginator>
+
+<div class="flex_container">
+    <div *ngFor='let res_view of result_view' class="flex_item grid_container">
+        <div class="grid_item author">
+            <h2> {{res_view.NOMBRE}} </h2>
+            <img [src]="res_view.URL_FOTO == null ? '../../../../assets/profile_image.jpg' : res_view.URL_FOTO" alt="profile_image" class="profile_image">
+        </div>
+        <div class="grid_item body">
+            <p *ngIf="res_view.CONTENIDO != ''"> {{res_view.CONTENIDO}} </p>
+            <img *ngIf="res_view.URL_IMAGEN != ''" src="res_view.URL_IMAGEN" alt="res_view.TAG">
+        </div>
+        <div class="grid_item footer">
+            <p> {{res_view.FECHA_CREACION | date: 'yyyy-MM-dd'}} </p>
+        </div>
+    </div>
+</div>

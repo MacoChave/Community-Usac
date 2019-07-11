@@ -89,6 +89,7 @@ export class AddTemaComponent implements OnInit {
   }
 
   saveTema() {
+    console.log(this.tema);
     this.temaService.saveTema(this.tema).subscribe(
       res => {
         this.cod_tema = res;
@@ -101,6 +102,7 @@ export class AddTemaComponent implements OnInit {
   }
 
   addSource() {
+    console.log(this.source);
     this.sourceService.saveSources(this.source).subscribe(
       res => {
         this.clearSource();
@@ -111,6 +113,7 @@ export class AddTemaComponent implements OnInit {
   }
 
   addLabel() {
+    console.log(this.label);
     this.labelService.saveEtiquetas(this.label).subscribe(
       res => {
         this.clearLabel();

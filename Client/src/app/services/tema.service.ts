@@ -14,22 +14,23 @@ export class TemaService {
     return this.http.get(`${Uri.TEMA}`);
   }
 
-
   getTema (id: number) {
     return this.http.get(`${Uri.TEMA}/${id}`);
   }
-
 
   saveTema (tema: Tema) {
     return this.http.post(`${Uri.TEMA}`, tema);
   }
 
-
-  updateTema (id: string, tema: Tema) {
+  updateTema (id: number, tema: Tema) {
     return this.http.put(`${Uri.TEMA}/${id}`, tema);
   }
 
-  deleteTema (id: string) {
+  closerTema (id: number, tema: Tema) {
+    return this.http.put(`${Uri.TEMA}/close/${id}`, tema);
+  }
+
+  solverTema (id: number) {
     return this.http.delete(`${Uri.TEMA}/${id}`);
   }
 }

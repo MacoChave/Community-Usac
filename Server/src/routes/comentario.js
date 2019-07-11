@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
     const id = req.params.id;
     ejecutor.query(
         `SELECT * FROM VIEW_COMENTARIO 
-        WHERE cod_comentario = :id`,
+        WHERE cod_tema = :id`,
         [id]
     )
     .then(result => {
@@ -26,17 +26,18 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { CONTENIDO, IMAGEN, TAG, TEMA, COD_USUARIO } = req.body;
+    const { CONTENIDO, IMAGEN, TAG, COD_TEMA, COD_USUARIO } = req.body;
     ejecutor.sp(
         `BEGIN
             PROC_C_COMENTARIO(
                 :contenido, 
                 :imagen, 
-                :tag, 
+                :tag,
+                :tema,  
                 :usuario
             );
         END`,
-        [CONTENIDO, IMAGEN, TAG, TEMA, COD_USUARIO]
+        [CONTENIDO, IMAGEN, TAG, COD_TEMA, COD_USUARIO]
     )
     .then(result => {
         return res.json(result.rowsAffected);

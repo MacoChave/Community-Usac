@@ -15,7 +15,7 @@ WHERE
     
 CREATE OR REPLACE VIEW VIEW_CIENCIA AS 
 SELECT 
-    m.cod_ciencia, m.nombre, m.descripcion, c.nombre AS carrera, f.nombre AS facultad
+    m.cod_ciencia, m.nombre, m.descripcion, c.cod_carrera, c.nombre AS carrera, f.nombre AS facultad
 FROM 
     Ciencia M, Carrera C, Facultad F
 WHERE 
@@ -61,7 +61,7 @@ WHERE
 
 CREATE OR REPLACE VIEW VIEW_ETIQUETA AS 
 SELECT 
-    t.titulo AS tema, m.nombre AS ciencia, f.nombre AS facultad, c.nombre AS carrera 
+    t.cod_tema, t.titulo AS tema, m.cod_ciencia, m.nombre AS ciencia, f.cod_facultad, f.nombre AS facultad, c.cod_carrera, c.nombre AS carrera 
 FROM 
     Etiqueta E, Tema T, Ciencia M, Facultad F, Carrera C 
 WHERE 
@@ -70,10 +70,10 @@ WHERE
     e.cod_facultad = f.cod_facultad AND 
     e.cod_carrera = c.cod_carrera;
 
-CREATE VIEW VIEW_COMENTARIO AS 
+CREATE OR REPLACE VIEW VIEW_COMENTARIO AS 
 SELECT 
-    c.cod_comentario, c.contenido, c.url_imagen, c.tag, c.fecha_creacion, 
-    t.titulo, u.nombre, u.url_foto
+    c.cod_comentario, c.contenido, c.url_imagen, c.tag, 
+    c.fecha_creacion, t.cod_tema, t.titulo, u.nombre, u.url_foto
 FROM 
     Comentario C, Tema T, Usuario U 
 WHERE 

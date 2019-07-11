@@ -54,18 +54,20 @@ router.post('/', (req, res) => {
 //     })
 // })
 
-// router.delete('/', (req, res) => {
-//     const { COD_TEMA, COD_CIENCIA } = req.body;
-//     ejecutor.query(
-//         `DELETE FROM Etiqueta 
-//         WHERE 
-//             cod_tema = :tema, 
-//             cod_ciencia = :ciencia`,
-//         [COD_TEMA, COD_CIENCIA]
-//     )
-//     .then(result => {
-//         return res.json(result.rowsAffected);
-//     })
-// })
+router.delete('/', (req, res) => {
+    const { COD_TEMA, COD_CIENCIA, COD_FACULTAD, COD_CARRERA } = req.body;
+    ejecutor.query(
+        `DELETE FROM Etiqueta 
+        WHERE 
+            cod_tema = :tema AND 
+            cod_ciencia = :ciencia AND
+            cod_facultad = :cod_facultad AND 
+            cod_carrera = :cod_carrera`,
+        [COD_TEMA, COD_CIENCIA, COD_FACULTAD, COD_CARRERA]
+    )
+    .then(result => {
+        return res.json(result.rowsAffected);
+    })
+})
 
 module.exports = router;

@@ -50,6 +50,8 @@ import { ExamenComponent } from './components/user/examen/examen.component';
 import { SalaComponent } from './components/user/sala/sala.component';
 import { AddTemaComponent } from './components/user/add-tema/add-tema.component';
 import { PickDetalleCargoComponent } from './components/modal/pick-detalle-cargo/pick-detalle-cargo.component';
+import { EtiquetaComponent } from './components/user/etiqueta/etiqueta.component';
+import { ComentarioComponent } from './components/user/comentario/comentario.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { PickDetalleCargoComponent } from './components/modal/pick-detalle-cargo
     ExamenComponent,
     SalaComponent,
     AddTemaComponent,
-    PickDetalleCargoComponent
+    PickDetalleCargoComponent,
+    EtiquetaComponent,
+    ComentarioComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +119,9 @@ import { PickDetalleCargoComponent } from './components/modal/pick-detalle-cargo
     CargoAddComponent,
     CienciaAddComponent, 
     AddTemaComponent,
-    PickDetalleCargoComponent
+    PickDetalleCargoComponent,
+    EtiquetaComponent, 
+    ComentarioComponent
   ]
 })
 export class AppModule { }

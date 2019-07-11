@@ -8,6 +8,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatTabsModule,
     MatTooltipModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -30,7 +32,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatTabsModule,
     MatTooltipModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule
   ],
 })
 export class MaterialModule { }

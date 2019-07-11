@@ -1,0 +1,32 @@
+<div class="flex_container">
+    <mat-form-field class="flex_item">
+      <mat-label>Selecciona la facultad</mat-label>
+      <mat-select [(value)]='etiqueta.COD_FACULTAD' (selectionChange)='changeFacultad()'>
+        <mat-option *ngFor="let facultad of facultades" [value]="facultad.COD_FACULTAD">
+          {{facultad.NOMBRE}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="flex_item">
+      <mat-label>Selecciona la carrera</mat-label>
+      <mat-select [(value)]='etiqueta.COD_CARRERA' (selectionChange)='changeCarrera()'>
+        <mat-option *ngFor="let carrera of carreras" [value]="carrera.COD_CARRERA">
+          {{carrera.NOMBRE}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="flex_item">
+        <mat-label>Selecciona la ciencia</mat-label>
+        <mat-select [(value)]='etiqueta.COD_CIENCIA'>
+            <mat-option *ngFor="let ciencia of ciencias" [value]="ciencia.COD_CIENCIA">
+                {{ciencia.NOMBRE}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <div class="flex_item">
+        <button mat-button color="accent" (click)='addLabel()'>Agregar</button>
+    </div>
+</div>

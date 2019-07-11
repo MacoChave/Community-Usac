@@ -14,7 +14,7 @@ export class ComentarioService {
     return this.http.get(`${Uri.COMENTARIO}`);
   }
 
-  getComentario (id: string) {
+  getComentario (id: number) {
     return this.http.get(`${Uri.COMENTARIO}/${id}`);
   }
 

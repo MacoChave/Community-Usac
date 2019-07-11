@@ -1,0 +1,28 @@
+mat-form-field {
+    margin-right: 12px;
+}
+
+.profile_image {
+    width: 32pt;
+    height: 32pt;
+}
+
+.flex_container {
+    flex-direction: column;
+}
+
+.grid_container {
+    grid-gap: 5pt;
+    grid-template-areas:    "author body"
+                            "footer footer";
+}
+
+.author {
+    grid-area: author;
+}
+.body {
+    grid-area: body;
+}
+.footer {
+    grid-area: footer;
+}

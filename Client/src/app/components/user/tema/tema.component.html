@@ -8,9 +8,11 @@
             <p> {{res.DESCRIPCION}} </p>
         </div>
         <div class="footer">
-            <p> {{res.FECHA_CREACION}} </p>
-            <button mat-button color="accent" (click)='editTema(res.COD_TEMA)'>Edit</button>
-            <button mat-button color="warn" (click)='deleteTema(res.COD_TEMA)'>Delete</button>
+            <p> {{res.FECHA_CREACION | date: 'yyyy-MM-dd'}} </p>
+            
+            <button mat-icon-button color="accent" aria-label="Agregar comentario en tema" (click)='commentTema(res.COD_TEMA)'>
+                <mat-icon>comment</mat-icon>
+            </button>
         </div>
     </div>
 </div>

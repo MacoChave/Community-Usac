@@ -153,6 +153,20 @@ BEGIN
             
 END PROC_U_TEMA;
 
+CREATE OR REPLACE PROCEDURE PROC_SOLVER_TEMA(
+    i_cod_tema IN NUMBER
+)
+IS 
+BEGIN 
+    UPDATE Tema 
+    SET 
+        motivo_cierre = 'Solucionado', 
+        fecha_cierre = CURRENT_TIMESTAMP
+    WHERE 
+        Tema.cod_tema = i_cod_tema;
+            
+END PROC_SOLVER_TEMA;
+
 CREATE OR REPLACE PROCEDURE PROC_D_TEMA(
     i_cod_tema IN NUMBER,
     i_motivo IN VARCHAR2
@@ -210,7 +224,6 @@ BEGIN
 END PROC_C_ETIQUETA;
 
 CREATE OR REPLACE PROCEDURE PROC_C_COMENTARIO(
-    i_codigo OUT NUMBER,
     i_contendido IN VARCHAR2,
     i_imagen IN VARCHAR2,
     i_tag IN VARCHAR2,
@@ -223,8 +236,6 @@ BEGIN
         (contenido, url_imagen, tag, cod_tema, cod_usuario)
     VALUES 
         (i_contendido, i_imagen, i_tag, i_tema, i_usuario);  
-    
-    i_codigo := SEQ_COMENTARIO.currval;
 END PROC_C_COMENTARIO;
 
 CREATE OR REPLACE PROCEDURE PROC_U_COMENTARIO(
