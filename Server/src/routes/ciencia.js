@@ -27,7 +27,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/carrera/:carrera', (req, res) => {
-    const{ CARRERA } = req.params.carrera;
+    const CARRERA = req.params.carrera;
+    console.log('COD_CARRERA: ' + CARRERA);
     ejecutor.query(
         `SELECT 
             m.cod_ciencia, m.nombre
@@ -39,6 +40,7 @@ router.get('/carrera/:carrera', (req, res) => {
         [CARRERA]
     )
     .then(result => {
+        console.log(result.rows);
         return res.json(result.rows);
     });
 });

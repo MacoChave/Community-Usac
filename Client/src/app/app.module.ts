@@ -52,6 +52,7 @@ import { AddTemaComponent } from './components/user/add-tema/add-tema.component'
 import { PickDetalleCargoComponent } from './components/modal/pick-detalle-cargo/pick-detalle-cargo.component';
 import { EtiquetaComponent } from './components/user/etiqueta/etiqueta.component';
 import { ComentarioComponent } from './components/user/comentario/comentario.component';
+import { AddExamenComponent } from './components/user/add-examen/add-examen.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { ComentarioComponent } from './components/user/comentario/comentario.com
     AddTemaComponent,
     PickDetalleCargoComponent,
     EtiquetaComponent,
-    ComentarioComponent
+    ComentarioComponent,
+    AddExamenComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +123,8 @@ import { ComentarioComponent } from './components/user/comentario/comentario.com
     AddTemaComponent,
     PickDetalleCargoComponent,
     EtiquetaComponent, 
-    ComentarioComponent
+    ComentarioComponent, 
+    AddExamenComponent
   ]
 })
 export class AppModule { }

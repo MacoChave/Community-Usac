@@ -15,6 +15,7 @@ export class CarreraService {
   }
 
   getCarrera (id: string) {
+    console.log(`CIENCIA BY CARRERA ${id}`);
     return this.http.get(`${Uri.CARRERA}/${id}`);
   }
 

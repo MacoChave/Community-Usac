@@ -1,6 +1,6 @@
 export class Uri {
 
-    static API_URI: string = 'http://localhost:3000/api';
+    static API_URI: string = 'http://192.168.42.211:3000/api';
 
     static CARGO: string = `${Uri.API_URI}/cargo`;
     static ROL: string= `${Uri.API_URI}/rol`;

@@ -1,0 +1,55 @@
+<mat-horizontal-stepper [linear]='isLinear' #stepper>
+    <mat-step>
+        <form>
+            <div class="flex_container">
+                <mat-form-field>
+                    <input matInput type="text" [(ngModel)]='examen.TITULO' placeholder="Ingrese el título" name="titlo">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input matInput type="text" [(ngModel)]='examen.TEMA' placeholder="Ingrese el tema" name="tema">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="number" [(ngModel)]='examen.DURACION' placeholder="Duración del examen" name="duracion">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Facultad</mat-label>
+                    <mat-select [(value)]='examen.COD_FACULTAD' (selectionChange)='changeFacultad()'>
+                        <mat-option *ngFor="let facultad of facultades" [value]="facultad.COD_FACULTAD">
+                            {{facultad.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Carrera</mat-label>
+                    <mat-select [(value)]='examen.COD_CARRERA' (selectionChange)='changeCarrera()'>
+                        <mat-option *ngFor="let carrera of carreras" [value]="carrera.COD_CARRERA">
+                            {{carrera.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Ciencia</mat-label>
+                    <mat-select [(value)]='examen.COD_CIENCIA'>
+                        <mat-option *ngFor="let ciencia of ciencias" [value]="ciencia.COD_CIENCIA">
+                            {{ciencia.NOMBRE}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <button mat-button color='primary' matStepperNext (click)='saveExamen()'>Next</button>
+        </form>
+    </mat-step>
+    <mat-step>
+        <form>
+            <div class="flex_container">
+                
+            </div>
+        </form>
+    </mat-step>
+</mat-horizontal-stepper>

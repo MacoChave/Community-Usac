@@ -19,6 +19,7 @@ export class CienciaService {
   }
 
   getCienciaByCarrera (carrera: number) {
+    console.log(`CIENCIA BY CARRERA ${carrera}`);
     return this.http.get(`${Uri.CIENCIA}/carrera/${carrera}`);
   }
 

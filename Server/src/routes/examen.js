@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     const id = req.params.id;
     ejecutor.query(
         `SELECT * FROM VIEW_EXAMEN
-        WHERE cod_examen = :id`,
+        WHERE cod_usuario = :id`,
         [id]
     )
     .then(result => {
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
     ejecutor.sp(
         `BEGIN
             PROC_C_EXAMEN(
-                :titulo, :tema, :duracion, :log, :usuario, :ciencia, :facultad, :carrera
+                :codigo, :titulo, :tema, :duracion, :log, :usuario, :ciencia, :facultad, :carrera
             ); 
         END`,
         {

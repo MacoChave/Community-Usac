@@ -83,8 +83,8 @@ WHERE
 CREATE OR REPLACE VIEW VIEW_EXAMEN AS 
 SELECT 
     e.cod_examen, e.titulo, e.sala, e.tema, e.fecha_creacion, e.fecha_modificacion, 
-    e.duracion, e.estado, e.log, m.nombre AS ciencia, c.nombre AS carrera, 
-    f.nombre AS facultad, u.nombre, u.url_foto
+    e.duracion, e.estado, e.log, m.cod_ciencia, m.nombre AS ciencia, c.cod_carrera, c.nombre AS carrera, 
+    f.cod_facultad, f.nombre AS facultad, u.cod_usuario, u.nombre, u.url_foto
 FROM
     Examen E, Usuario U, Ciencia M, Carrera C, Facultad F 
 WHERE 

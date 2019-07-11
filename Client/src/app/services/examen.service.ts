@@ -14,7 +14,7 @@ export class ExamenService {
     return this.http.get(`${Uri.EXAMEN}`);
   }
 
-  getExamen (id: string) {
+  getExamen (id: number) {
     return this.http.get(`${Uri.EXAMEN}/${id}`);
   }
 
